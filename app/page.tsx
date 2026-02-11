@@ -31,7 +31,7 @@ export default function Home() {
         </aside>
 
         {/* Content area */}
-        <section className="flex-1 max-h-[70vh] md:max-h-[75vh] overflow-y-auto pr-1 md:pr-3 space-y-0">
+        <section className="flex-1 pr-1 md:pr-3 space-y-0">
           {activeTab === "profil" && <AboutMe />}
           {activeTab === "project" && <Projects />}
           {activeTab === "contact" && <ContactPerson />}

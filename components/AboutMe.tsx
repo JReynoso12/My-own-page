@@ -116,11 +116,11 @@ export default function AboutMe() {
                 </div>
                 <div>
                   <div className="flex justify-between mb-1">
-                    <span className="text-gray-300">PYTHON</span>
-                    <span className="text-gray-300">75%</span>
+                    <span className="text-gray-300">React/Next.js</span>
+                    <span className="text-gray-300">99%</span>
                   </div>
                   <div className="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
-                    <div className="bg-neon-blue h-2 rounded-full shadow-neon-blue" style={{ width: "75%" }}></div>
+                    <div className="bg-neon-blue h-2 rounded-full shadow-neon-blue" style={{ width: "99%" }}></div>
                   </div>
                 </div>
               </div>

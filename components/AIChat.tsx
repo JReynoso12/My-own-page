@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { HiPaperAirplane } from "react-icons/hi";
 
@@ -25,6 +25,7 @@ export default function AIChat() {
   const [input, setInput] = useState("");
   const [stepIndex, setStepIndex] = useState(0);
   const [isSending, setIsSending] = useState(false);
+  const messagesContainerRef = useRef<HTMLDivElement | null>(null);
 
   const answers = useMemo(
     () => ({
@@ -52,6 +53,13 @@ export default function AIChat() {
       },
     ]);
   }, []);
+
+  // Auto-scroll to latest message whenever messages change
+  useEffect(() => {
+    const el = messagesContainerRef.current;
+    if (!el) return;
+    el.scrollTop = el.scrollHeight;
+  }, [messages]);
 
   const handleSend = async () => {
     if (!input.trim() || isSending) return;
@@ -158,7 +166,10 @@ export default function AIChat() {
         Jimuels email.
       </p>
 
-      <div className="flex-1 overflow-y-auto space-y-2 pr-1 mb-3">
+      <div
+        ref={messagesContainerRef}
+        className="flex-1 overflow-y-auto space-y-2 pr-1 mb-3"
+      >
         <AnimatePresence initial={false}>
           {messages.map((msg) => (
             <motion.div
