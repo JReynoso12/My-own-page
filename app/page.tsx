@@ -2,23 +2,13 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import Landing from "@/components/Landing";
 import TabNavigation from "@/components/TabNavigation";
 import AboutMe from "@/components/AboutMe";
 import Projects from "@/components/Projects";
 import ContactPerson from "@/components/ContactPerson";
 
 export default function Home() {
-  const [showLanding, setShowLanding] = useState(true);
   const [activeTab, setActiveTab] = useState("profil");
-
-  const handleStart = () => {
-    setShowLanding(false);
-  };
-
-  if (showLanding) {
-    return <Landing onStart={handleStart} />;
-  }
 
   return (
     <main className="relative min-h-screen flex items-center justify-center px-4 py-10">
