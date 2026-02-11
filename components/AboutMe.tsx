@@ -90,9 +90,11 @@ export default function AboutMe() {
             <div>
               <h3 className="text-2xl font-bold text-white mb-4">EDUCATION</h3>
               <div className="space-y-2 text-gray-300">
-                <p className="font-semibold">2019-2022</p>
-                <p>SMAN 2 HALMAHERA TIMUR</p>
-                <p>Natural science</p>
+                <p className="font-semibold">2018-2019</p>
+                <p>Golden State College</p>
+                <p>Information Technology</p>
+                <p>Junior Application Lead</p>
+                <p>Full Stack Developer</p>
               </div>
             </div>
 
