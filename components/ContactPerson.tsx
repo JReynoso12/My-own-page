@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { FaInstagram, FaGithub, FaFacebook } from "react-icons/fa";
+import AIChat from "./AIChat";
 
 const socialLinks = [
   {
@@ -95,26 +96,14 @@ export default function ContactPerson() {
             </div>
           </motion.div>
 
-          {/* Right Side - Thank You */}
+          {/* Right Side - AI Chat */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-center md:text-right"
           >
-            <h2 className="text-5xl md:text-7xl font-bold text-white mb-8">
-              THANK YOU 2025
-            </h2>
-            
-            {/* Decorative Graphic - Hand with Paintbrush and Film Strip */}
-            <div className="relative w-full h-64 flex items-center justify-center md:justify-end">
-              <div className="relative">
-                {/* Simplified representation - you can replace with actual SVG or image */}
-                <div className="w-48 h-48 bg-gradient-to-br from-gray-700 to-gray-900 rounded-lg flex items-center justify-center">
-                  <div className="text-white text-4xl">🎨</div>
-                </div>
-              </div>
-            </div>
+            <AIChat />
           </motion.div>
         </div>
       </div>
