@@ -2,19 +2,29 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { FaInstagram, FaTiktok, FaYoutube, FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaInstagram, FaGithub, FaFacebook } from "react-icons/fa";
 
 const socialLinks = [
-  { icon: FaInstagram, username: "@jimuelreynoso", url: "https://instagram.com/jimuelreynoso" },
-  { icon: FaTiktok, username: "@jimuelreynoso", url: "https://tiktok.com/@jimuelreynoso" },
-  { icon: FaYoutube, username: "@jimuelreynoso", url: "https://youtube.com/@jimuelreynoso" },
-  { icon: FaGithub, username: "jimuelreynoso", url: "https://github.com/jimuelreynoso" },
-  { icon: FaLinkedin, username: "Jimuel Reynoso", url: "https://linkedin.com/in/jimuelreynoso" },
+  {
+    icon: FaFacebook,
+    username: "Facebook",
+    url: "https://www.facebook.com/jimuel.torrecampo.1",
+  },
+  {
+    icon: FaInstagram,
+    username: "@rjmuuuel",
+    url: "https://www.instagram.com/rjmuuuel/",
+  },
+  {
+    icon: FaGithub,
+    username: "JReynoso12",
+    url: "https://github.com/JReynoso12",
+  },
 ];
 
 export default function ContactPerson() {
   return (
-    <section className="min-h-screen px-4 md:px-8 py-20">
+    <section className="w-full">
       <div className="max-w-6xl mx-auto">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           {/* Left Side - Contact Info */}
@@ -24,11 +34,11 @@ export default function ContactPerson() {
             transition={{ duration: 0.5 }}
             className="text-center md:text-left"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">CONTACT ME</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-neon-blue mb-8">CONTACT ME</h2>
             
             {/* Profile Picture */}
             <div className="flex justify-center md:justify-start mb-6">
-              <div className="relative w-48 h-48 rounded-full overflow-hidden">
+              <div className="relative w-48 h-48 rounded-full overflow-hidden border border-slate-700/70 shadow-neon-blue">
                 <Image
                   src="/images/avatar.png"
                   alt="Jimuel Reynoso"
@@ -70,7 +80,7 @@ export default function ContactPerson() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5, delay: 0.5 }}
-                className="bg-gray-800 p-4 rounded-lg hover:bg-gray-700 transition-colors cursor-pointer"
+                className="bg-slate-900/80 p-4 rounded-xl border border-slate-700/70 hover:border-neon-blue hover:bg-slate-900 transition-colors cursor-pointer"
               >
                 <p className="text-white">PORTOFOLIO. 2023</p>
               </motion.div>
@@ -78,7 +88,7 @@ export default function ContactPerson() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5, delay: 0.6 }}
-                className="bg-gray-800 p-4 rounded-lg hover:bg-gray-700 transition-colors cursor-pointer"
+                className="bg-slate-900/80 p-4 rounded-xl border border-slate-700/70 hover:border-neon-blue hover:bg-slate-900 transition-colors cursor-pointer"
               >
                 <p className="text-white">DESIGN PORTFOLIO 2024</p>
               </motion.div>

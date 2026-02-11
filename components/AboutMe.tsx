@@ -9,29 +9,13 @@ export default function AboutMe() {
     { name: "Node", color: "bg-neon-blue" },
     { name: "TS", label: "TypeScript", color: "bg-neon-blue" },
     { name: "AI", label: "AI Tools", color: "bg-neon-blue" },
-    { name: "Next", color: "bg-pink-500" },
+    { name: "Next", color: "bg-neon-blue" },
   ];
 
   return (
-    <section className="min-h-screen px-4 md:px-8 py-20">
+    <section className="w-full">
       <div className="max-w-6xl mx-auto">
-        {/* JR Logo */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          className="mb-8"
-        >
-          <Image
-            src="/images/logo-jr.png"
-            alt="JR Logo"
-            width={48}
-            height={48}
-            className="object-contain"
-          />
-        </motion.div>
-
-        <div className="grid md:grid-cols-2 gap-12 items-start">
+        <div className="grid md:grid-cols-2 gap-10 items-start">
           {/* Left Side - Image */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -42,14 +26,14 @@ export default function AboutMe() {
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
               HELLO,IM JIMUEL REYNOSO
             </h2>
-            <div className="relative w-full aspect-[3/4] rounded-lg overflow-hidden">
+            <div className="relative w-full aspect-[3/4] rounded-3xl overflow-hidden border border-slate-700/70 shadow-neon-blue">
               <Image
                 src="/images/avatar.png"
                 alt="Yudha Pradana"
                 fill
                 className="object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-orange-500/20 to-blue-500/20"></div>
+              <div className="absolute inset-0 bg-gradient-to-tr from-neon-blue/20 via-transparent to-neon-blue/5" />
             </div>
           </motion.div>
 
@@ -78,7 +62,7 @@ export default function AboutMe() {
                     initial={{ opacity: 0, scale: 0 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.3, delay: 0.1 * index }}
-                    className={`w-16 h-16 min-w-[4rem] ${skill.color} flex items-center justify-center text-black font-bold text-xs rounded`}
+                    className={`w-16 h-16 min-w-[4rem] ${skill.color} flex items-center justify-center text-black font-bold text-xs rounded-lg shadow-neon-blue`}
                   >
                     {skill.name}
                   </motion.div>
@@ -117,8 +101,8 @@ export default function AboutMe() {
                     <span className="text-gray-300">JAVASCRIPT</span>
                     <span className="text-gray-300">95%</span>
                   </div>
-                  <div className="w-full bg-gray-700 rounded-full h-2">
-                    <div className="bg-neon-blue h-2 rounded-full" style={{ width: "95%" }}></div>
+                  <div className="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
+                    <div className="bg-neon-blue h-2 rounded-full shadow-neon-blue" style={{ width: "95%" }}></div>
                   </div>
                 </div>
                 <div>
@@ -126,8 +110,8 @@ export default function AboutMe() {
                     <span className="text-gray-300">TYPESCRIPT</span>
                     <span className="text-gray-300">90%</span>
                   </div>
-                  <div className="w-full bg-gray-700 rounded-full h-2">
-                    <div className="bg-neon-blue h-2 rounded-full" style={{ width: "90%" }}></div>
+                  <div className="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
+                    <div className="bg-neon-blue h-2 rounded-full shadow-neon-blue" style={{ width: "90%" }}></div>
                   </div>
                 </div>
                 <div>
@@ -135,8 +119,8 @@ export default function AboutMe() {
                     <span className="text-gray-300">PYTHON</span>
                     <span className="text-gray-300">75%</span>
                   </div>
-                  <div className="w-full bg-gray-700 rounded-full h-2">
-                    <div className="bg-neon-blue h-2 rounded-full" style={{ width: "75%" }}></div>
+                  <div className="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
+                    <div className="bg-neon-blue h-2 rounded-full shadow-neon-blue" style={{ width: "75%" }}></div>
                   </div>
                 </div>
               </div>

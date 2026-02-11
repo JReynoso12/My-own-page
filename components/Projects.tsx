@@ -4,17 +4,36 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 const projects = [
-  { id: 1, title: "E-Commerce Platform", image: "/images/project-placeholder.svg" },
-  { id: 2, title: "Task Management App", image: "/images/project-placeholder.svg" },
-  { id: 3, title: "Weather Dashboard", image: "/images/project-placeholder.svg" },
-  { id: 4, title: "Portfolio Website", image: "/images/project-placeholder.svg" },
-  { id: 5, title: "REST API Backend", image: "/images/project-placeholder.svg" },
-  { id: 6, title: "AI-Powered Web App", image: "/images/project-placeholder.svg" },
+  {
+    id: 1,
+    title: "E-Commerce Landing Page",
+    image: "/images/project-1.png",
+  },
+  {
+    id: 2,
+    title: "SaaS Landing Page",
+    image: "/images/project-2.png",
+  },
+  {
+    id: 3,
+    title: "Weather Forecast Dashboard",
+    image: "/images/project-3.png",
+  },
+  {
+    id: 4,
+    title: "Portfolio Presentation",
+    image: "/images/project-4.png",
+  },
+  {
+    id: 5,
+    title: "Productivity Dashboard",
+    image: "/images/project-5.png",
+  },
 ];
 
 export default function Projects() {
   return (
-    <section className="min-h-screen px-4 md:px-8 py-20">
+    <section className="w-full">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -22,7 +41,7 @@ export default function Projects() {
           transition={{ duration: 0.5 }}
           className="mb-12"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-neon-blue mb-4 text-left">
             WEB DEVELOPMENT PROJECTS
           </h2>
         </motion.div>
@@ -35,7 +54,7 @@ export default function Projects() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.3, delay: index * 0.1 }}
               whileHover={{ scale: 1.05 }}
-              className="relative aspect-square bg-gray-800 rounded-lg overflow-hidden cursor-pointer group"
+              className="relative aspect-square bg-slate-900/80 rounded-2xl overflow-hidden cursor-pointer group border border-slate-700/70 hover:border-neon-blue transition-colors duration-300"
             >
               <Image
                 src={project.image}
