@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-background-dark text-white;
+    background: #0A0E27;
+    min-height: 100vh;
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+}
+
+@layer utilities {
+  .neon-glow-blue {
+    box-shadow: 0 0 20px rgba(0, 217, 255, 0.5);
+  }
+  
+  .neon-glow-purple {
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+  }
+  
+  .neon-glow-green {
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
+  }
+  
+  .text-neon-blue {
+    color: #00D9FF;
+  }
+  
+  .text-neon-purple {
+    color: #A855F7;
+  }
+  
+  .text-neon-green {
+    color: #10B981;
+  }
+  
+  .bg-neon-blue {
+    background-color: #00D9FF;
+  }
+}
