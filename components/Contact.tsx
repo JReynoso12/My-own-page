@@ -20,7 +20,7 @@ export default function Contact() {
             Get In Touch
           </h2>
           <p className="text-gray-300 text-lg mb-12">
-            Feel free to reach out if you're looking for a developer, have a
+            Feel free to reach out if youre looking for a developer, have a
             question, or just want to connect.
           </p>
 

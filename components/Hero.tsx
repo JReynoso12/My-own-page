@@ -74,7 +74,7 @@ export default function Hero() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4"
         >
-          Hi, I'm <span className="text-neon-blue">Jimuel Reynoso</span>
+          Hi, Im <span className="text-neon-blue">Jimuel Reynoso</span>
         </motion.h1>
 
         {/* Typing Animation */}
@@ -84,7 +84,7 @@ export default function Hero() {
           transition={{ duration: 0.5, delay: 0.4 }}
           className="text-2xl md:text-3xl mb-6 h-10"
         >
-          I'm a{" "}
+          I&apos;m a{" "}
           <span className="text-neon-blue font-semibold">
             {displayedText}
             <span className="animate-pulse">|</span>
