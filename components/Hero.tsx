@@ -39,7 +39,7 @@ export default function Hero({ onViewProjects, onContact }: HeroProps) {
             transition={{ duration: 0.4, delay: 0.3 }}
             className="text-[#A0B0C0] text-base md:text-lg max-w-2xl mx-auto mb-10 leading-relaxed"
           >
-            I build scalable, user-friendly web applications that turn ideas into real products.
+            I build scalable, user-friendly web applications using modern full-stack technologies, transforming ideas into secure, high-performance digital products. From concept and design to development and deployment, I focus on creating real-world solutions that solve real problems, deliver great user experiences, and grow seamlessly with your business or idea.
           </motion.p>
 
           {/* CTA Buttons */}
