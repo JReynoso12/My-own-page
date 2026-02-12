@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { HiBadgeCheck } from "react-icons/hi";
 
 export default function AboutMe() {
   return (
@@ -30,8 +31,11 @@ export default function AboutMe() {
                     sizes="(max-width: 768px) 144px, 176px"
                   />
                 </div>
-                <h2 className="text-2xl md:text-3xl font-bold text-white mb-1">
+                <h2 className="text-2xl md:text-3xl font-bold text-white mb-1 flex items-center justify-center gap-2">
                   Jimuel Reynoso
+                  <span className="flex items-center justify-center w-7 h-7 md:w-8 md:h-8 rounded-full bg-neon-blue text-white" title="Verified">
+                    <HiBadgeCheck className="w-4 h-4 md:w-5 md:h-5" />
+                  </span>
                 </h2>
                 <p className="text-base text-white/90 mb-0.5">
                   rjimueltorrecampo@gmail.com
