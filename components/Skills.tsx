@@ -1,131 +1,76 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { SiReact, SiTailwindcss, SiPython, SiVuedotjs } from "react-icons/si";
-import ProgressBar from "./ui/ProgressBar";
-import { Skill } from "@/types";
 
-const skills: Skill[] = [
+const skillGroups = [
   {
-    name: "React",
-    percentage: 90,
-    icon: SiReact,
-    color: "neon-blue",
+    title: "Frontend",
+    items: ["Vue.js", "JavaScript (ES6+)", "Tailwind CSS", "HTML5 / CSS3"],
+    color: "text-neon-blue",
+    borderColor: "border-blue-500/30",
   },
   {
-    name: "Tailwind",
-    percentage: 85,
-    icon: SiTailwindcss,
-    color: "neon-blue",
+    title: "Backend",
+    items: ["Node.js", "Express.js", "REST APIs", "Authentication (JWT / sessions)"],
+    color: "text-neon-purple",
+    borderColor: "border-purple-500/30",
   },
   {
-    name: "Python",
-    percentage: 80,
-    icon: SiPython,
-    color: "neon-green",
+    title: "Database",
+    items: ["MySQL", "MSSQL", "SQL optimization"],
+    color: "text-neon-green",
+    borderColor: "border-emerald-500/30",
   },
   {
-    name: "Vue",
-    percentage: 95,
-    icon: SiVuedotjs,
-    color: "neon-purple",
+    title: "Tools",
+    items: ["Git / GitHub", "Postman", "Docker", "Deployment (Vercel, Netlify, VPS, etc.)"],
+    color: "text-amber-400",
+    borderColor: "border-amber-500/30",
   },
 ];
 
 export default function Skills() {
   return (
-    <section
-      id="skills"
-      className="min-h-screen flex items-center justify-center px-4 md:px-8 py-20 md:ml-20"
-    >
-      <div className="max-w-6xl mx-auto w-full">
-        {/* Section Header */}
+    <section className="w-full py-2">
+      <div className="max-w-6xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-12"
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          className="mb-8"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-neon-blue mb-4">
-            My Skills
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
+            Skills
           </h2>
-          <p className="text-gray-300 text-lg max-w-3xl mx-auto">
-            Im a passionate web developer with over 3 years of experience
-            creating modern, responsive web applications. I specialize in
-            frontend development using cutting-edge technologies to deliver
-            exceptional user experiences.
+          <p className="text-[#A0B0C0] text-base">
+            Technologies and tools I use to build and ship products.
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-8 items-center">
-          {/* Visual Element - Tech Logos */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="hidden lg:flex justify-center items-center"
-          >
-            <div className="relative w-64 h-64">
-              {/* Robotic hand illustration using tech logos */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="grid grid-cols-2 gap-8">
-                  {skills.map((skill, index) => {
-                    const Icon = skill.icon;
-                    return (
-                      <motion.div
-                        key={skill.name}
-                        initial={{ opacity: 0, scale: 0 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: index * 0.1 }}
-                        className="w-20 h-20 bg-background-darker rounded-xl flex items-center justify-center border-2 border-gray-800 hover:border-neon-blue transition-all duration-300 hover:shadow-neon-blue"
-                      >
-                        <Icon className="w-10 h-10 text-neon-blue" />
-                      </motion.div>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Skills List */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="space-y-6"
-          >
-            {skills.map((skill, index) => {
-              const Icon = skill.icon;
-              return (
-                <motion.div
-                  key={skill.name}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="bg-background-darker rounded-xl p-6 border border-gray-800 hover:border-neon-blue transition-all duration-300"
-                >
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center">
-                      <Icon className="w-6 h-6 text-neon-blue" />
-                    </div>
-                    <span className="text-xl font-semibold text-white">
-                      {skill.name}
-                    </span>
-                  </div>
-                  <ProgressBar
-                    percentage={skill.percentage}
-                    color={skill.color}
-                  />
-                </motion.div>
-              );
-            })}
-          </motion.div>
+        <div className="grid sm:grid-cols-2 gap-5 md:gap-6">
+          {skillGroups.map((group, groupIndex) => (
+            <motion.div
+              key={group.title}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.35, delay: groupIndex * 0.08 }}
+              className={`glass-card p-6 rounded-2xl border ${group.borderColor}`}
+            >
+              <h3 className={`font-bold text-lg mb-4 ${group.color}`}>
+                {group.title}
+              </h3>
+              <ul className="flex flex-wrap gap-2.5">
+                {group.items.map((item, i) => (
+                  <li
+                    key={item}
+                    className="px-3.5 py-2 rounded-lg bg-white/5 text-[#C0D0E0] text-base border border-white/10"
+                  >
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

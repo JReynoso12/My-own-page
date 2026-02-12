@@ -1,136 +1,81 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
-import Image from "next/image";
-import { scrollToSection } from "@/lib/utils";
 
-const jobTitles = [
-  "UI/UX Designer",
-  "Web Developer",
-  "Frontend Developer",
-  "React Developer",
-];
+interface HeroProps {
+  onViewProjects: () => void;
+  onContact: () => void;
+}
 
-export default function Hero() {
-  const [currentTitleIndex, setCurrentTitleIndex] = useState(0);
-  const [displayedText, setDisplayedText] = useState("");
-  const [isDeleting, setIsDeleting] = useState(false);
-
-  useEffect(() => {
-    const currentTitle = jobTitles[currentTitleIndex];
-    let timeout: NodeJS.Timeout;
-
-    if (!isDeleting && displayedText.length < currentTitle.length) {
-      timeout = setTimeout(() => {
-        setDisplayedText(currentTitle.slice(0, displayedText.length + 1));
-      }, 100);
-    } else if (!isDeleting && displayedText.length === currentTitle.length) {
-      timeout = setTimeout(() => {
-        setIsDeleting(true);
-      }, 2000);
-    } else if (isDeleting && displayedText.length > 0) {
-      timeout = setTimeout(() => {
-        setDisplayedText(currentTitle.slice(0, displayedText.length - 1));
-      }, 50);
-    } else if (isDeleting && displayedText.length === 0) {
-      setIsDeleting(false);
-      setCurrentTitleIndex((prev) => (prev + 1) % jobTitles.length);
-    }
-
-    return () => clearTimeout(timeout);
-  }, [displayedText, isDeleting, currentTitleIndex]);
-
+export default function Hero({ onViewProjects, onContact }: HeroProps) {
   return (
-    <section
-      id="hero"
-      className="min-h-screen flex items-center justify-center px-4 md:px-8 py-20 md:ml-20 pb-24 md:pb-20"
-    >
-      <div className="max-w-4xl mx-auto text-center">
-        {/* Avatar */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
-          className="mb-8 flex justify-center"
-        >
-          <div className="relative w-32 h-32 rounded-full border-4 border-neon-blue shadow-neon-blue-lg overflow-hidden group">
-            <Image
-              src="/images/avatar.png"
-              alt="Profile Avatar"
-              width={128}
-              height={128}
-              className="object-cover group-hover:scale-110 transition-transform duration-300"
-              priority
-            />
-            <div className="absolute inset-0 rounded-full border-4 border-neon-purple opacity-50 animate-pulse" />
-          </div>
-        </motion.div>
-
-        {/* Greeting */}
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4"
-        >
-          Hi, Im <span className="text-neon-blue">Jimuel Reynoso</span>
-        </motion.h1>
-
-        {/* Typing Animation */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="text-2xl md:text-3xl mb-6 h-10"
-        >
-          I&apos;m a{" "}
-          <span className="text-neon-blue font-semibold">
-            {displayedText}
-            <span className="animate-pulse">|</span>
-          </span>
-        </motion.div>
-
-        {/* Description */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
-          className="text-gray-300 text-lg md:text-xl mb-8 max-w-2xl mx-auto"
-        >
-I am a web developer who builds modern, scalable, and user-focused applications by combining clean code with the power of AI. I leverage AI tools to streamline development, improve performance, and create smarter, more efficient solutions—from UI design to backend logic. My goal is to deliver web applications that are not only functional, but intelligent, reliable, and built for real-world impact.
-        </motion.p>
-
-        {/* CTA Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.8 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center"
-        >
-          <motion.button
-            onClick={() => scrollToSection("portfolio")}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="px-8 py-3 bg-neon-blue text-black font-bold rounded-lg hover:bg-neon-blue/80 transition-all duration-300 shadow-neon-blue hover:shadow-neon-blue-lg"
+    <section className="w-full py-6 md:py-10">
+      <div className="max-w-4xl mx-auto">
+        <div className="flex flex-col items-center text-center">
+          {/* Name */}
+          <motion.h1
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.1 }}
+            className="text-4xl md:text-5xl font-bold text-white mb-2"
           >
-            View My Work
-          </motion.button>
-          <motion.button
-            onClick={() => {
-              // Download CV functionality
-              const link = document.createElement("a");
-              link.href = "/cv.pdf";
-              link.download = "cv.pdf";
-              link.click();
-            }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="px-8 py-3 border-2 border-neon-blue text-neon-blue font-bold rounded-lg hover:bg-neon-blue/10 transition-all duration-300"
+            Jimuel Reynoso
+          </motion.h1>
+
+          {/* Title */}
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.2 }}
+            className="text-neon-blue font-semibold text-xl md:text-2xl mb-5"
           >
-            Download CV
-          </motion.button>
-        </motion.div>
+            Full-Stack Web Developer
+          </motion.p>
+
+          {/* Value statement */}
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.3 }}
+            className="text-[#A0B0C0] text-base md:text-lg max-w-2xl mx-auto mb-10 leading-relaxed"
+          >
+            I build scalable, user-friendly web applications that turn ideas into real products.
+          </motion.p>
+
+          {/* CTA Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.4 }}
+            className="flex flex-wrap justify-center gap-4"
+          >
+            <motion.button
+              onClick={onViewProjects}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
+              className="px-8 py-3.5 bg-neon-blue text-white font-semibold text-base rounded-xl hover:opacity-90 transition-opacity shadow-lg"
+            >
+              View Projects
+            </motion.button>
+            <motion.button
+              onClick={onContact}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
+              className="px-8 py-3.5 border-2 border-neon-blue text-neon-blue font-semibold text-base rounded-xl hover:bg-neon-blue/10 transition-colors"
+            >
+              Contact Me
+            </motion.button>
+            <motion.a
+              href="/resume.pdf"
+              download="resume.pdf"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
+              className="px-8 py-3.5 border border-white/30 text-[#C0D0E0] font-semibold text-base rounded-xl hover:bg-white/5 hover:border-white/50 transition-all inline-block"
+            >
+              Download Resume
+            </motion.a>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

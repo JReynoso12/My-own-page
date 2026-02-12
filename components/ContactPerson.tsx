@@ -25,83 +25,90 @@ const socialLinks = [
 
 export default function ContactPerson() {
   return (
-    <section className="w-full">
+    <section className="w-full py-2">
       <div className="max-w-6xl mx-auto">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          {/* Left Side - Contact Info */}
+        <div className="grid md:grid-cols-2 gap-10 items-start">
+          {/* Left Side - Contact card (glass widget) */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
-            className="text-center md:text-left"
+            className="space-y-6"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-neon-blue mb-8">CONTACT ME</h2>
-            
-            {/* Profile Picture */}
-            <div className="flex justify-center md:justify-start mb-6">
-              <div className="relative w-48 h-48 rounded-full overflow-hidden border border-slate-700/70 shadow-neon-blue">
-                <Image
-                  src="/images/avatar.png"
-                  alt="Jimuel Reynoso"
-                  width={192}
-                  height={192}
-                  className="object-cover w-full h-full"
-                />
+            <div className="glass-card p-7 rounded-2xl text-center md:text-left">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Contact me</h2>
+
+              <div className="flex justify-center md:justify-start mb-6">
+                <div className="relative">
+                  {/* Translucent blue shapes behind profile */}
+                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                    <div className="w-32 h-32 rounded-full bg-blue-500/20 blur-2xl -ml-4" />
+                    <div className="absolute w-24 h-24 rounded-full bg-blue-400/15 blur-xl ml-6 mt-2" />
+                  </div>
+                  <div className="relative w-44 h-44 rounded-full overflow-hidden border-2 border-white/10 ring-2 ring-blue-500/20">
+                    <Image
+                      src="/images/avatar.png"
+                      alt="Jimuel Reynoso"
+                      width={176}
+                      height={176}
+                      className="object-cover w-full h-full grayscale"
+                    />
+                  </div>
+                </div>
               </div>
-            </div>
 
-            <h3 className="text-2xl font-bold text-white mb-8">JIMUEL REYNOSO</h3>
+              <h3 className="text-2xl font-bold text-white mb-6">Jimuel Reynoso</h3>
 
-            {/* Social Media Links */}
-            <div className="space-y-4 mb-8">
-              {socialLinks.map((social, index) => {
-                const Icon = social.icon;
-                return (
-                  <motion.a
-                    key={index}
-                    href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.3, delay: 0.1 * index }}
-                    whileHover={{ x: 10 }}
-                    className="flex items-center gap-4 text-white hover:text-neon-blue transition-colors duration-300"
-                  >
-                    <Icon className="w-6 h-6" />
-                    <span className="text-lg">{social.username}</span>
-                  </motion.a>
-                );
-              })}
-            </div>
+              <div className="space-y-4 mb-6">
+                {socialLinks.map((social, index) => {
+                  const Icon = social.icon;
+                  return (
+                    <motion.a
+                      key={index}
+                      href={social.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.3, delay: 0.1 * index }}
+                      whileHover={{ x: 6 }}
+                      className="flex items-center justify-center md:justify-start gap-3 text-[#C0D0E0] hover:text-neon-blue transition-colors duration-300"
+                    >
+                      <Icon className="w-5 h-5 text-neon-blue" />
+                      <span className="text-base">{social.username}</span>
+                    </motion.a>
+                  );
+                })}
+              </div>
 
-            {/* Portfolio Links */}
-            <div className="space-y-3">
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.5 }}
-                className="bg-slate-900/80 p-4 rounded-xl border border-slate-700/70 hover:border-neon-blue hover:bg-slate-900 transition-colors cursor-pointer"
-              >
-                <p className="text-white">PORTOFOLIO. 2023</p>
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.6 }}
-                className="bg-slate-900/80 p-4 rounded-xl border border-slate-700/70 hover:border-neon-blue hover:bg-slate-900 transition-colors cursor-pointer"
-              >
-                <p className="text-white">DESIGN PORTFOLIO 2024</p>
-              </motion.div>
+              <div className="space-y-3">
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5, delay: 0.5 }}
+                  className="glass-card p-5 rounded-xl border border-white/10 hover:border-white/20 transition-colors cursor-pointer"
+                >
+                  <p className="text-white text-base font-medium">Portfolio 2023</p>
+                  <p className="text-[#A0B0C0] text-sm mt-0.5">Web projects</p>
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5, delay: 0.6 }}
+                  className="glass-card p-5 rounded-xl border border-white/10 hover:border-white/20 transition-colors cursor-pointer"
+                >
+                  <p className="text-white text-base font-medium">Design portfolio 2024</p>
+                  <p className="text-[#A0B0C0] text-sm mt-0.5">UI/UX & design</p>
+                </motion.div>
+              </div>
             </div>
           </motion.div>
 
-          {/* Right Side - AI Chat */}
+          {/* Right Side - AI Chat (glass widget) */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-center md:text-right"
           >
             <AIChat />
           </motion.div>

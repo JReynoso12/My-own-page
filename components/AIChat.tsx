@@ -157,11 +157,11 @@ export default function AIChat() {
   };
 
   return (
-    <div className="neon-glass-card p-4 md:p-5 h-80 md:h-96 flex flex-col">
+    <div className="glass-card p-5 md:p-6 h-80 md:h-96 flex flex-col rounded-2xl">
       <h3 className="text-lg font-semibold mb-2 text-neon-blue">
         AI Booking Assistant
       </h3>
-      <p className="text-xs text-slate-300 mb-3">
+      <p className="text-xs text-[#A0B0C0] mb-3">
         Answer a few quick questions and Ill send your request directly to
         Jimuels email.
       </p>
@@ -180,8 +180,8 @@ export default function AIChat() {
               transition={{ duration: 0.18 }}
               className={`max-w-[85%] text-sm px-3 py-2 rounded-2xl ${
                 msg.sender === "bot"
-                  ? "bg-slate-900/80 border border-slate-700/70 text-slate-100"
-                  : "ml-auto bg-neon-blue text-black"
+                  ? "bg-white/10 border border-white/10 text-[#E0E0E0]"
+                  : "ml-auto bg-neon-blue text-white"
               }`}
             >
               {msg.text}
@@ -193,7 +193,7 @@ export default function AIChat() {
       <div className="flex items-center gap-2">
         <input
           type="text"
-          className="flex-1 bg-slate-900/80 border border-slate-700/70 rounded-full px-3 py-2 text-sm text-white focus:outline-none focus:border-neon-blue"
+          className="flex-1 bg-white/10 border border-white/10 rounded-full px-3 py-2 text-sm text-white placeholder-[#A0B0C0] focus:outline-none focus:border-neon-blue"
           placeholder={
             isSending
               ? "Sending your request..."
@@ -208,7 +208,7 @@ export default function AIChat() {
           aria-label="Send message"
           onClick={handleSend}
           disabled={isSending}
-          className="p-2 rounded-full bg-neon-blue text-black hover:bg-neon-blue/80 transition disabled:opacity-60"
+          className="p-2 rounded-full bg-neon-blue text-white hover:opacity-90 transition disabled:opacity-60"
         >
           <HiPaperAirplane className="w-4 h-4" />
         </button>
