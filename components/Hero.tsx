@@ -65,15 +65,7 @@ export default function Hero({ onViewProjects, onContact }: HeroProps) {
             >
               Contact Me
             </motion.button>
-            <motion.a
-              href="/resume.pdf"
-              download="resume.pdf"
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.98 }}
-              className="px-8 py-3.5 border border-white/30 text-[#C0D0E0] font-semibold text-base rounded-xl hover:bg-white/5 hover:border-white/50 transition-all inline-block"
-            >
-              Download Resume
-            </motion.a>
+
           </motion.div>
         </div>
       </div>

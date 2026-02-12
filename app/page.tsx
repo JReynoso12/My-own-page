@@ -1,13 +1,24 @@
 "use client";
 
 import { useState } from "react";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import TabNavigation from "@/components/TabNavigation";
 import Hero from "@/components/Hero";
-import AboutMe from "@/components/AboutMe";
-import Skills from "@/components/Skills";
-import Projects from "@/components/Projects";
-import ContactPerson from "@/components/ContactPerson";
+
+// Lazy-load tab content so initial dev compile is smaller and faster
+const AboutMe = dynamic(() => import("@/components/AboutMe"), {
+  loading: () => <div className="min-h-[200px] animate-pulse rounded-2xl bg-white/5" aria-hidden />,
+});
+const Skills = dynamic(() => import("@/components/Skills"), {
+  loading: () => <div className="min-h-[200px] animate-pulse rounded-2xl bg-white/5" aria-hidden />,
+});
+const Projects = dynamic(() => import("@/components/Projects"), {
+  loading: () => <div className="min-h-[200px] animate-pulse rounded-2xl bg-white/5" aria-hidden />,
+});
+const ContactPerson = dynamic(() => import("@/components/ContactPerson"), {
+  loading: () => <div className="min-h-[200px] animate-pulse rounded-2xl bg-white/5" aria-hidden />,
+});
 
 
 export default function Home() {
@@ -25,6 +36,7 @@ export default function Home() {
           width={56}
           height={56}
           className="object-contain drop-shadow-lg"
+          priority
         />
       </div>
 
