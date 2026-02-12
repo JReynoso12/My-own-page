@@ -60,12 +60,6 @@ export default function AboutMe() {
             {/* Education & Experience */}
             <div className="glass-card p-7 rounded-2xl space-y-6">
               <div>
-                <h3 className="text-2xl font-bold text-white mb-3">Education</h3>
-                <div className="space-y-1 text-[#A0B0C0] text-base">
-                  <p className="font-semibold text-[#C0D0E0]">2018–2019</p>
-                  <p>Golden State College — Information Technology</p>
-                  <p>Junior Application Lead · Full Stack Developer</p>
-                </div>
               </div>
               <div>
                 <h3 className="text-2xl font-bold text-white mb-3">Experience</h3>
