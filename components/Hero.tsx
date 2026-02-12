@@ -65,8 +65,34 @@ export default function Hero({ onViewProjects, onContact }: HeroProps) {
             >
               Contact Me
             </motion.button>
-
+            <motion.a
+              href="/resume.pdf"
+              download="resume.pdf"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
+              className="px-8 py-3.5 border border-white/30 text-[#C0D0E0] font-semibold text-base rounded-xl hover:bg-white/5 hover:border-white/50 transition-all inline-block"
+            >
+              Download Resume
+            </motion.a>
           </motion.div>
+
+          {/* Tech strip */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4, delay: 0.5 }}
+            className="mt-8 text-[#A0B0C0] text-sm flex flex-wrap justify-center gap-x-4 gap-y-1"
+          >
+            <span>Vue.js</span>
+            <span className="text-white/40">·</span>
+            <span>Node.js</span>
+            <span className="text-white/40">·</span>
+            <span>MySQL</span>
+            <span className="text-white/40">·</span>
+            <span>Tailwind CSS</span>
+            <span className="text-white/40">·</span>
+            <span>REST APIs</span>
+          </motion.p>
         </div>
       </div>
     </section>

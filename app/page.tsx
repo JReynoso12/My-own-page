@@ -25,11 +25,11 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState("home");
 
   return (
-    <main className="relative min-h-screen flex items-center justify-center px-4 py-8 md:px-6 md:py-10">
+    <main className="relative min-h-screen flex items-center justify-center px-5 py-10 md:px-8 md:py-12">
       {/* Animated grid background */}
       
       {/* JR Logo - Top Left (always visible) */}
-      <div className="fixed top-8 left-8 z-50">
+      <div className="fixed top-10 left-10 z-50">
         <Image
           src="/images/logo-jr.png"
           alt="JR Logo"
@@ -41,16 +41,16 @@ export default function Home() {
       </div>
 
       {/* Main frosted glass panel – scaled up for more presence */}
-      <div className="relative z-10 w-full max-w-7xl min-h-[min(85vh,720px)] neon-glass-card px-6 py-10 md:px-12 md:py-12 flex flex-col md:flex-row gap-8 md:gap-12">
+      <div className="relative z-10 w-full max-w-7xl min-h-[min(88vh,800px)] neon-glass-card px-7 py-12 md:px-14 md:py-14 flex flex-col md:flex-row gap-8 md:gap-14">
         {/* Vertical navigation */}
-        <aside className="flex md:flex-col items-center justify-between md:justify-center gap-4 md:gap-5 md:w-28">
+        <aside className="flex md:flex-col items-center justify-between md:justify-center gap-4 md:gap-6 md:w-32">
           <TabNavigation activeTab={activeTab} onTabChange={setActiveTab} />
         </aside>
 
         {/* Content area */}
-        <section className="flex-1 pr-1 md:pr-3 space-y-0">
+        <section className="flex-1 pr-2 md:pr-6 space-y-0 min-w-0">
           {activeTab === "home" && <Hero onViewProjects={() => setActiveTab("project")} onContact={() => setActiveTab("contact")} />}
-          {activeTab === "profil" && <AboutMe />}
+          {activeTab === "profil" && <AboutMe onNavigateToContact={() => setActiveTab("contact")} />}
           {activeTab === "skills" && <Skills />}
           {activeTab === "project" && <Projects />}
           {activeTab === "contact" && <ContactPerson />}
