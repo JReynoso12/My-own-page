@@ -16,15 +16,15 @@
     background:
       radial-gradient(
         ellipse at 20% 20%,
-        rgba(40, 60, 100, 0.4),
+        rgba(146, 169, 216, 0.4),
         transparent 50%
       ),
       radial-gradient(
         ellipse at 80% 80%,
-        rgba(50, 70, 120, 0.3),
+        rgba(153, 174, 228, 0.3),
         transparent 50%
       ),
-      linear-gradient(160deg, #0f1729 0%, #1a2a4b 40%, #152238 100%);
+      linear-gradient(160deg, #496097 0%, #5471aa 40%, #506994 100%);
   }
 }
 
