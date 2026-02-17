@@ -154,7 +154,7 @@ export default function AIChat() {
   };
 
   return (
-    <div className="glass-card p-5 md:p-6 h-80 md:h-96 flex flex-col rounded-2xl">
+    <div className="glass-card p-4 sm:p-5 md:p-6 h-72 sm:h-80 md:h-96 flex flex-col rounded-2xl min-h-0">
       <h3 className="text-lg font-semibold mb-2 text-neon-blue">
         AI Booking Assistant
       </h3>

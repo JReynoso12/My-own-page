@@ -31,9 +31,9 @@ const socialLinks = [
 
 export default function ContactPerson() {
   return (
-    <section className="w-full py-2">
+    <section className="w-full py-2 px-1">
       <div className="max-w-6xl mx-auto">
-        <div className="grid md:grid-cols-2 gap-10 items-start">
+        <div className="grid md:grid-cols-2 gap-6 sm:gap-8 md:gap-10 items-start">
           {/* Left Side - Contact card (glass widget) */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -41,29 +41,30 @@ export default function ContactPerson() {
             transition={{ duration: 0.5 }}
             className="space-y-6"
           >
-            <div className="glass-card p-7 rounded-2xl text-center md:text-left">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Contact me</h2>
+            <div className="glass-card p-5 sm:p-6 md:p-7 rounded-2xl text-center md:text-left">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 sm:mb-6">Contact me</h2>
 
-              <div className="flex justify-center md:justify-start mb-6">
+              <div className="flex justify-center md:justify-start mb-4 sm:mb-6">
                 <div className="relative">
                   {/* Translucent blue shapes behind profile */}
                   <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                     <div className="w-32 h-32 rounded-full bg-blue-500/20 blur-2xl -ml-4" />
                     <div className="absolute w-24 h-24 rounded-full bg-blue-400/15 blur-xl ml-6 mt-2" />
                   </div>
-                  <div className="relative w-44 h-44 rounded-full overflow-hidden border-2 border-white/10 ring-2 ring-blue-500/20">
+                  <div className="relative w-32 h-32 sm:w-40 sm:h-40 md:w-44 md:h-44 rounded-full overflow-hidden border-2 border-white/10 ring-2 ring-blue-500/20">
                     <Image
                       src="/images/avatar.png"
                       alt="Jimuel Reynoso"
                       width={176}
                       height={176}
+                      sizes="(max-width: 640px) 128px, (max-width: 768px) 160px, 176px"
                       className="object-cover w-full h-full grayscale"
                     />
                   </div>
                 </div>
               </div>
 
-              <h3 className="text-2xl font-bold text-white mb-4">Jimuel Reynoso</h3>
+              <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4">Jimuel Reynoso</h3>
 
               {/* Email & Phone */}
               <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start mb-6">

@@ -78,15 +78,15 @@ const projects: Project[] = [
 
 export default function Projects() {
   return (
-    <section className="w-full">
+    <section className="w-full px-1">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="mb-8"
+          className="mb-6 sm:mb-8"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2">
             Projects
           </h2>
           <p className="text-glass-muted text-base">
@@ -116,11 +116,11 @@ export default function Projects() {
                 </div>
 
                 {/* Content */}
-                <div className="md:col-span-3 p-6 md:p-8 flex flex-col justify-center">
-                  <h3 className="text-2xl font-bold text-white mb-3">
+                <div className="md:col-span-3 p-4 sm:p-6 md:p-8 flex flex-col justify-center">
+                  <h3 className="text-xl sm:text-2xl font-bold text-white mb-2 sm:mb-3">
                     {project.title}
                   </h3>
-                  <p className="text-glass-secondary text-base leading-relaxed mb-4">
+                  <p className="text-glass-secondary text-sm sm:text-base leading-relaxed mb-3 sm:mb-4">
                     {project.description}
                   </p>
                   <p className="text-glass-secondary text-sm mb-2">

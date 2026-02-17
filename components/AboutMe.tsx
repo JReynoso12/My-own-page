@@ -12,37 +12,37 @@ interface AboutMeProps {
 
 export default function AboutMe({ onNavigateToContact }: AboutMeProps) {
   return (
-    <section className="w-full py-2">
-      <div className="max-w-6xl mx-auto space-y-8">
+    <section className="w-full py-2 px-1">
+      <div className="max-w-6xl mx-auto space-y-6 sm:space-y-8">
         {/* Top: About me (full width, read first) */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <div className="glass-card p-7 rounded-2xl">
-            <h3 className="text-2xl font-bold text-white mb-4">About me</h3>
-            <p className="text-glass-secondary leading-relaxed text-base max-w-3xl">
+          <div className="glass-card p-5 sm:p-6 md:p-7 rounded-2xl">
+            <h3 className="text-xl sm:text-2xl font-bold text-white mb-3 sm:mb-4">About me</h3>
+            <p className="text-glass-secondary leading-relaxed text-sm sm:text-base max-w-3xl">
               I&apos;m a Full-Stack Web Developer specializing in Vue.js, Node.js, and MySQL. I build responsive, secure, and scalable web applications for businesses and startups—from idea to deployment. I focus on clean code, user experience, and delivering solutions that solve real problems.
             </p>
           </div>
         </motion.div>
 
         {/* Bottom row: Profile (left) + Experience (right) */}
-        <div className="grid md:grid-cols-2 gap-8 items-start">
+        <div className="grid md:grid-cols-2 gap-6 sm:gap-8 items-start">
           {/* Profile card */}
           <motion.div
             initial={{ opacity: 0, x: -24 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            <div className="relative rounded-2xl overflow-hidden glass-card p-7 pb-9">
+            <div className="relative rounded-2xl overflow-hidden glass-card p-5 sm:p-6 md:p-7 pb-7 sm:pb-9">
               <div className="absolute left-1/2 top-16 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
                 <div className="absolute w-32 h-32 rounded-full bg-blue-500/25 blur-2xl -left-8 top-0" />
                 <div className="absolute w-28 h-28 rounded-full bg-blue-400/20 blur-xl left-6 -top-2" />
               </div>
               <div className="relative flex flex-col items-center text-center">
-                <div className="relative w-36 h-36 md:w-44 md:h-44 rounded-full overflow-hidden border-2 border-white/10 ring-2 ring-blue-500/20 mb-5">
+                <div className="relative w-28 h-28 sm:w-36 sm:h-36 md:w-44 md:h-44 rounded-full overflow-hidden border-2 border-white/10 ring-2 ring-blue-500/20 mb-4 sm:mb-5">
                   <Image
                     src="/images/avatar.png"
                     alt="Jimuel Reynoso"
@@ -74,8 +74,8 @@ export default function AboutMe({ onNavigateToContact }: AboutMeProps) {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <div className="glass-card p-7 rounded-2xl h-full">
-              <h3 className="text-2xl font-bold text-white mb-3">Experience</h3>
+            <div className="glass-card p-5 sm:p-6 md:p-7 rounded-2xl h-full">
+              <h3 className="text-xl sm:text-2xl font-bold text-white mb-2 sm:mb-3">Experience</h3>
               <div className="space-y-1 text-glass-secondary text-base">
                 <p className="font-semibold text-glass-secondary">Web development</p>
                 <p className="leading-relaxed">
@@ -91,9 +91,9 @@ export default function AboutMe({ onNavigateToContact }: AboutMeProps) {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4, delay: 0.3 }}
-          className="glass-card p-6 rounded-2xl"
+          className="glass-card p-4 sm:p-5 md:p-6 rounded-2xl"
         >
-          <h3 className="text-lg font-bold text-white mb-3">Tech I use</h3>
+          <h3 className="text-base sm:text-lg font-bold text-white mb-2 sm:mb-3">Tech I use</h3>
           <div className="flex flex-wrap gap-2.5">
             {techStack.map((tech) => (
               <span

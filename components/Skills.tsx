@@ -31,15 +31,15 @@ const skillGroups = [
 
 export default function Skills() {
   return (
-    <section className="w-full py-2">
+    <section className="w-full py-2 px-1">
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
-          className="mb-8"
+          className="mb-6 sm:mb-8"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2">
             Skills
           </h2>
           <p className="text-glass-muted text-base">
@@ -47,14 +47,14 @@ export default function Skills() {
           </p>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 gap-5 md:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
           {skillGroups.map((group, groupIndex) => (
             <motion.div
               key={group.title}
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.35, delay: groupIndex * 0.08 }}
-              className={`glass-card p-6 rounded-2xl border ${group.borderColor}`}
+              className={`glass-card p-4 sm:p-5 md:p-6 rounded-2xl border ${group.borderColor}`}
             >
               <h3 className={`font-bold text-lg mb-4 ${group.color}`}>
                 {group.title}

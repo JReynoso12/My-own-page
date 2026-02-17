@@ -13,7 +13,7 @@ export default function Footer() {
       className="mt-auto pt-8 border-t border-white/15"
       role="contentinfo"
     >
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-glass-muted text-sm">
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 text-glass-muted text-xs sm:text-sm text-center sm:text-left">
         <p>© {year} Jimuel Reynoso. All rights reserved.</p>
         <p className="text-center sm:text-right">
           Built with Next.js, Tailwind CSS & Framer Motion

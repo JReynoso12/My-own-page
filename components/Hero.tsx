@@ -9,7 +9,7 @@ interface HeroProps {
 
 export default function Hero({ onViewProjects, onContact }: HeroProps) {
   return (
-    <section className="w-full py-6 md:py-10">
+    <section className="w-full py-4 sm:py-6 md:py-10 px-1">
       <div className="max-w-4xl mx-auto">
         <div className="flex flex-col items-center text-center">
           {/* Availability badge */}
@@ -28,7 +28,7 @@ export default function Hero({ onViewProjects, onContact }: HeroProps) {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.1 }}
-            className="text-4xl md:text-5xl font-bold text-white mb-2"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-2"
           >
             Jimuel Reynoso
           </motion.h1>
@@ -38,7 +38,7 @@ export default function Hero({ onViewProjects, onContact }: HeroProps) {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.2 }}
-            className="text-neon-blue font-semibold text-xl md:text-2xl mb-5"
+            className="text-neon-blue font-semibold text-lg sm:text-xl md:text-2xl mb-4 sm:mb-5"
           >
             Full-Stack Web Developer
           </motion.p>
@@ -48,7 +48,7 @@ export default function Hero({ onViewProjects, onContact }: HeroProps) {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.3 }}
-            className="text-glass-secondary text-base md:text-lg max-w-2xl mx-auto mb-10 leading-relaxed"
+            className="text-glass-secondary text-sm sm:text-base md:text-lg max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed px-1"
           >
             I build scalable, user-friendly web applications using modern full-stack technologies, transforming ideas into secure, high-performance digital products. From concept and design to development and deployment, I focus on creating real-world solutions that solve real problems, deliver great user experiences, and grow seamlessly with your business or idea.
           </motion.p>
@@ -58,13 +58,13 @@ export default function Hero({ onViewProjects, onContact }: HeroProps) {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.4 }}
-            className="flex flex-wrap justify-center gap-4"
+            className="flex flex-wrap justify-center gap-3 sm:gap-4"
           >
             <motion.button
               onClick={onViewProjects}
               whileHover={{ y: -2, boxShadow: "0 8px 25px rgba(0, 122, 255, 0.45)" }}
               whileTap={{ scale: 0.98 }}
-              className="px-8 py-3.5 btn-active text-white font-semibold text-base rounded-full transition-shadow"
+              className="px-6 py-3 sm:px-8 sm:py-3.5 btn-active text-white font-semibold text-sm sm:text-base rounded-full transition-shadow"
             >
               View Projects
             </motion.button>
@@ -72,7 +72,7 @@ export default function Hero({ onViewProjects, onContact }: HeroProps) {
               onClick={onContact}
               whileHover={{ y: -2 }}
               whileTap={{ scale: 0.98 }}
-              className="px-8 py-3.5 btn-glass text-glass-secondary font-semibold text-base rounded-full border-2 border-neon-blue/50 text-neon-blue hover:bg-neon-blue/15 hover:border-neon-blue/70 transition-all"
+              className="px-6 py-3 sm:px-8 sm:py-3.5 btn-glass text-glass-secondary font-semibold text-sm sm:text-base rounded-full border-2 border-neon-blue/50 text-neon-blue hover:bg-neon-blue/15 hover:border-neon-blue/70 transition-all"
             >
               Contact Me
             </motion.button>
@@ -81,7 +81,7 @@ export default function Hero({ onViewProjects, onContact }: HeroProps) {
               download="resume.pdf"
               whileHover={{ y: -2 }}
               whileTap={{ scale: 0.98 }}
-              className="px-8 py-3.5 btn-glass text-glass-secondary font-semibold text-base rounded-full hover:bg-white/15 hover:border-white/30 transition-all inline-block"
+              className="px-6 py-3 sm:px-8 sm:py-3.5 btn-glass text-glass-secondary font-semibold text-sm sm:text-base rounded-full hover:bg-white/15 hover:border-white/30 transition-all inline-block"
             >
               Download Resume
             </motion.a>
