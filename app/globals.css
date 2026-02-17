@@ -118,4 +118,9 @@
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
+
+  /* AI Chat input – placeholder (inline style handles text color) */
+  .aichat-input::placeholder {
+    color: #94a3b8;
+  }
 }

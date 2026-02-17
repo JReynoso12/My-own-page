@@ -190,7 +190,12 @@ export default function AIChat() {
       <div className="flex items-center gap-2">
         <input
           type="text"
-          className="flex-1 bg-white/12 border border-white/25 backdrop-blur-xl rounded-full px-4 py-2.5 text-sm text-white placeholder:text-[#b8c4d8] focus:outline-none focus:border-neon-blue focus:ring-1 focus:ring-neon-blue/50 transition-all"
+          className="aichat-input flex-1 min-w-0 rounded-full px-4 py-2.5 text-sm border border-white/25 placeholder:text-slate-400 focus:outline-none focus:border-neon-blue focus:ring-2 focus:ring-neon-blue/50 transition-all"
+          style={{
+            background: "rgba(15, 23, 42, 0.9)",
+            color: "#f1f5f9",
+            caretColor: "#007AFF",
+          }}
           placeholder={
             isSending
               ? "Sending your request..."
