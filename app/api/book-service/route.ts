@@ -39,8 +39,11 @@ export async function POST(request: NextRequest) {
       conversation || "-",
     ].join("\n");
 
+    const fromAddress = process.env.RESEND_FROM ?? "onboarding@resend.dev";
+
+    // 1. Send booking notification to you (Jimuel)
     const { error: resendError } = await resend.emails.send({
-      from: "onboarding@resend.dev",
+      from: fromAddress,
       to,
       subject: `New service booking from ${name}`,
       text,
@@ -60,6 +63,20 @@ export async function POST(request: NextRequest) {
         { error: "Email provider rejected the request" },
         { status: 502 }
       );
+    }
+
+    // 2. Send confirmation to the person who booked
+    const { error: confirmError } = await resend.emails.send({
+      from: fromAddress,
+      to: email,
+      subject: "Booking request received – Jimuel",
+      text: `Hi ${name},\n\nThanks for your booking request! Jimuel has received your details and will get back to you soon.\n\nService: ${service}\nPreferred date/time: ${preferredDate}\n\nBest,\nPortfolio`,
+      html: `<p>Hi ${name},</p><p>Thanks for your booking request! Jimuel has received your details and will get back to you soon.</p><p><strong>Service:</strong> ${service}<br/><strong>Preferred date/time:</strong> ${preferredDate}</p><p>Best,<br/>Portfolio</p>`,
+    });
+
+    if (confirmError) {
+      console.error("Resend confirmation error (notification still sent):", confirmError);
+      // Don't fail the request – owner notification already went through
     }
 
     return NextResponse.json({ success: true });

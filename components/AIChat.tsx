@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { HiPaperAirplane } from "react-icons/hi";
 
@@ -20,23 +20,30 @@ const steps = [
   "Any extra details or goals I should know about?",
 ];
 
+/** Extract booking answers from user messages (in order: name, email, service, date, details) */
+function getAnswersFromMessages(
+  messages: ChatMessage[],
+  currentUserText: string
+): { name: string; email: string; service: string; preferredDate: string; details: string } {
+  const userTexts = [
+    ...messages.filter((m) => m.sender === "user").map((m) => m.text),
+    currentUserText,
+  ];
+  return {
+    name: userTexts[0] ?? "",
+    email: userTexts[1] ?? "",
+    service: userTexts[2] ?? "",
+    preferredDate: userTexts[3] ?? "",
+    details: userTexts[4] ?? "",
+  };
+}
+
 export default function AIChat() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState("");
   const [stepIndex, setStepIndex] = useState(0);
   const [isSending, setIsSending] = useState(false);
   const messagesContainerRef = useRef<HTMLDivElement | null>(null);
-
-  const answers = useMemo(
-    () => ({
-      name: "",
-      email: "",
-      service: "",
-      preferredDate: "",
-      details: "",
-    }),
-    []
-  );
 
   useEffect(() => {
     // Initial greeting
@@ -72,19 +79,6 @@ export default function AIChat() {
       { id: Date.now(), sender: "user", text },
     ]);
 
-    // Store answer based on current step
-    if (stepIndex === 0) {
-      (answers as any).name = text;
-    } else if (stepIndex === 1) {
-      (answers as any).email = text;
-    } else if (stepIndex === 2) {
-      (answers as any).service = text;
-    } else if (stepIndex === 3) {
-      (answers as any).preferredDate = text;
-    } else if (stepIndex === 4) {
-      (answers as any).details = text;
-    }
-
     // Move to next step or submit
     if (stepIndex < steps.length - 1) {
       const nextIndex = stepIndex + 1;
@@ -100,11 +94,14 @@ export default function AIChat() {
         ]);
       }, 400);
     } else {
-      // Submit booking
+      // Submit booking - derive answers from messages (avoids race/stale data)
       setIsSending(true);
-      const conversationTranscript = [...messages, { id: Date.now(), sender: "user", text }]
+      const allMessages = [...messages, { id: Date.now(), sender: "user" as const, text }];
+      const conversationTranscript = allMessages
         .map((m) => (m.sender === "bot" ? `AI: ${m.text}` : `You: ${m.text}`))
         .join("\n");
+
+      const { name, email, service, preferredDate, details } = getAnswersFromMessages(messages, text);
 
       try {
         const res = await fetch("/api/book-service", {
@@ -113,11 +110,11 @@ export default function AIChat() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            name: (answers as any).name,
-            email: (answers as any).email,
-            service: (answers as any).service,
-            preferredDate: (answers as any).preferredDate,
-            message: (answers as any).details,
+            name,
+            email,
+            service,
+            preferredDate,
+            message: details,
             conversation: conversationTranscript,
           }),
         });
