@@ -58,9 +58,22 @@ export async function POST(request: NextRequest) {
     });
 
     if (resendError) {
+      const isNetworkError =
+        resendError.message?.includes("fetch") ||
+        resendError.message?.includes("could not be resolved") ||
+        resendError.name === "application_error";
       console.error("Resend error in /api/book-service:", resendError);
+      if (isNetworkError) {
+        console.error(
+          "Hint: Request never reached Resend. Check: internet, firewall/proxy, DNS, or https://status.resend.com"
+        );
+      }
       return NextResponse.json(
-        { error: "Email provider rejected the request" },
+        {
+          error: isNetworkError
+            ? "Could not reach email service. Check your network or try again later."
+            : "Email provider rejected the request",
+        },
         { status: 502 }
       );
     }
