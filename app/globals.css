@@ -12,8 +12,8 @@
     min-height: 100vh;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
-    /* Neo-Tactile: dark minimal background */
-    background: linear-gradient(180deg, #0d1117 0%, #161b22 50%, #0d1117 100%);
+    /* Fading grey to black */
+    background: linear-gradient(180deg, #2d3748 0%, #1a1a2e 50%, #0a0a0f 100%);
   }
 }
 
