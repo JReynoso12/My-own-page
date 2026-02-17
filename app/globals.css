@@ -12,19 +12,8 @@
     min-height: 100vh;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
-    /* Dark sapphire/indigo gradient – dashboard-style background */
-    background:
-      radial-gradient(
-        ellipse at 20% 20%,
-        rgba(146, 169, 216, 0.4),
-        transparent 50%
-      ),
-      radial-gradient(
-        ellipse at 80% 80%,
-        rgba(153, 174, 228, 0.3),
-        transparent 50%
-      ),
-      linear-gradient(160deg, #496097 0%, #5471aa 40%, #506994 100%);
+    /* Neo-Tactile: dark minimal background */
+    background: linear-gradient(180deg, #0d1117 0%, #161b22 50%, #0d1117 100%);
   }
 }
 
@@ -57,23 +46,66 @@
     background-color: #007AFF;
   }
 
-  /* Frosted glass card – semi-transparent + blur (glassmorphism) */
+  /* Neo-Tactile: liquid glass – transparent, blur, soft edge, depth */
   .glass-card {
-    background: rgba(30, 45, 75, 0.55);
-    border-radius: 1.25rem;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+    @apply rounded-2xl text-white;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
+    box-shadow:
+      0 4px 6px -1px rgba(0, 0, 0, 0.25),
+      0 10px 20px -5px rgba(0, 0, 0, 0.2);
   }
 
-  /* Main content panel – same glass, slightly stronger */
+  .glass-card:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow:
+      0 10px 15px -3px rgba(0, 0, 0, 0.3),
+      0 20px 30px -10px rgba(0, 0, 0, 0.25);
+  }
+
+  /* Main panel – Neo-Tactile with neon blue edge glow */
   .neon-glass-card {
-    background: rgba(26, 42, 75, 0.65);
-    border-radius: 1.75rem;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    @apply rounded-2xl text-white;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    box-shadow:
+      0 20px 40px -10px rgba(0, 0, 0, 0.35),
+      -4px -4px 20px rgba(0, 122, 255, 0.08);
+  }
+
+  /* Pill button – inactive (glass) */
+  .btn-glass {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  /* Pill button – active (neon blue, elevated) */
+  .btn-active {
+    background: #007AFF;
+    box-shadow: 0 4px 14px rgba(0, 122, 255, 0.4);
+  }
+
+  .btn-active:hover {
+    box-shadow: 0 6px 20px rgba(0, 122, 255, 0.5);
+  }
+
+  /* Readable text on glass */
+  .text-glass-primary {
+    color: #ffffff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+  }
+
+  .text-glass-secondary {
+    color: #d4dce8;
+  }
+
+  .text-glass-muted {
+    color: #b8c4d8;
   }
 }

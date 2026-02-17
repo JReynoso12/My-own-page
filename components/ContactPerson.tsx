@@ -2,10 +2,21 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { FaInstagram, FaGithub, FaFacebook } from "react-icons/fa";
+import { FaInstagram, FaGithub, FaFacebook, FaLinkedin } from "react-icons/fa";
+import { HiMail, HiPhone } from "react-icons/hi";
 import AIChat from "./AIChat";
 
 const socialLinks = [
+  {
+    icon: FaLinkedin,
+    username: "LinkedIn",
+    url: "https://www.linkedin.com/in/jimuel-reynoso",
+  },
+  {
+    icon: FaGithub,
+    username: "JReynoso12",
+    url: "https://github.com/JReynoso12",
+  },
   {
     icon: FaFacebook,
     username: "Facebook",
@@ -15,11 +26,6 @@ const socialLinks = [
     icon: FaInstagram,
     username: "@rjmuuuel",
     url: "https://www.instagram.com/rjmuuuel/",
-  },
-  {
-    icon: FaGithub,
-    username: "JReynoso12",
-    url: "https://github.com/JReynoso12",
   },
 ];
 
@@ -57,7 +63,25 @@ export default function ContactPerson() {
                 </div>
               </div>
 
-              <h3 className="text-2xl font-bold text-white mb-6">Jimuel Reynoso</h3>
+              <h3 className="text-2xl font-bold text-white mb-4">Jimuel Reynoso</h3>
+
+              {/* Email & Phone */}
+              <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start mb-6">
+                <a
+                  href="mailto:rjimueltorrecampo@gmail.com"
+                  className="flex items-center justify-center md:justify-start gap-2 text-glass-secondary hover:text-neon-blue transition-colors"
+                >
+                  <HiMail className="w-5 h-5 text-neon-blue shrink-0" />
+                  <span className="text-sm break-all">rjimueltorrecampo@gmail.com</span>
+                </a>
+                <a
+                  href="tel:+639126114933"
+                  className="flex items-center justify-center md:justify-start gap-2 text-glass-secondary hover:text-neon-blue transition-colors"
+                >
+                  <HiPhone className="w-5 h-5 text-neon-blue shrink-0" />
+                  <span className="text-sm">+63 912 611 4933</span>
+                </a>
+              </div>
 
               <div className="space-y-4 mb-6">
                 {socialLinks.map((social, index) => {
@@ -72,7 +96,7 @@ export default function ContactPerson() {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.3, delay: 0.1 * index }}
                       whileHover={{ x: 6 }}
-                      className="flex items-center justify-center md:justify-start gap-3 text-[#C0D0E0] hover:text-neon-blue transition-colors duration-300"
+                      className="flex items-center justify-center md:justify-start gap-3 text-glass-secondary hover:text-neon-blue transition-colors duration-300"
                     >
                       <Icon className="w-5 h-5 text-neon-blue" />
                       <span className="text-base">{social.username}</span>
@@ -86,19 +110,19 @@ export default function ContactPerson() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.5, delay: 0.5 }}
-                  className="glass-card p-5 rounded-xl border border-white/10 hover:border-white/20 transition-colors cursor-pointer"
+                  className="glass-card p-5 rounded-xl cursor-pointer transition-all"
                 >
                   <p className="text-white text-base font-medium">Portfolio 2023</p>
-                  <p className="text-[#A0B0C0] text-sm mt-0.5">Web projects</p>
+                  <p className="text-glass-muted text-sm mt-0.5">Web projects</p>
                 </motion.div>
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.5, delay: 0.6 }}
-                  className="glass-card p-5 rounded-xl border border-white/10 hover:border-white/20 transition-colors cursor-pointer"
+                  className="glass-card p-5 rounded-xl cursor-pointer transition-all"
                 >
                   <p className="text-white text-base font-medium">Design portfolio 2024</p>
-                  <p className="text-[#A0B0C0] text-sm mt-0.5">UI/UX & design</p>
+                  <p className="text-glass-muted text-sm mt-0.5">UI/UX & design</p>
                 </motion.div>
               </div>
             </div>

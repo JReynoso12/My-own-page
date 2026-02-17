@@ -158,7 +158,7 @@ export default function AIChat() {
       <h3 className="text-lg font-semibold mb-2 text-neon-blue">
         AI Booking Assistant
       </h3>
-      <p className="text-xs text-[#A0B0C0] mb-3">
+      <p className="text-xs text-glass-muted mb-3">
         Answer a few quick questions and Ill send your request directly to
         Jimuels email.
       </p>
@@ -177,7 +177,7 @@ export default function AIChat() {
               transition={{ duration: 0.18 }}
               className={`max-w-[85%] text-sm px-3 py-2 rounded-2xl ${
                 msg.sender === "bot"
-                  ? "bg-white/10 border border-white/10 text-[#E0E0E0]"
+                  ? "bg-white/15 border border-white/25 backdrop-blur-xl text-glass-secondary rounded-2xl"
                   : "ml-auto bg-neon-blue text-white"
               }`}
             >
@@ -190,7 +190,7 @@ export default function AIChat() {
       <div className="flex items-center gap-2">
         <input
           type="text"
-          className="flex-1 bg-white/10 border border-white/10 rounded-full px-3 py-2 text-sm text-white placeholder-[#A0B0C0] focus:outline-none focus:border-neon-blue"
+          className="flex-1 bg-white/12 border border-white/25 backdrop-blur-xl rounded-full px-4 py-2.5 text-sm text-white placeholder:text-[#b8c4d8] focus:outline-none focus:border-neon-blue focus:ring-1 focus:ring-neon-blue/50 transition-all"
           placeholder={
             isSending
               ? "Sending your request..."
@@ -205,7 +205,7 @@ export default function AIChat() {
           aria-label="Send message"
           onClick={handleSend}
           disabled={isSending}
-          className="p-2 rounded-full bg-neon-blue text-white hover:opacity-90 transition disabled:opacity-60"
+          className="p-2.5 rounded-full btn-active text-white transition-all disabled:opacity-60 hover:shadow-[0_4px_20px_rgba(0,122,255,0.5)]"
         >
           <HiPaperAirplane className="w-4 h-4" />
         </button>

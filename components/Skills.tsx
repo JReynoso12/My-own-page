@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 const skillGroups = [
   {
     title: "Frontend",
-    items: ["Vue.js", "JavaScript (ES6+)", "Tailwind CSS", "HTML5 / CSS3"],
+    items: ["Vue.js", "React", "Next.js", "JavaScript (ES6+)", "Tailwind CSS", "HTML5 / CSS3"],
     color: "text-neon-blue",
     borderColor: "border-blue-500/30",
   },
@@ -42,7 +42,7 @@ export default function Skills() {
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
             Skills
           </h2>
-          <p className="text-[#A0B0C0] text-base">
+          <p className="text-glass-muted text-base">
             Technologies and tools I use to build and ship products.
           </p>
         </motion.div>
@@ -63,7 +63,7 @@ export default function Skills() {
                 {group.items.map((item, i) => (
                   <li
                     key={item}
-                    className="px-3.5 py-2 rounded-lg bg-white/5 text-[#C0D0E0] text-base border border-white/10"
+                    className="px-3.5 py-2 rounded-xl bg-white/12 text-glass-secondary text-base border border-white/25 backdrop-blur-md"
                   >
                     {item}
                   </li>

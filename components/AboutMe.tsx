@@ -22,8 +22,8 @@ export default function AboutMe({ onNavigateToContact }: AboutMeProps) {
         >
           <div className="glass-card p-7 rounded-2xl">
             <h3 className="text-2xl font-bold text-white mb-4">About me</h3>
-            <p className="text-[#A0B0C0] leading-relaxed text-base max-w-3xl">
-              I&apos;m a Full-Stack Web Developer specializing in Vue.js, Node.js, and MySQL. I build responsive, secure, and scalable web applications for businesses and startups—from idea to deployment.
+            <p className="text-glass-secondary leading-relaxed text-base max-w-3xl">
+              I&apos;m a Full-Stack Web Developer specializing in Vue.js, Node.js, and MySQL. I build responsive, secure, and scalable web applications for businesses and startups—from idea to deployment. I focus on clean code, user experience, and delivering solutions that solve real problems.
             </p>
           </div>
         </motion.div>
@@ -36,7 +36,7 @@ export default function AboutMe({ onNavigateToContact }: AboutMeProps) {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            <div className="relative rounded-2xl overflow-hidden bg-[#0f1a2e] border border-white/10 shadow-[0_0_0_1px_rgba(59,130,246,0.15),0_4px_24px_rgba(0,0,0,0.3)] p-7 pb-9">
+            <div className="relative rounded-2xl overflow-hidden glass-card p-7 pb-9">
               <div className="absolute left-1/2 top-16 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
                 <div className="absolute w-32 h-32 rounded-full bg-blue-500/25 blur-2xl -left-8 top-0" />
                 <div className="absolute w-28 h-28 rounded-full bg-blue-400/20 blur-xl left-6 -top-2" />
@@ -76,8 +76,8 @@ export default function AboutMe({ onNavigateToContact }: AboutMeProps) {
           >
             <div className="glass-card p-7 rounded-2xl h-full">
               <h3 className="text-2xl font-bold text-white mb-3">Experience</h3>
-              <div className="space-y-1 text-[#A0B0C0] text-base">
-                <p className="font-semibold text-[#C0D0E0]">Web development</p>
+              <div className="space-y-1 text-glass-secondary text-base">
+                <p className="font-semibold text-glass-secondary">Web development</p>
                 <p className="leading-relaxed">
                   Building full-stack web applications with Vue.js, Node.js, and MySQL—from UI to backend, auth, and deployment.
                 </p>
@@ -98,7 +98,7 @@ export default function AboutMe({ onNavigateToContact }: AboutMeProps) {
             {techStack.map((tech) => (
               <span
                 key={tech}
-                className="px-3.5 py-2 rounded-lg bg-white/5 text-[#C0D0E0] text-sm border border-white/10"
+                className="px-3.5 py-2 rounded-xl bg-white/12 text-glass-secondary text-sm border border-white/25 backdrop-blur-md"
               >
                 {tech}
               </span>
@@ -113,12 +113,12 @@ export default function AboutMe({ onNavigateToContact }: AboutMeProps) {
           transition={{ duration: 0.4, delay: 0.4 }}
           className="text-center py-4"
         >
-          <p className="text-[#A0B0C0] text-sm mb-3">Open to new projects and full-time opportunities.</p>
+          <p className="text-glass-muted text-sm mb-3">Open to new projects and full-time opportunities.</p>
           {onNavigateToContact && (
             <button
               type="button"
               onClick={onNavigateToContact}
-              className="px-6 py-2.5 rounded-xl bg-neon-blue/20 text-neon-blue font-semibold text-sm border border-neon-blue/40 hover:bg-neon-blue/30 transition-colors"
+              className="px-6 py-2.5 rounded-full btn-active text-white font-semibold text-sm transition-all"
             >
               Get in touch
             </button>

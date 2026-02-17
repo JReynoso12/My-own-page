@@ -2,12 +2,28 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { HiExternalLink, HiCode } from "react-icons/hi";
 
-const projects = [
+interface Project {
+  id: number;
+  title: string;
+  image: string;
+  description: string;
+  role: string;
+  challenges: string;
+  features: string[];
+  techStack: string[];
+  demoUrl?: string | null;
+  repoUrl?: string | null;
+}
+
+const projects: Project[] = [
   {
     id: 1,
     title: "Product Order Web App",
     image: "/images/project-1.png",
+    demoUrl: null,
+    repoUrl: "https://github.com/JReynoso12",
     description:
       "Full-stack e-commerce app with user and admin roles. Solves the need for a single place to browse products, manage cart and checkout, and for admins to manage inventory and orders.",
     role: "End-to-end development: frontend, backend, database design, authentication, and deployment.",
@@ -27,6 +43,8 @@ const projects = [
     id: 2,
     title: "Business Website + Admin CMS",
     image: "/images/project-2.png",
+    demoUrl: null,
+    repoUrl: null,
     description:
       "Client-facing business website with an admin panel to update content without touching code. Delivers real business value: always up-to-date content and a professional online presence.",
     role: "Design and build of the public site, admin CMS, and contact form with backend handling.",
@@ -42,6 +60,8 @@ const projects = [
     id: 3,
     title: "API-Driven App (Activity Monitor Dashboard)",
     image: "/images/project-3.png",
+    demoUrl: null,
+    repoUrl: null,
     description:
       "Data management and activity monitoring dashboard powered by RESTful APIs. Highlights API design and integration—ideal for teaching Introduction to APIs and showing production-ready API skills.",
     role: "RESTful API design, CRUD operations, secure endpoints, and dashboard UI consuming the API.",
@@ -69,7 +89,7 @@ export default function Projects() {
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-2">
             Projects
           </h2>
-          <p className="text-[#A0B0C0] text-base">
+          <p className="text-glass-muted text-base">
             Quality over quantity—here are solid projects that show what I build.
           </p>
         </motion.div>
@@ -81,7 +101,7 @@ export default function Projects() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: index * 0.1 }}
-              className="glass-card rounded-2xl overflow-hidden border border-white/10 hover:border-white/20 transition-colors"
+              className="glass-card rounded-2xl overflow-hidden transition-all"
             >
               <div className="grid md:grid-cols-5 gap-0">
                 {/* Image */}
@@ -100,14 +120,14 @@ export default function Projects() {
                   <h3 className="text-2xl font-bold text-white mb-3">
                     {project.title}
                   </h3>
-                  <p className="text-[#A0B0C0] text-base leading-relaxed mb-4">
+                  <p className="text-glass-secondary text-base leading-relaxed mb-4">
                     {project.description}
                   </p>
-                  <p className="text-[#C0D0E0] text-sm mb-2">
+                  <p className="text-glass-secondary text-sm mb-2">
                     <span className="font-semibold text-white">My role:</span>{" "}
                     {project.role}
                   </p>
-                  <p className="text-[#A0B0C0] text-sm mb-4">
+                  <p className="text-glass-muted text-sm mb-4">
                     <span className="font-semibold text-white">Challenges:</span>{" "}
                     {project.challenges}
                   </p>
@@ -121,16 +141,42 @@ export default function Projects() {
                       </span>
                     ))}
                   </div>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2 mb-4">
                     {project.techStack.map((tech) => (
                       <span
                         key={tech}
-                        className="px-3 py-1 rounded bg-white/10 text-[#A0B0C0] text-sm"
+                        className="px-3 py-1.5 rounded-lg bg-white/10 text-glass-muted text-sm border border-white/20 backdrop-blur-md"
                       >
                         {tech}
                       </span>
                     ))}
                   </div>
+                  {(project.demoUrl || project.repoUrl) && (
+                    <div className="flex flex-wrap gap-3">
+                      {project.demoUrl && (
+                        <a
+                          href={project.demoUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 px-4 py-2 rounded-full btn-active text-white text-sm font-medium transition-all"
+                        >
+                          <HiExternalLink className="w-4 h-4" />
+                          Live Demo
+                        </a>
+                      )}
+                      {project.repoUrl && (
+                        <a
+                          href={project.repoUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 px-4 py-2 rounded-full btn-glass text-glass-secondary text-sm font-medium transition-all"
+                        >
+                          <HiCode className="w-4 h-4" />
+                          Source Code
+                        </a>
+                      )}
+                    </div>
+                  )}
                 </div>
               </div>
             </motion.article>

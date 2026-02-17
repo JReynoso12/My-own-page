@@ -18,18 +18,23 @@ const tabs = [
 
 export default function TabNavigation({ activeTab, onTabChange }: TabNavigationProps) {
   return (
-    <div className="flex md:flex-col gap-3 glass-card rounded-full md:rounded-3xl p-2.5 md:p-4 border border-white/10">
+    <nav
+      aria-label="Main navigation"
+      className="flex md:flex-col gap-2 glass-card rounded-full md:rounded-3xl p-2.5 md:p-3 border border-white/25"
+    >
       {tabs.map((tab) => (
         <motion.button
           key={tab.id}
           onClick={() => onTabChange(tab.id)}
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
+          whileHover={{ y: -1 }}
+          whileTap={{ scale: 0.98 }}
+          aria-current={activeTab === tab.id ? "page" : undefined}
+          aria-label={`Go to ${tab.label}`}
           className={`flex items-center justify-center gap-2.5 rounded-full px-5 py-2.5 text-sm md:text-base font-semibold transition-all duration-300
             ${
               activeTab === tab.id
-                ? "bg-neon-blue text-white shadow-neon-blue"
-                : "text-[#C0D0E0] hover:text-neon-blue hover:bg-white/5"
+                ? "btn-active text-white"
+                : "btn-glass text-glass-secondary hover:text-neon-blue hover:bg-white/15"
             }`}
         >
           {(() => {
@@ -39,6 +44,6 @@ export default function TabNavigation({ activeTab, onTabChange }: TabNavigationP
           <span className="hidden md:inline">{tab.label}</span>
         </motion.button>
       ))}
-    </div>
+    </nav>
   );
 }
