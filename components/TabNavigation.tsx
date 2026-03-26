@@ -9,41 +9,95 @@ interface TabNavigationProps {
 }
 
 const tabs = [
-  { id: "home", label: "Home", icon: HiHome },
-  { id: "profil", label: "About", icon: HiUser },
-  { id: "skills", label: "Skills", icon: HiCog },
-  { id: "project", label: "Projects", icon: HiCollection },
-  { id: "contact", label: "Contact", icon: HiUserGroup },
+  { id: "home", label: "Home", icon: HiHome, color: "#FF6B9D" },
+  { id: "profil", label: "About", icon: HiUser, color: "#C084FC" },
+  { id: "skills", label: "Skills", icon: HiCog, color: "#22D3EE" },
+  { id: "project", label: "Projects", icon: HiCollection, color: "#FBBF24" },
+  { id: "contact", label: "Contact", icon: HiUserGroup, color: "#34D399" },
 ];
 
 export default function TabNavigation({ activeTab, onTabChange }: TabNavigationProps) {
   return (
     <nav
       aria-label="Main navigation"
-      className="flex md:flex-col gap-2 glass-card rounded-2xl md:rounded-3xl p-2 md:p-3 border border-white/25 overflow-x-auto md:overflow-visible scrollbar-hide"
+      className="flex md:flex-col gap-2 glass-card rounded-2xl md:rounded-3xl p-2 md:p-3 
+        border border-white/25 overflow-x-auto md:overflow-visible scrollbar-hide
+        backdrop-blur-xl"
     >
-      {tabs.map((tab) => (
-        <motion.button
-          key={tab.id}
-          onClick={() => onTabChange(tab.id)}
-          whileHover={{ y: -1 }}
-          whileTap={{ scale: 0.98 }}
-          aria-current={activeTab === tab.id ? "page" : undefined}
-          aria-label={`Go to ${tab.label}`}
-          className={`flex items-center justify-center gap-1.5 sm:gap-2.5 rounded-full px-3 py-2 sm:px-5 sm:py-2.5 text-sm font-semibold transition-all duration-300 flex-shrink-0
-            ${
-              activeTab === tab.id
-                ? "btn-active text-white"
-                : "btn-glass text-glass-secondary hover:text-neon-blue hover:bg-white/15"
-            }`}
-        >
-          {(() => {
-            const Icon = tab.icon;
-            return <Icon className="w-5 h-5 md:w-6 md:h-6" />;
-          })()}
-          <span className="hidden md:inline">{tab.label}</span>
-        </motion.button>
-      ))}
+      {tabs.map((tab, index) => {
+        const Icon = tab.icon;
+        const isActive = activeTab === tab.id;
+        
+        return (
+          <motion.button
+            key={tab.id}
+            onClick={() => onTabChange(tab.id)}
+            whileHover={{ 
+              scale: 1.05,
+            }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ 
+              type: "spring", 
+              stiffness: 400, 
+              damping: 25 
+            }}
+            aria-current={isActive ? "page" : undefined}
+            aria-label={`Go to ${tab.label}`}
+            className={`flex items-center justify-center gap-2 rounded-2xl px-4 py-3 
+              text-sm font-bold transition-all duration-300 flex-shrink-0 relative overflow-hidden
+              ${isActive
+                ? "text-white shadow-lg"
+                : "bg-white/10 text-white/70 hover:text-white hover:bg-white/20"
+              }`}
+            style={{
+              background: isActive 
+                ? `linear-gradient(135deg, ${tab.color}dd, ${tab.color})`
+                : undefined,
+              boxShadow: isActive 
+                ? `0 4px 20px ${tab.color}50`
+                : undefined,
+            }}
+          >
+            {/* Shimmer effect for active tab */}
+            {isActive && (
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+                initial={{ x: "-100%" }}
+                animate={{ x: "100%" }}
+                transition={{ 
+                  duration: 1.5, 
+                  repeat: Infinity, 
+                  repeatDelay: 2 
+                }}
+              />
+            )}
+
+            <motion.div
+              animate={isActive ? { 
+                rotate: [0, -5, 5, 0],
+                scale: [1, 1.1, 1]
+              } : {}}
+              transition={{ duration: 0.4 }}
+              className="relative z-10"
+            >
+              <Icon className="w-5 h-5" />
+            </motion.div>
+            
+            <span className="hidden md:inline relative z-10">{tab.label}</span>
+
+            {/* Active indicator dot */}
+            {isActive && (
+              <motion.span
+                layoutId="activeTab"
+                className="absolute -bottom-1 md:bottom-auto md:-right-1 w-2 h-2 rounded-full bg-white"
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ type: "spring", stiffness: 500, damping: 30 }}
+              />
+            )}
+          </motion.button>
+        );
+      })}
     </nav>
   );
 }

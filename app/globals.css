@@ -11,14 +11,40 @@
   body {
     @apply text-white;
     min-height: 100vh;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-family: var(--font-noto), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
-    /* Fading grey to black */
-    background: linear-gradient(180deg, #2d3748 0%, #1a1a2e 50%, #0a0a0f 100%);
+    /* Anime midnight gradient */
+    background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+    position: relative;
+  }
+
+  /* Animated aurora background effect */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+      radial-gradient(circle at 20% 50%, rgba(255, 107, 157, 0.15) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(34, 211, 238, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 40% 20%, rgba(192, 132, 252, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 60% 60%, rgba(251, 191, 36, 0.08) 0%, transparent 40%);
+    animation: pulse-glow 8s ease-in-out infinite;
+    pointer-events: none;
+    z-index: -1;
   }
 }
 
 @layer utilities {
+  /* Aurora pulse animation */
+  @keyframes pulse-glow {
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.05); }
+  }
+
+  /* Legacy neon glows */
   .neon-glow-blue {
     box-shadow: 0 0 25px rgba(0, 122, 255, 0.35);
   }
@@ -66,7 +92,58 @@
       0 20px 30px -10px rgba(0, 0, 0, 0.25);
   }
 
-  /* Main panel – Neo-Tactile with neon blue edge glow */
+  /* Anime-style glass card with shimmer border */
+  .anime-glass-card {
+    @apply rounded-2xl text-white;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .anime-glass-card::before {
+    content: "";
+    position: absolute;
+    top: -2px; left: -2px; right: -2px; bottom: -2px;
+    background: linear-gradient(
+      45deg,
+      #FF6B9D,
+      #C084FC,
+      #22D3EE,
+      #FF6B9D
+    );
+    background-size: 400% 400%;
+    border-radius: 26px;
+    z-index: -1;
+    animation: shimmer 3s ease infinite;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .anime-glass-card:hover::before {
+    opacity: 0.6;
+  }
+
+  .anime-glass-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 
+      0 12px 40px rgba(0, 0, 0, 0.4),
+      0 0 30px rgba(255, 107, 157, 0.2);
+  }
+
+  @keyframes shimmer {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* Main panel – Neo-Tactile with neon glow */
   .neon-glass-card {
     @apply rounded-2xl text-white;
     background: rgba(255, 255, 255, 0.15);
@@ -78,22 +155,118 @@
       -4px -4px 20px rgba(0, 122, 255, 0.08);
   }
 
+  /* Anime-enhanced main panel */
+  .anime-main-panel {
+    @apply rounded-2xl text-white;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    box-shadow:
+      0 20px 40px -10px rgba(0, 0, 0, 0.4),
+      0 0 40px rgba(255, 107, 157, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  }
+
   /* Pill button – inactive (glass) */
   .btn-glass {
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
+    transition: all 0.3s ease;
   }
 
-  /* Pill button – active (neon blue, elevated) */
+  .btn-glass:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 107, 157, 0.5);
+    box-shadow: 0 0 20px rgba(255, 107, 157, 0.2);
+  }
+
+  /* Pill button – active (neon) */
   .btn-active {
-    background: #007AFF;
-    box-shadow: 0 4px 14px rgba(0, 122, 255, 0.4);
+    background: linear-gradient(135deg, #FF6B9D, #C084FC);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .btn-active::before {
+    content: "";
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.5s ease;
+  }
+
+  .btn-active:hover::before {
+    left: 100%;
   }
 
   .btn-active:hover {
-    box-shadow: 0 6px 20px rgba(0, 122, 255, 0.5);
+    box-shadow: 0 0 30px rgba(255, 107, 157, 0.6);
+    transform: translateY(-2px);
+  }
+
+  /* Anime gradient button */
+  .anime-btn-primary {
+    background: linear-gradient(135deg, #FF6B9D, #C084FC);
+    border: none;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .anime-btn-primary::before {
+    content: "";
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    transition: left 0.5s ease;
+  }
+
+  .anime-btn-primary:hover::before {
+    left: 100%;
+  }
+
+  .anime-btn-primary:hover {
+    box-shadow: 0 0 30px rgba(255, 107, 157, 0.6);
+    transform: translateY(-2px);
+  }
+
+  /* Anime secondary button */
+  .anime-btn-secondary {
+    background: transparent;
+    border: 2px solid rgba(255, 107, 157, 0.5);
+    color: #FF6B9D;
+    transition: all 0.3s ease;
+  }
+
+  .anime-btn-secondary:hover {
+    background: rgba(255, 107, 157, 0.15);
+    border-color: rgba(255, 107, 157, 0.8);
+    box-shadow: 0 0 20px rgba(255, 107, 157, 0.3);
+  }
+
+  /* Anime badge styles */
+  .anime-badge {
+    background: linear-gradient(135deg, rgba(255, 107, 157, 0.2), rgba(192, 132, 252, 0.2));
+    border: 1px solid rgba(255, 107, 157, 0.4);
+    color: #FF6B9D;
+  }
+
+  .anime-badge-cyan {
+    background: rgba(34, 211, 238, 0.15);
+    border: 1px solid rgba(34, 211, 238, 0.4);
+    color: #22D3EE;
+  }
+
+  .anime-badge-mint {
+    background: rgba(52, 211, 153, 0.15);
+    border: 1px solid rgba(52, 211, 153, 0.4);
+    color: #34D399;
   }
 
   /* Readable text on glass */
@@ -110,6 +283,19 @@
     color: #b8c4d8;
   }
 
+  /* Anime text colors */
+  .text-anime-pink {
+    color: #FF6B9D;
+  }
+
+  .text-anime-purple {
+    color: #C084FC;
+  }
+
+  .text-anime-cyan {
+    color: #22D3EE;
+  }
+
   /* Hide scrollbar for horizontal nav on mobile */
   .scrollbar-hide {
     -ms-overflow-style: none;
@@ -122,5 +308,28 @@
   /* AI Chat input – placeholder (inline style handles text color) */
   .aichat-input::placeholder {
     color: #94a3b8;
+  }
+
+  /* Floating animation for elements */
+  .float-animation {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+
+  /* Gradient text effect */
+  .gradient-text {
+    background: linear-gradient(135deg, #FF6B9D, #C084FC, #22D3EE);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Glow text effect */
+  .glow-text {
+    text-shadow: 0 0 10px rgba(255, 107, 157, 0.5), 0 0 20px rgba(255, 107, 157, 0.3);
   }
 }
