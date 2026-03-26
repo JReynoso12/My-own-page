@@ -1,20 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Noto_Sans_JP, Orbitron } from "next/font/google";
 import "./globals.css";
-
-const notoSansJP = Noto_Sans_JP({
-  subsets: ["latin"],
-  weight: ["400", "500", "700"],
-  variable: "--font-noto",
-  display: "swap",
-});
-
-const orbitron = Orbitron({
-  subsets: ["latin"],
-  weight: ["400", "500", "700"],
-  variable: "--font-orbitron",
-  display: "swap",
-});
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -53,7 +38,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${notoSansJP.variable} ${orbitron.variable} overflow-x-hidden`}>
+    <html lang="en" className="overflow-x-hidden">
       <body className="antialiased overflow-x-hidden min-h-dvh font-anime">{children}</body>
     </html>
   );

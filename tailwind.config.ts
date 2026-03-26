@@ -32,8 +32,8 @@ const config: Config = {
         "text-muted": "#C0D0E0",
       },
       fontFamily: {
-        anime: ["var(--font-noto)", "'M PLUS Rounded 1c'", "sans-serif"],
-        display: ["var(--font-orbitron)", "'Rajdhani'", "sans-serif"],
+        anime: ["'Segoe UI'", "'Noto Sans JP'", "'M PLUS Rounded 1c'", "system-ui", "sans-serif"],
+        display: ["'Segoe UI'", "'Orbitron'", "'Rajdhani'", "system-ui", "sans-serif"],
       },
       boxShadow: {
         "neon-blue": "0 0 20px rgba(0, 122, 255, 0.35)",

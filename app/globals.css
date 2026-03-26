@@ -11,7 +11,7 @@
   body {
     @apply text-white;
     min-height: 100vh;
-    font-family: var(--font-noto), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, "Noto Sans JP", sans-serif;
 
     /* Anime midnight gradient */
     background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
