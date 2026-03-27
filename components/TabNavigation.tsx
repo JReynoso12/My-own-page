@@ -20,7 +20,7 @@ export default function TabNavigation({ activeTab, onTabChange }: TabNavigationP
   return (
     <nav
       aria-label="Main navigation"
-      className="flex md:flex-col gap-2 glass-card rounded-2xl md:rounded-3xl p-2 md:p-3 
+      className="nav-shell flex md:flex-col gap-2 glass-card rounded-2xl md:rounded-3xl p-2 md:p-3 
         border border-white/25 overflow-x-auto md:overflow-visible scrollbar-hide
         backdrop-blur-xl"
     >
@@ -43,11 +43,11 @@ export default function TabNavigation({ activeTab, onTabChange }: TabNavigationP
             }}
             aria-current={isActive ? "page" : undefined}
             aria-label={`Go to ${tab.label}`}
-            className={`flex items-center justify-center gap-2 rounded-2xl px-4 py-3 
+            className={`nav-tab flex items-center justify-center gap-2 rounded-2xl px-4 py-3 
               text-sm font-bold transition-all duration-300 flex-shrink-0 relative overflow-hidden
               ${isActive
-                ? "text-white shadow-lg"
-                : "bg-white/10 text-white/70 hover:text-white hover:bg-white/20"
+                ? "nav-tab-active text-white shadow-lg"
+                : "nav-tab-inactive text-white/90 hover:text-white hover:bg-white/20"
               }`}
             style={{
               background: isActive 
@@ -83,7 +83,7 @@ export default function TabNavigation({ activeTab, onTabChange }: TabNavigationP
               <Icon className="w-5 h-5" />
             </motion.div>
             
-            <span className="hidden md:inline relative z-10">{tab.label}</span>
+            <span className="relative z-10 text-xs sm:text-sm md:inline">{tab.label}</span>
 
             {/* Active indicator dot */}
             {isActive && (

@@ -191,6 +191,26 @@
         0 8px 30px rgba(0, 0, 0, 0.45),
         inset 0 1px 0 rgba(255, 255, 255, 0.06);
     }
+
+    .nav-shell {
+      background: rgba(17, 24, 39, 0.86);
+      border-color: rgba(17, 24, 39, 0.55);
+    }
+
+    .nav-tab-inactive {
+      background: rgba(17, 24, 39, 0.45);
+      border-color: rgba(17, 24, 39, 0.5);
+      color: #ffffff;
+    }
+
+    .nav-tab-inactive:hover {
+      background: rgba(17, 24, 39, 0.62);
+      border-color: rgba(17, 24, 39, 0.62);
+    }
+
+    .nav-tab-active {
+      border-color: rgba(255, 255, 255, 0.62);
+    }
   }
 
   .anime-glass-card::before {
@@ -267,6 +287,31 @@
     background: rgba(255, 255, 255, 0.15);
     border-color: rgba(255, 107, 157, 0.5);
     box-shadow: 0 0 20px rgba(255, 107, 157, 0.2);
+  }
+
+  /* Navigation-specific visibility tuning */
+  .nav-shell {
+    background: rgba(17, 24, 39, 0.78);
+    border-color: rgba(255, 255, 255, 0.28);
+  }
+
+  .nav-tab {
+    border: 1px solid transparent;
+    min-width: 78px;
+  }
+
+  .nav-tab-inactive {
+    background: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.26);
+  }
+
+  .nav-tab-inactive:hover {
+    background: rgba(255, 255, 255, 0.26);
+    border-color: rgba(255, 255, 255, 0.38);
+  }
+
+  .nav-tab-active {
+    border-color: rgba(255, 255, 255, 0.5);
   }
 
   /* Pill button – active (neon) */
