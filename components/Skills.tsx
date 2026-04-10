@@ -1,133 +1,92 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { HiCode, HiServer, HiDatabase, HiCog } from "react-icons/hi";
+import { useEffect } from "react";
 
-const skillGroups = [
-  {
-    title: "Frontend",
-    icon: HiCode,
-    items: ["Vue.js", "React", "Next.js", "JavaScript (ES6+)", "Tailwind CSS", "HTML5 / CSS3"],
-    color: "#FF6B9D",
-    gradient: "from-anime-pink/20 to-anime-purple/20",
-  },
-  {
-    title: "Backend",
-    icon: HiServer,
-    items: ["Node.js", "Express.js", "REST APIs", "Authentication (JWT / sessions)"],
-    color: "#C084FC",
-    gradient: "from-anime-purple/20 to-anime-cyan/20",
-  },
-  {
-    title: "Database",
-    icon: HiDatabase,
-    items: ["MySQL", "MSSQL", "SQL optimization"],
-    color: "#22D3EE",
-    gradient: "from-anime-cyan/20 to-anime-mint/20",
-  },
-  {
-    title: "Tools",
-    icon: HiCog,
-    items: ["Git / GitHub", "Postman", "Docker", "Deployment (Vercel, Netlify, VPS)"],
-    color: "#FBBF24",
-    gradient: "from-anime-amber/20 to-anime-pink/20",
-  },
+const frontendSkills = [
+  { name: "Vue.js", width: "92%" },
+  { name: "React / Next.js", width: "88%" },
+  { name: "JavaScript (ES6+)", width: "95%" },
+  { name: "Tailwind CSS", width: "90%" },
+  { name: "HTML5 / CSS3", width: "96%" },
+];
+
+const backendSkills = [
+  { name: "Node.js / Express", width: "85%" },
+  { name: "REST APIs", width: "90%" },
+  { name: "MySQL / MSSQL", width: "82%" },
+  { name: "Git / GitHub", width: "88%" },
+  { name: "Docker / Deploy", width: "72%" },
 ];
 
 export default function Skills() {
-  return (
-    <section className="w-full py-2 px-1">
-      <div className="max-w-6xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-          className="mb-6 sm:mb-8"
+  useEffect(() => {
+    const el = document.getElementById("skills-grid");
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target
+              .querySelectorAll<HTMLDivElement>("[data-width]")
+              .forEach((bar) => {
+                bar.style.width = bar.dataset.width || "0%";
+              });
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  const renderSkillRow = (skill: { name: string; width: string }) => (
+    <div key={skill.name} className="flex items-center gap-[14px] mb-[14px]">
+      <span className="text-[13px] text-[var(--text)] font-ui w-[130px] flex-shrink-0">
+        {skill.name}
+      </span>
+      <div className="flex-1 h-[2px] bg-[#1a1a30]">
+        <div
+          data-width={skill.width}
+          className="h-[2px] bg-gradient-to-r from-[var(--gold)] to-[var(--gold2)] w-0 transition-[width] duration-[1200ms] ease-[cubic-bezier(.4,0,.2,1)] relative"
         >
-          <motion.div
-            initial={{ width: 0 }}
-            animate={{ width: "60px" }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="h-1 bg-gradient-to-r from-anime-pink to-anime-purple rounded-full mb-4"
-          />
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-display mb-2">
-            <span className="gradient-text">Skills</span>{" "}
-            <span className="text-white">& Technologies</span>
-          </h2>
-          <p className="text-glass-muted text-base">
-            Technologies and tools I use to build and ship products.
-          </p>
-        </motion.div>
+          <span className="absolute right-[-2px] top-[-3px] w-[7px] h-[7px] bg-[var(--gold)] rounded-full shadow-[0_0_8px_var(--gold)]" />
+        </div>
+      </div>
+      <span className="text-[11px] text-[var(--muted)] font-ui w-[34px] text-right">
+        {skill.width}
+      </span>
+    </div>
+  );
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
-          {skillGroups.map((group, groupIndex) => (
-            <motion.div
-              key={group.title}
-              initial={{ opacity: 0, y: 20, rotateX: -5 }}
-              animate={{ opacity: 1, y: 0, rotateX: 0 }}
-              transition={{ 
-                duration: 0.5, 
-                delay: groupIndex * 0.1,
-                type: "spring",
-                stiffness: 100
-              }}
-              whileHover={{ 
-                y: -5, 
-                scale: 1.02,
-                transition: { duration: 0.2 }
-              }}
-              className="anime-glass-card p-4 sm:p-5 md:p-6 cursor-default"
-              style={{
-                boxShadow: `0 8px 32px rgba(0,0,0,0.3), 0 0 20px ${group.color}10`
-              }}
-            >
-              {/* Header with icon */}
-              <div className="flex items-center gap-3 mb-4">
-                <motion.div
-                  whileHover={{ rotate: 360 }}
-                  transition={{ duration: 0.5 }}
-                  className="w-10 h-10 rounded-xl flex items-center justify-center"
-                  style={{
-                    background: `${group.color}20`,
-                    border: `1px solid ${group.color}40`,
-                  }}
-                >
-                  <group.icon className="w-5 h-5" style={{ color: group.color }} />
-                </motion.div>
-                <h3 
-                  className="font-bold text-lg font-display"
-                  style={{ color: group.color }}
-                >
-                  {group.title}
-                </h3>
-              </div>
-
-              {/* Skills list */}
-              <ul className="flex flex-wrap gap-2">
-                {group.items.map((item, i) => (
-                  <motion.li
-                    key={item}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.2 + groupIndex * 0.1 + i * 0.03 }}
-                    whileHover={{ 
-                      scale: 1.1, 
-                      y: -2,
-                      boxShadow: `0 0 15px ${group.color}30`
-                    }}
-                    className="px-3 py-1.5 rounded-xl text-sm font-medium border backdrop-blur-md transition-all cursor-default"
-                    style={{
-                      background: `${group.color}15`,
-                      borderColor: `${group.color}30`,
-                      color: group.color,
-                    }}
-                  >
-                    {item}
-                  </motion.li>
-                ))}
-              </ul>
-            </motion.div>
-          ))}
+  return (
+    <section
+      className="py-[72px] px-6 sm:px-12"
+      id="skills"
+      style={{ background: "var(--bg)" }}
+    >
+      <div className="text-[10px] tracking-[4px] uppercase text-[var(--gold)] font-ui mb-[14px]">
+        Capabilities
+      </div>
+      <h2 className="text-[clamp(30px,4vw,48px)] font-normal tracking-[-1px] leading-[1.15] mb-11">
+        What I Bring
+        <br />
+        <em className="text-[var(--muted)] italic">to the Table</em>
+      </h2>
+      <div className="grid md:grid-cols-2 gap-10" id="skills-grid">
+        <div>
+          <div className="text-[10px] tracking-[3px] uppercase text-[var(--gold)] font-ui mb-5">
+            Frontend
+          </div>
+          {frontendSkills.map(renderSkillRow)}
+        </div>
+        <div>
+          <div className="text-[10px] tracking-[3px] uppercase text-[var(--gold)] font-ui mb-5">
+            Backend &amp; Tools
+          </div>
+          {backendSkills.map(renderSkillRow)}
         </div>
       </div>
     </section>

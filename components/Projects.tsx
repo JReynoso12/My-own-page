@@ -1,292 +1,330 @@
 "use client";
 
-import { motion } from "framer-motion";
-import Image from "next/image";
-import { HiExternalLink } from "react-icons/hi";
+import { useState, useCallback } from "react";
+import dynamic from "next/dynamic";
+
+const ThreeCardScene = dynamic(() => import("./ThreeCardScene"), { ssr: false });
 
 interface Project {
-  id: number;
+  id: string;
   title: string;
-  image: string;
   liveUrl: string;
-  description: string;
+  shortDesc: string;
   category: string;
-  status: "Active" | "Live";
-  features: string[];
+  filterCat: string;
   techStack: string[];
-  accentColor: string;
+  year: string;
+  featured?: boolean;
+  modal: {
+    cat: string;
+    desc: string;
+    meta: [string, string][];
+  };
 }
 
 const projects: Project[] = [
   {
-    id: 1,
+    id: "running",
     title: "Running App",
-    image: "/images/project-running-app.png",
     liveUrl: "https://running-app-peach.vercel.app/",
+    shortDesc:
+      "Modern fitness web app for active users with fast, responsive UI and workout-focused flow.",
     category: "Fitness / Tracking",
-    status: "Active",
-    description:
-      "A modern running-focused web app for active users, with a clean interface built for smooth interactions and quick access to workout-related content.",
-    features: [
-      "Fast, responsive UI",
-      "Fitness-focused flow",
-      "Clean and modern design",
-    ],
+    filterCat: "app",
     techStack: ["Next.js", "React", "Tailwind CSS", "Vercel"],
-    accentColor: "#22D3EE",
+    year: "2024",
+    featured: true,
+    modal: {
+      cat: "Fitness · 2024",
+      desc: "A modern running-focused web app for active users, with a clean interface built for smooth interactions and quick access to workout-related content. Features fast responsive UI, fitness-focused flow, and clean modern design.",
+      meta: [
+        ["Role", "Full-Stack Developer"],
+        ["Platform", "Web (Next.js)"],
+        ["Stack", "Next.js, React, Tailwind CSS"],
+        ["Status", "Active / Live"],
+      ],
+    },
   },
   {
-    id: 2,
+    id: "recurring",
     title: "Recurring Bliss",
-    image: "/images/project-recurring-bliss.png",
     liveUrl: "https://recurring-bliss.vercel.app/login",
-    category: "Productivity / Habit",
-    status: "Live",
-    description:
-      "A beautifully designed web application focused on recurring routines and habits with polished UI and consistent user experience.",
-    features: [
-      "Authentication entry flow",
-      "Elegant and consistent UI",
-      "Responsive across devices",
-    ],
+    shortDesc:
+      "Habit tracking app with polished UX, authentication, and responsive design.",
+    category: "Productivity",
+    filterCat: "app",
     techStack: ["Next.js", "React", "Tailwind CSS", "Vercel"],
-    accentColor: "#C084FC",
+    year: "2024",
+    modal: {
+      cat: "Productivity · 2024",
+      desc: "A beautifully designed web application focused on recurring routines and habits with polished UI and consistent user experience. Features authentication entry flow, elegant UI, and responsive design across devices.",
+      meta: [
+        ["Role", "Full-Stack Developer"],
+        ["Platform", "Web (Next.js)"],
+        ["Stack", "Next.js, React, Tailwind CSS"],
+        ["Status", "Live"],
+      ],
+    },
   },
   {
-    id: 3,
+    id: "humanize",
     title: "Humanize",
-    image: "/images/project-humanize.png",
     liveUrl: "https://humanize-nine.vercel.app/",
+    shortDesc:
+      "Real-time pose detection with body landmarks and heatmap rendering.",
     category: "Computer Vision",
-    status: "Active",
-    description:
-      "Real-time pose detection app with movement visualization using body landmarks and heatmap-style rendering.",
-    features: [
-      "Pose landmark detection",
-      "Motion heatmap visual",
-      "Interactive controls",
-    ],
+    filterCat: "tech",
     techStack: ["Next.js", "MediaPipe", "Canvas API", "Vercel"],
-    accentColor: "#FF6B9D",
+    year: "2024",
+    modal: {
+      cat: "AI / Vision · 2024",
+      desc: "Real-time pose detection app with movement visualization using body landmarks and heatmap-style rendering. Features pose landmark detection, motion heatmap visuals, and interactive controls.",
+      meta: [
+        ["Role", "Full-Stack Developer"],
+        ["Platform", "Web (Next.js)"],
+        ["Stack", "Next.js, MediaPipe, Canvas API"],
+        ["Status", "Active"],
+      ],
+    },
   },
   {
-    id: 4,
+    id: "badminton",
     title: "Badminton",
-    image: "/images/project-badminton.png",
     liveUrl: "https://badminton-neon-eta.vercel.app/",
+    shortDesc:
+      "Court-booking experience with availability-focused layout and mobile-friendly design.",
     category: "Booking Platform",
-    status: "Live",
-    description:
-      "A fast and intuitive court-booking experience that helps users check availability and reserve sessions quickly.",
-    features: [
-      "Booking-first user flow",
-      "Availability-focused layout",
-      "Mobile-friendly interactions",
-    ],
+    filterCat: "app",
     techStack: ["Next.js", "React", "Tailwind CSS", "Vercel"],
-    accentColor: "#FBBF24",
+    year: "2024",
+    modal: {
+      cat: "Booking · 2024",
+      desc: "A fast and intuitive court-booking experience that helps users check availability and reserve sessions quickly. Booking-first user flow with availability-focused layout and mobile-friendly interactions.",
+      meta: [
+        ["Role", "Full-Stack Developer"],
+        ["Platform", "Web (Next.js)"],
+        ["Stack", "Next.js, React, Tailwind CSS"],
+        ["Status", "Live"],
+      ],
+    },
   },
   {
-    id: 5,
+    id: "vet",
     title: "Vet App",
-    image: "/images/project-vet-app.png",
     liveUrl: "https://vet-app-one.vercel.app/",
-    category: "Healthcare / Veterinary",
-    status: "Live",
-    description:
-      "Veterinary clinic website designed to present services clearly and give pet owners a professional, trustworthy experience.",
-    features: [
-      "Clinic service presentation",
-      "Professional healthcare UI",
-      "Responsive page structure",
-    ],
+    shortDesc:
+      "Veterinary clinic site designed for clear service presentation and trust.",
+    category: "Healthcare",
+    filterCat: "health",
     techStack: ["Next.js", "React", "Tailwind CSS", "Vercel"],
-    accentColor: "#34D399",
+    year: "2024",
+    modal: {
+      cat: "Healthcare · 2024",
+      desc: "Veterinary clinic website designed to present services clearly and give pet owners a professional, trustworthy experience. Features clinic service presentation, professional healthcare UI, and responsive page structure.",
+      meta: [
+        ["Role", "Full-Stack Developer"],
+        ["Platform", "Web (Next.js)"],
+        ["Stack", "Next.js, React, Tailwind CSS"],
+        ["Status", "Live"],
+      ],
+    },
   },
   {
-    id: 6,
+    id: "health",
     title: "Health Hub",
-    image: "/images/project-health-hub.png",
     liveUrl: "https://health-hub-zq3d.vercel.app/",
-    category: "Mental Health / Wellness",
-    status: "Active",
-    description:
-      "Mental health and wellness platform that organizes helpful content into an accessible and calming experience.",
-    features: [
-      "Organized wellness resources",
-      "Accessibility-minded layout",
-      "Comfort-focused interface",
-    ],
+    shortDesc:
+      "Mental wellness platform with calming, accessible design.",
+    category: "Wellness",
+    filterCat: "health",
     techStack: ["Next.js", "React", "Tailwind CSS", "Vercel"],
-    accentColor: "#FB7185",
+    year: "2024",
+    modal: {
+      cat: "Wellness · 2024",
+      desc: "Mental health and wellness platform that organizes helpful content into an accessible and calming experience. Features organized wellness resources, accessibility-minded layout, and comfort-focused interface.",
+      meta: [
+        ["Role", "Full-Stack Developer"],
+        ["Platform", "Web (Next.js)"],
+        ["Stack", "Next.js, React, Tailwind CSS"],
+        ["Status", "Active"],
+      ],
+    },
   },
 ];
 
+const filters = [
+  { id: "all", label: "All" },
+  { id: "app", label: "App" },
+  { id: "health", label: "Health" },
+  { id: "tech", label: "Tech" },
+];
+
 export default function Projects() {
+  const [filter, setFilter] = useState("all");
+  const [modalProject, setModalProject] = useState<Project | null>(null);
+
+  const filtered =
+    filter === "all"
+      ? projects
+      : projects.filter((p) => p.filterCat === filter);
+
+  const handleCardMouseMove = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      const card = e.currentTarget;
+      const r = card.getBoundingClientRect();
+      const x = ((e.clientX - r.left) / r.width - 0.5) * 18;
+      const y = -((e.clientY - r.top) / r.height - 0.5) * 12;
+      card.style.transform = `perspective(600px) rotateY(${x}deg) rotateX(${y}deg) translateZ(6px)`;
+    },
+    []
+  );
+
+  const handleCardMouseLeave = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      e.currentTarget.style.transform =
+        "perspective(600px) rotateX(0) rotateY(0) translateZ(0)";
+    },
+    []
+  );
+
   return (
-    <section className="w-full px-1">
-      <div className="max-w-6xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="mb-6 sm:mb-8"
-        >
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-display mb-2">
-            <span className="gradient-text">Running & Active</span>{" "}
-            <span className="text-white">Projects</span>
-          </h2>
-          <p className="text-glass-muted text-base">
-            These are my currently running projects and live deployments.
-          </p>
-        </motion.div>
+    <>
+      <section className="py-[72px] px-6 sm:px-12 bg-[var(--surface)]" id="work">
+        <div className="text-[10px] tracking-[4px] uppercase text-[var(--gold)] font-ui mb-[14px]">
+          Selected Work
+        </div>
+        <h2 className="text-[clamp(30px,4vw,48px)] font-normal tracking-[-1px] leading-[1.15] mb-11">
+          Projects That
+          <br />
+          <em className="text-[var(--muted)] italic">Actually Shipped</em>
+        </h2>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8">
-          {projects.map((project, index) => (
-            <motion.article
-              key={project.id}
-              initial={{ opacity: 0, y: 30, rotateX: -10 }}
-              animate={{ opacity: 1, y: 0, rotateX: 0 }}
-              whileHover={{ 
-                y: -8,
-                scale: 1.02,
-                transition: { duration: 0.3 }
-              }}
-              transition={{ duration: 0.6, delay: index * 0.1, type: "spring" }}
-              className="anime-glass-card overflow-hidden group cursor-pointer"
-              style={{
-                boxShadow: `0 8px 32px rgba(0,0,0,0.3), 0 0 20px ${project.accentColor}15`
-              }}
+        {/* Filter buttons */}
+        <div className="flex gap-1 mb-8 flex-wrap">
+          {filters.map((f) => (
+            <button
+              key={f.id}
+              onClick={() => setFilter(f.id)}
+              className={`px-[18px] py-[7px] text-[10px] tracking-[2px] uppercase font-ui bg-transparent border cursor-pointer transition-all duration-200 ${
+                filter === f.id
+                  ? "border-[var(--gold)] text-[var(--gold)]"
+                  : "border-[var(--border)] text-[var(--muted)] hover:border-[var(--gold)] hover:text-[var(--gold)]"
+              }`}
             >
-              <div className="flex flex-col">
-                {/* Image with anime zoom effect */}
-                <div className="relative aspect-video overflow-hidden">
-                  <motion.div
-                    whileHover={{ scale: 1.1 }}
-                    transition={{ duration: 0.6 }}
-                    className="w-full h-full"
-                  >
-                    <Image
-                      src={project.image}
-                      alt={project.title}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 1024px) 100vw, 50vw"
-                    />
-                  </motion.div>
-                  
-                  {/* Gradient overlay on hover */}
-                  <div 
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    style={{
-                      background: `linear-gradient(to top, ${project.accentColor}60, transparent)`
-                    }}
-                  />
-
-                  {/* Status badge */}
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ delay: 0.3 + index * 0.1 }}
-                    className="absolute top-3 right-3"
-                  >
-                    <span 
-                      className="px-3 py-1 text-xs rounded-full font-bold border backdrop-blur-md"
-                      style={{
-                        background: project.status === "Active" 
-                          ? "rgba(52, 211, 153, 0.25)"
-                          : "rgba(34, 211, 238, 0.25)",
-                        color: project.status === "Active" ? "#34D399" : "#22D3EE",
-                        borderColor: project.status === "Active" 
-                          ? "rgba(52, 211, 153, 0.5)"
-                          : "rgba(34, 211, 238, 0.5)",
-                      }}
-                    >
-                      {project.status}
-                    </span>
-                  </motion.div>
-                </div>
-
-                <div className="p-4 sm:p-6">
-                  {/* Category badge */}
-                  <div className="flex flex-wrap items-center gap-2 mb-3">
-                    <span 
-                      className="px-3 py-1 text-xs rounded-full font-bold border backdrop-blur-md"
-                      style={{
-                        background: `${project.accentColor}25`,
-                        color: project.accentColor,
-                        borderColor: `${project.accentColor}50`,
-                      }}
-                    >
-                      {project.category}
-                    </span>
-                  </div>
-
-                  <h3 className="text-xl sm:text-2xl font-bold font-display text-white mb-3">
-                    {project.title}
-                  </h3>
-                  
-                  <p className="text-glass-secondary text-sm sm:text-base leading-relaxed mb-3 sm:mb-4">
-                    {project.description}
-                  </p>
-
-                  {/* Features */}
-                  <div className="flex flex-wrap gap-2 mb-3">
-                    {project.features.map((f) => (
-                      <span
-                        key={f}
-                        className="px-3 py-1.5 rounded-lg text-sm border backdrop-blur-md"
-                        style={{
-                          background: `${project.accentColor}15`,
-                          color: project.accentColor,
-                          borderColor: `${project.accentColor}30`,
-                        }}
-                      >
-                        {f}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* Tech stack */}
-                  <div className="flex flex-wrap gap-2 mb-5">
-                    {project.techStack.map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-3 py-1.5 rounded-lg bg-white/10 text-glass-muted text-sm border border-white/20 backdrop-blur-md"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-
-                  {/* Live project button */}
-                  <motion.a
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-white text-sm font-bold transition-all"
-                    style={{
-                      background: `linear-gradient(135deg, ${project.accentColor}dd, ${project.accentColor})`,
-                      boxShadow: `0 4px 15px ${project.accentColor}40`,
-                    }}
-                  >
-                    <HiExternalLink className="w-4 h-4" />
-                    Open Live Project
-                    <motion.span
-                      animate={{ x: [0, 3, 0] }}
-                      transition={{ duration: 1.5, repeat: Infinity }}
-                    >
-                      →
-                    </motion.span>
-                  </motion.a>
-                </div>
-              </div>
-            </motion.article>
+              {f.label}
+            </button>
           ))}
         </div>
-      </div>
-    </section>
+
+        {/* Project grid with perspective */}
+        <div
+          className="grid grid-cols-1 sm:grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-4"
+          style={{ perspective: "1000px" }}
+        >
+          {filtered.map((project) => (
+            <div
+              key={project.id}
+              onClick={() => setModalProject(project)}
+              onMouseMove={handleCardMouseMove}
+              onMouseLeave={handleCardMouseLeave}
+              className={`bg-[var(--s2)] p-7 cursor-pointer transition-all duration-[250ms] relative overflow-hidden border border-transparent hover:bg-[#181830] hover:border-[#252540] hover:shadow-[0_20px_60px_rgba(0,0,0,0.5),0_0_0_1px_rgba(232,201,106,0.08)] will-change-transform group ${
+                project.featured
+                  ? "sm:col-span-full sm:grid sm:grid-cols-2 sm:gap-8 sm:items-center"
+                  : ""
+              }`}
+              style={{ transformStyle: "preserve-3d" }}
+            >
+              {/* Gold gradient overlay on hover */}
+              <div className="absolute inset-0 bg-gradient-to-br from-[rgba(232,201,106,0.04)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+
+              {/* Featured card gets a 3D scene */}
+              {project.featured && (
+                <div className="relative">
+                  <ThreeCardScene />
+                </div>
+              )}
+
+              <div className="relative z-[1]">
+                <div className="text-[10px] tracking-[3px] uppercase text-[var(--gold)] font-ui mb-[14px]">
+                  {project.category} &middot; {project.year}
+                </div>
+                <div className="text-[22px] font-normal mb-[10px] tracking-[-0.3px]">
+                  {project.title}
+                </div>
+                <div className="text-[13px] text-[var(--muted)] font-ui leading-[1.7] mb-5">
+                  {project.shortDesc}
+                </div>
+                <div className="flex gap-[6px] flex-wrap mb-5">
+                  {project.techStack.map((tech) => (
+                    <span
+                      key={tech}
+                      className="text-[9px] tracking-[1px] px-2 py-[3px] bg-[#1a1a2e] text-[#4a4a6a] font-ui uppercase"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-[11px] text-[#333] font-ui">
+                    {project.year}
+                  </span>
+                  <span className="text-[16px] text-[var(--gold)] transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1">
+                    &#8599;
+                  </span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Project detail modal */}
+      {modalProject && (
+        <div
+          className="fixed inset-0 bg-[rgba(0,0,0,0.88)] z-[300] flex items-center justify-center"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setModalProject(null);
+          }}
+        >
+          <div className="bg-[var(--surface)] max-w-[520px] w-[92%] p-11 relative max-h-[85vh] overflow-y-auto border border-[var(--border)]">
+            <button
+              onClick={() => setModalProject(null)}
+              className="absolute top-[18px] right-[18px] bg-transparent border-none text-[var(--muted)] text-[20px] cursor-pointer hover:text-[var(--text)]"
+            >
+              &#10005;
+            </button>
+            <div className="text-[10px] tracking-[3px] uppercase text-[var(--gold)] font-ui mb-[14px]">
+              {modalProject.modal.cat}
+            </div>
+            <div className="text-[28px] font-normal tracking-[-0.5px] mb-[14px]">
+              {modalProject.title}
+            </div>
+            <div className="text-[14px] text-[#8888aa] font-ui leading-[1.8] mb-6">
+              {modalProject.modal.desc}
+            </div>
+            <div className="grid grid-cols-2 gap-[14px] border-t border-[var(--border)] pt-5 mb-6">
+              {modalProject.modal.meta.map(([key, value]) => (
+                <div key={key}>
+                  <div className="text-[10px] tracking-[2px] uppercase text-[#333350] font-ui mb-[3px]">
+                    {key}
+                  </div>
+                  <div className="text-[13px] text-[var(--text)] font-ui">
+                    {value}
+                  </div>
+                </div>
+              ))}
+            </div>
+            <a
+              href={modalProject.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block px-[30px] py-3 bg-[var(--gold)] text-[var(--bg)] text-[11px] tracking-[2px] uppercase font-ui cursor-pointer border-none font-bold transition-colors duration-200 hover:bg-[var(--gold2)] no-underline"
+            >
+              View Live Project &#8599;
+            </a>
+          </div>
+        </div>
+      )}
+    </>
   );
 }

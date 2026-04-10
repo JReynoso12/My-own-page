@@ -2,465 +2,55 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --gold: #e8c96a;
+  --gold2: #c4a84f;
+  --bg: #080810;
+  --surface: #0e0e1a;
+  --s2: #141428;
+  --text: #f0ece0;
+  --muted: #7a7a9a;
+  --border: #1a1a30;
+}
+
 @layer base {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
   html {
     scroll-behavior: smooth;
     overflow-x: hidden;
   }
 
   body {
-    @apply text-white;
-    min-height: 100vh;
-    font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, "Noto Sans JP", sans-serif;
-
-    /* Anime midnight gradient */
-    background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
-    position: relative;
-  }
-
-  /* Animated aurora background effect */
-  body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: 
-      radial-gradient(circle at 20% 50%, rgba(255, 107, 157, 0.15) 0%, transparent 50%),
-      radial-gradient(circle at 80% 80%, rgba(34, 211, 238, 0.1) 0%, transparent 50%),
-      radial-gradient(circle at 40% 20%, rgba(192, 132, 252, 0.1) 0%, transparent 50%),
-      radial-gradient(circle at 60% 60%, rgba(251, 191, 36, 0.08) 0%, transparent 40%);
-    animation: pulse-glow 8s ease-in-out infinite;
-    pointer-events: none;
-    z-index: -1;
-  }
-
-  /* Light mode adaptation (depends on OS/mobile theme) */
-  @media (prefers-color-scheme: light) {
-    body {
-      /* Lighter anime sky gradient */
-      background: linear-gradient(135deg, #ffffff 0%, #f7f7ff 40%, #f3e8ff 100%);
-    }
-
-    body::before {
-      /* Less intense glow for readability */
-      background-image:
-        radial-gradient(circle at 20% 50%, rgba(255, 107, 157, 0.12) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(34, 211, 238, 0.08) 0%, transparent 50%),
-        radial-gradient(circle at 40% 20%, rgba(192, 132, 252, 0.08) 0%, transparent 50%),
-        radial-gradient(circle at 60% 60%, rgba(251, 191, 36, 0.06) 0%, transparent 40%);
-    }
+    background: var(--bg);
+    color: var(--text);
+    font-family: Georgia, "Times New Roman", serif;
+    overflow-x: hidden;
   }
 }
 
 @layer utilities {
-  /* Aurora pulse animation */
-  @keyframes pulse-glow {
-    0%, 100% { opacity: 0.5; transform: scale(1); }
-    50% { opacity: 0.8; transform: scale(1.05); }
-  }
-
-  /* Legacy neon glows */
-  .neon-glow-blue {
-    box-shadow: 0 0 25px rgba(0, 122, 255, 0.35);
-  }
-
-  .neon-glow-purple {
-    box-shadow: 0 0 25px rgba(168, 85, 247, 0.4);
-  }
-
-  .neon-glow-green {
-    box-shadow: 0 0 25px rgba(16, 185, 129, 0.4);
-  }
-
-  .text-neon-blue {
-    color: #007AFF;
-  }
-
-  .text-neon-purple {
-    color: #A855F7;
-  }
-
-  .text-neon-green {
-    color: #10B981;
-  }
-
-  .bg-neon-blue {
-    background-color: #007AFF;
-  }
-
-  /* Neo-Tactile: liquid glass – transparent, blur, soft edge, depth */
-  .glass-card {
-    @apply rounded-2xl text-white;
-    background: rgba(255, 255, 255, 0.12);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    box-shadow:
-      0 4px 6px -1px rgba(0, 0, 0, 0.25),
-      0 10px 20px -5px rgba(0, 0, 0, 0.2);
-  }
-
-  .glass-card:hover {
-    border-color: rgba(255, 255, 255, 0.3);
-    box-shadow:
-      0 10px 15px -3px rgba(0, 0, 0, 0.3),
-      0 20px 30px -10px rgba(0, 0, 0, 0.25);
-  }
-
-  /* Light mode adaptation for cards/panels.
-     We keep the text-white aesthetic, but switch the glass to darker translucency
-     so it stays readable on a light background. */
-  @media (prefers-color-scheme: light) {
-    .glass-card {
-      background: rgba(17, 24, 39, 0.62);
-      border-color: rgba(17, 24, 39, 0.36);
-      box-shadow:
-        0 8px 20px -10px rgba(17, 24, 39, 0.45),
-        0 24px 36px -24px rgba(17, 24, 39, 0.55);
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
     }
-
-    .glass-card:hover {
-      border-color: rgba(17, 24, 39, 0.48);
-      box-shadow:
-        0 12px 20px -8px rgba(17, 24, 39, 0.5),
-        0 32px 42px -26px rgba(17, 24, 39, 0.6);
-    }
-
-    .anime-glass-card {
-      background: rgba(17, 24, 39, 0.58);
-      border-color: rgba(17, 24, 39, 0.4);
-    }
-
-    .neon-glass-card {
-      background: rgba(17, 24, 39, 0.68);
-      border-color: rgba(17, 24, 39, 0.42);
-      box-shadow:
-        0 22px 40px -10px rgba(17, 24, 39, 0.62),
-        -4px -4px 20px rgba(0, 122, 255, 0.14);
-    }
-
-    .anime-main-panel {
-      background: rgba(17, 24, 39, 0.72);
-      border-color: rgba(17, 24, 39, 0.46);
-      box-shadow:
-        0 24px 42px -10px rgba(17, 24, 39, 0.68),
-        0 0 42px rgba(255, 107, 157, 0.16),
-        inset 0 1px 0 rgba(255, 255, 255, 0.08);
-    }
-
-    .btn-glass {
-      background: rgba(0, 0, 0, 0.10);
-      border-color: rgba(0, 0, 0, 0.18);
-    }
-
-    /* Increase text contrast for light mode mobile/web */
-    .text-glass-secondary {
-      color: #eef2ff;
-    }
-
-    .text-glass-muted {
-      color: #dbe4ff;
-    }
-
-    .text-glass-primary {
-      color: #ffffff;
-      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+    to {
+      opacity: 1;
+      transform: translateY(0);
     }
   }
 
-  /* Anime-style glass card with shimmer border */
-  .anime-glass-card {
-    @apply rounded-2xl text-white;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    box-shadow: 
-      0 8px 32px rgba(0, 0, 0, 0.3),
-      inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s ease;
-  }
-
-  @media (prefers-color-scheme: light) {
-    .anime-glass-card {
-      box-shadow:
-        0 8px 30px rgba(0, 0, 0, 0.45),
-        inset 0 1px 0 rgba(255, 255, 255, 0.06);
-    }
-
-    .nav-shell {
-      background: rgba(17, 24, 39, 0.86);
-      border-color: rgba(17, 24, 39, 0.55);
-    }
-
-    .nav-tab-inactive {
-      background: rgba(17, 24, 39, 0.45);
-      border-color: rgba(17, 24, 39, 0.5);
-      color: #ffffff;
-    }
-
-    .nav-tab-inactive:hover {
-      background: rgba(17, 24, 39, 0.62);
-      border-color: rgba(17, 24, 39, 0.62);
-    }
-
-    .nav-tab-active {
-      border-color: rgba(255, 255, 255, 0.62);
-    }
-  }
-
-  .anime-glass-card::before {
-    content: "";
-    position: absolute;
-    top: -2px; left: -2px; right: -2px; bottom: -2px;
-    background: linear-gradient(
-      45deg,
-      #FF6B9D,
-      #C084FC,
-      #22D3EE,
-      #FF6B9D
-    );
-    background-size: 400% 400%;
-    border-radius: 26px;
-    z-index: -1;
-    animation: shimmer 3s ease infinite;
+  .animate-fade-up {
     opacity: 0;
-    transition: opacity 0.3s;
+    animation: fadeUp 0.6s forwards;
   }
 
-  .anime-glass-card:hover::before {
-    opacity: 0.6;
-  }
-
-  .anime-glass-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 
-      0 12px 40px rgba(0, 0, 0, 0.4),
-      0 0 30px rgba(255, 107, 157, 0.2);
-  }
-
-  @keyframes shimmer {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-
-  /* Main panel – Neo-Tactile with neon glow */
-  .neon-glass-card {
-    @apply rounded-2xl text-white;
-    background: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    box-shadow:
-      0 20px 40px -10px rgba(0, 0, 0, 0.35),
-      -4px -4px 20px rgba(0, 122, 255, 0.08);
-  }
-
-  /* Anime-enhanced main panel */
-  .anime-main-panel {
-    @apply rounded-2xl text-white;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    box-shadow:
-      0 20px 40px -10px rgba(0, 0, 0, 0.4),
-      0 0 40px rgba(255, 107, 157, 0.1),
-      inset 0 1px 0 rgba(255, 255, 255, 0.15);
-  }
-
-  /* Pill button – inactive (glass) */
-  .btn-glass {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    transition: all 0.3s ease;
-  }
-
-  .btn-glass:hover {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 107, 157, 0.5);
-    box-shadow: 0 0 20px rgba(255, 107, 157, 0.2);
-  }
-
-  /* Navigation-specific visibility tuning */
-  .nav-shell {
-    background: rgba(17, 24, 39, 0.78);
-    border-color: rgba(255, 255, 255, 0.28);
-  }
-
-  .nav-tab {
-    border: 1px solid transparent;
-    min-width: 78px;
-  }
-
-  .nav-tab-inactive {
-    background: rgba(255, 255, 255, 0.18);
-    border-color: rgba(255, 255, 255, 0.26);
-  }
-
-  .nav-tab-inactive:hover {
-    background: rgba(255, 255, 255, 0.26);
-    border-color: rgba(255, 255, 255, 0.38);
-  }
-
-  .nav-tab-active {
-    border-color: rgba(255, 255, 255, 0.5);
-  }
-
-  /* Pill button – active (neon) */
-  .btn-active {
-    background: linear-gradient(135deg, #FF6B9D, #C084FC);
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s ease;
-  }
-
-  .btn-active::before {
-    content: "";
-    position: absolute;
-    top: 0; left: -100%;
-    width: 100%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-    transition: left 0.5s ease;
-  }
-
-  .btn-active:hover::before {
-    left: 100%;
-  }
-
-  .btn-active:hover {
-    box-shadow: 0 0 30px rgba(255, 107, 157, 0.6);
-    transform: translateY(-2px);
-  }
-
-  /* Anime gradient button */
-  .anime-btn-primary {
-    background: linear-gradient(135deg, #FF6B9D, #C084FC);
-    border: none;
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s ease;
-  }
-
-  .anime-btn-primary::before {
-    content: "";
-    position: absolute;
-    top: 0; left: -100%;
-    width: 100%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-    transition: left 0.5s ease;
-  }
-
-  .anime-btn-primary:hover::before {
-    left: 100%;
-  }
-
-  .anime-btn-primary:hover {
-    box-shadow: 0 0 30px rgba(255, 107, 157, 0.6);
-    transform: translateY(-2px);
-  }
-
-  /* Anime secondary button */
-  .anime-btn-secondary {
-    background: transparent;
-    border: 2px solid rgba(255, 107, 157, 0.5);
-    color: #FF6B9D;
-    transition: all 0.3s ease;
-  }
-
-  .anime-btn-secondary:hover {
-    background: rgba(255, 107, 157, 0.15);
-    border-color: rgba(255, 107, 157, 0.8);
-    box-shadow: 0 0 20px rgba(255, 107, 157, 0.3);
-  }
-
-  /* Anime badge styles */
-  .anime-badge {
-    background: linear-gradient(135deg, rgba(255, 107, 157, 0.2), rgba(192, 132, 252, 0.2));
-    border: 1px solid rgba(255, 107, 157, 0.4);
-    color: #FF6B9D;
-  }
-
-  .anime-badge-cyan {
-    background: rgba(34, 211, 238, 0.15);
-    border: 1px solid rgba(34, 211, 238, 0.4);
-    color: #22D3EE;
-  }
-
-  .anime-badge-mint {
-    background: rgba(52, 211, 153, 0.15);
-    border: 1px solid rgba(52, 211, 153, 0.4);
-    color: #34D399;
-  }
-
-  /* Readable text on glass */
-  .text-glass-primary {
-    color: #ffffff;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
-  }
-
-  .text-glass-secondary {
-    color: #d4dce8;
-  }
-
-  .text-glass-muted {
-    color: #b8c4d8;
-  }
-
-  /* Anime text colors */
-  .text-anime-pink {
-    color: #FF6B9D;
-  }
-
-  .text-anime-purple {
-    color: #C084FC;
-  }
-
-  .text-anime-cyan {
-    color: #22D3EE;
-  }
-
-  /* Hide scrollbar for horizontal nav on mobile */
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* AI Chat input – placeholder (inline style handles text color) */
-  .aichat-input::placeholder {
-    color: #94a3b8;
-  }
-
-  /* Floating animation for elements */
-  .float-animation {
-    animation: float 6s ease-in-out infinite;
-  }
-
-  @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-  }
-
-  /* Gradient text effect */
-  .gradient-text {
-    background: linear-gradient(135deg, #FF6B9D, #C084FC, #22D3EE);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  /* Glow text effect */
-  .glow-text {
-    text-shadow: 0 0 10px rgba(255, 107, 157, 0.5), 0 0 20px rgba(255, 107, 157, 0.3);
+  .font-ui {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   }
 }
