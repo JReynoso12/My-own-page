@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const stats = [
   { target: 3, suffix: "+", label: "Projects Shipped" },
@@ -9,9 +9,30 @@ const stats = [
 ];
 
 export default function StatsBar() {
+  const rootRef = useRef<HTMLDivElement>(null);
+  const [started, setStarted] = useState(false);
   const intervalIdsRef = useRef<number[]>([]);
 
   useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) {
+          setStarted(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.35, rootMargin: "0px 0px -8% 0px" }
+    );
+    observer.observe(root);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!started) return;
+
     intervalIdsRef.current = [];
 
     const startDelay = window.setTimeout(() => {
@@ -30,17 +51,21 @@ export default function StatsBar() {
         }, 35);
         intervalIdsRef.current.push(id);
       });
-    }, 500);
+    }, 200);
 
     return () => {
       window.clearTimeout(startDelay);
       intervalIdsRef.current.forEach((id) => window.clearInterval(id));
       intervalIdsRef.current = [];
     };
-  }, []);
+  }, [started]);
 
   return (
-    <div className="flex flex-wrap gap-4 border-b border-[rgba(204,0,0,0.12)] bg-[var(--night2)] px-6 py-6 sm:gap-8 sm:px-12">
+    <div
+      ref={rootRef}
+      id="stats-bar-root"
+      className="flex flex-wrap gap-4 border-b border-[rgba(204,0,0,0.12)] bg-[var(--night2)] px-6 py-6 sm:gap-8 sm:px-12"
+    >
       {stats.map((stat, i) => (
         <div
           key={stat.label}

@@ -1,36 +1,15 @@
 import type { Metadata, Viewport } from "next";
-import { Anton, Bebas_Neue, Crimson_Text, Oswald } from "next/font/google";
+
+import "@fontsource/anton/400.css";
+import "@fontsource/bebas-neue/400.css";
+import "@fontsource/crimson-text/400.css";
+import "@fontsource/crimson-text/400-italic.css";
+import "@fontsource/oswald/400.css";
+import "@fontsource/oswald/600.css";
+
+import { getSiteUrl } from "@/lib/site";
 
 import "./globals.css";
-
-const fontHeroName = Anton({
-  weight: "400",
-  subsets: ["latin"],
-  variable: "--font-hero-name",
-  display: "swap",
-});
-
-const fontDisplay = Bebas_Neue({
-  weight: "400",
-  subsets: ["latin"],
-  variable: "--font-display",
-  display: "swap",
-});
-
-const fontUi = Oswald({
-  weight: ["400", "600"],
-  subsets: ["latin"],
-  variable: "--font-ui",
-  display: "swap",
-});
-
-const fontSerif = Crimson_Text({
-  weight: "400",
-  style: ["normal", "italic"],
-  subsets: ["latin"],
-  variable: "--font-serif",
-  display: "swap",
-});
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -39,14 +18,18 @@ export const viewport: Viewport = {
   themeColor: "#060608",
 };
 
+const siteUrl = getSiteUrl();
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: "Jimuel Reynoso | Full-Stack Web Developer",
   description:
-    "Full-Stack Web Developer specializing in Vue.js, Node.js, and MySQL. Building scalable, user-friendly web applications.",
+    "Full-stack developer (Vue, React/Next.js, Node.js, MySQL). I ship fast, accessible web apps—open to roles and freelance projects.",
   keywords: [
     "Full-Stack Developer",
     "Web Developer",
     "Vue.js",
+    "Next.js",
     "Node.js",
     "MySQL",
     "Portfolio",
@@ -55,8 +38,25 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Jimuel Reynoso | Full-Stack Web Developer",
     description:
-      "Building scalable, user-friendly web applications. Available for projects.",
+      "Scalable web apps from idea to deployment. Available for projects and full-time roles.",
     type: "website",
+    url: siteUrl,
+    locale: "en_US",
+    images: [
+      {
+        url: "/images/daredevil-atmosphere.png",
+        width: 1200,
+        height: 630,
+        alt: "Jimuel Reynoso — portfolio",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Jimuel Reynoso | Full-Stack Web Developer",
+    description:
+      "Scalable web apps from idea to deployment. Available for projects.",
+    images: ["/images/daredevil-atmosphere.png"],
   },
   robots: "index, follow",
 };
@@ -68,11 +68,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${fontHeroName.variable} ${fontDisplay.variable} ${fontUi.variable} ${fontSerif.variable} dd-theme antialiased relative z-[1]`}
-      >
-        {children}
-      </body>
+      <body className="dd-theme antialiased relative z-[1]">{children}</body>
     </html>
   );
 }

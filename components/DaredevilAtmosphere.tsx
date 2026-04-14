@@ -37,6 +37,10 @@ function ScanLineVertical() {
   );
 }
 
+function ScanLineHorizontal() {
+  return <div className="dd-scan-line-h" aria-hidden />;
+}
+
 export default function DaredevilAtmosphere() {
   const reduced = usePrefersReducedMotion();
   const radarRef = useRef<HTMLCanvasElement>(null);
@@ -160,6 +164,7 @@ export default function DaredevilAtmosphere() {
         aria-hidden
       />
       <ScanLineVertical />
+      <ScanLineHorizontal />
       <CursorDot x={cursor.x} y={cursor.y} visible={cursor.visible} />
     </>
   );

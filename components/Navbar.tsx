@@ -1,8 +1,12 @@
 "use client";
 
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 import { useBookNav } from "@/contexts/BookNavigationContext";
+import { useMainScroll } from "@/contexts/MainScrollContext";
+
+import ThemeToggle from "./ThemeToggle";
 
 const links = [
   { id: "hero", label: "Home" },
@@ -14,9 +18,25 @@ const links = [
 
 export default function Navbar() {
   const { pageId, goToPage } = useBookNav();
+  const { scrollEl } = useMainScroll();
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    if (!scrollEl) return;
+    const onScroll = () => setScrolled(scrollEl.scrollTop > 20);
+    onScroll();
+    scrollEl.addEventListener("scroll", onScroll, { passive: true });
+    return () => scrollEl.removeEventListener("scroll", onScroll);
+  }, [scrollEl]);
 
   return (
-    <nav className="sticky top-0 z-[200] flex shrink-0 items-center justify-between border-b border-[rgba(204,0,0,0.2)] bg-[rgba(6,6,8,0.85)] px-5 py-4 backdrop-blur-[8px] sm:px-12">
+    <nav
+      className={`sticky top-0 z-[200] flex shrink-0 items-center justify-between border-b bg-[var(--nav-bg)] px-5 py-4 backdrop-blur-[14px] transition-[border-color] duration-300 sm:px-12 ${
+        scrolled
+          ? "border-[rgba(204,0,0,0.45)] shadow-[0_8px_32px_rgba(0,0,0,0.35)]"
+          : "border-[rgba(204,0,0,0.2)]"
+      }`}
+    >
       <button
         type="button"
         onClick={() => goToPage("hero")}
@@ -34,7 +54,7 @@ export default function Navbar() {
           />
         </span>
       </button>
-      <div className="hidden gap-8 sm:flex">
+      <div className="hidden items-center gap-6 sm:flex">
         {links.map((link) => (
           <button
             key={link.id}
@@ -50,13 +70,23 @@ export default function Navbar() {
           </button>
         ))}
       </div>
-      <button
-        type="button"
-        onClick={() => goToPage("contact")}
-        className="dd-btn dd-btn-filled cursor-none border-none px-5 py-2.5 text-[0.75rem]"
-      >
-        Hire Me
-      </button>
+      <div className="flex items-center gap-2 sm:gap-3">
+        <ThemeToggle />
+        <a
+          href="/resume.pdf"
+          download
+          className="hidden cursor-none rounded-full border border-[rgba(204,0,0,0.35)] px-3 py-2 font-ui text-[10px] font-semibold uppercase tracking-[0.12em] text-[var(--text-muted)] no-underline transition-colors hover:border-[var(--crimson)] hover:text-[var(--crimson)] sm:inline-flex sm:items-center"
+        >
+          CV
+        </a>
+        <button
+          type="button"
+          onClick={() => goToPage("contact")}
+          className="dd-btn dd-btn-filled cursor-none border-none px-4 py-2.5 text-[0.7rem] sm:px-5 sm:text-[0.75rem]"
+        >
+          Hire Me
+        </button>
+      </div>
     </nav>
   );
 }

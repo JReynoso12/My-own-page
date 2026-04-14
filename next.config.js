@@ -8,6 +8,13 @@ const nextConfig = {
   distDir: process.env.NEXT_DIST_DIR || '.next',
   images: {
     domains: ['localhost', 'www.google.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cdn.jsdelivr.net',
+        pathname: '/npm/simple-icons@v9/icons/**',
+      },
+    ],
   },
   experimental: {
     // Only bundle icons you import instead of the whole library (faster compile)

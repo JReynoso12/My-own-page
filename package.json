@@ -12,9 +12,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fontsource/anton": "^5.2.7",
     "@fontsource/bangers": "^5.2.8",
+    "@fontsource/bebas-neue": "^5.2.7",
     "@fontsource/comic-neue": "^5.2.7",
+    "@fontsource/crimson-text": "^5.2.7",
     "@fontsource/inter": "^5.2.8",
+    "@fontsource/oswald": "^5.2.8",
     "@types/three": "^0.183.1",
     "clsx": "^2.1.1",
     "framer-motion": "^11.3.19",

@@ -13,9 +13,15 @@
   --text-primary: #f0ece4;
   --text-muted: #888880;
 
-  --font-sans: var(--font-ui), "Oswald", system-ui, sans-serif;
-  --font-comic-display: var(--font-display), "Bebas Neue", sans-serif;
-  --font-comic-body: var(--font-serif), "Crimson Text", Georgia, serif;
+  /* Self-hosted via @fontsource/* (no Google Fonts fetch at build/dev time) */
+  --font-hero-name: "Anton", system-ui, sans-serif;
+  --font-display: "Bebas Neue", system-ui, sans-serif;
+  --font-ui: "Oswald", system-ui, sans-serif;
+  --font-serif: "Crimson Text", Georgia, serif;
+
+  --font-sans: var(--font-ui), system-ui, sans-serif;
+  --font-comic-display: var(--font-display), sans-serif;
+  --font-comic-body: var(--font-serif), serif;
 
   --dd-red: var(--crimson);
   --dd-red-bright: #ff2222;
@@ -32,6 +38,38 @@
   --border: rgba(204, 0, 0, 0.12);
   --ink: rgba(255, 255, 255, 0.08);
   --panel-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.75);
+  --nav-bg: rgba(6, 6, 8, 0.82);
+}
+
+/* Light mode — readable for recruiters; toggled via .dd-light on <html> */
+html.dd-light {
+  --crimson: #b30000;
+  --crimson-dark: #7a0000;
+  --crimson-glow: rgba(179, 0, 0, 0.28);
+  --night: #f3f1ec;
+  --night2: #e8e5df;
+  --night3: #dcd8d0;
+  --text-primary: #141210;
+  --text-muted: #5a5650;
+
+  --bg: var(--night);
+  --surface: var(--night2);
+  --s2: var(--night3);
+  --text: var(--text-primary);
+  --muted: var(--text-muted);
+  --border: rgba(179, 0, 0, 0.18);
+  --ink: rgba(0, 0, 0, 0.08);
+  --panel-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.18);
+  --nav-bg: rgba(243, 241, 236, 0.92);
+}
+
+html.dd-light body {
+  background: var(--night);
+  color: var(--text-primary);
+}
+
+html.dd-light body.dd-theme {
+  cursor: auto;
 }
 
 @layer base {
@@ -233,6 +271,46 @@
     }
   }
 
+  /* Horizontal sweep: vertical line moves left → right */
+  .dd-scan-line-h {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    z-index: 7999;
+    pointer-events: none;
+    background: linear-gradient(
+      180deg,
+      transparent,
+      rgba(204, 0, 0, 0.35),
+      transparent
+    );
+    opacity: 0.12;
+    animation: dd-scan-horizontal 14s linear infinite;
+  }
+
+  @keyframes dd-scan-horizontal {
+    0% {
+      left: -4px;
+    }
+    100% {
+      left: 100vw;
+    }
+  }
+
+  @keyframes dd-page-loader-slide {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(400%);
+    }
+  }
+
+  .dd-page-loader-bar {
+    animation: dd-page-loader-slide 1s ease-in-out infinite;
+  }
+
   /* Cinematic hero — poster name + tagline (Daredevil-style) */
   .hero-noir::before {
     content: "";
@@ -276,6 +354,14 @@
 
   .hero-name-last {
     color: #cc0000;
+  }
+
+  html.dd-light .hero-name-first {
+    color: #1a1810;
+  }
+
+  html.dd-light .hero-name-last {
+    color: var(--crimson);
   }
 
   .dd-emblem {
@@ -437,6 +523,14 @@
     }
 
     .dd-scan-line-v {
+      animation: none;
+    }
+
+    .dd-scan-line-h {
+      animation: none;
+    }
+
+    .dd-page-loader-bar {
       animation: none;
     }
 

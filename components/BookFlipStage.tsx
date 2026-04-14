@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, type ReactNode } from "react";
+import { useCallback, useEffect, type ReactNode } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa6";
 
 import { PAGE_ORDER, useBookNav } from "@/contexts/BookNavigationContext";
+import { useMainScroll } from "@/contexts/MainScrollContext";
 
 const flipEase = [0.22, 1, 0.36, 1] as const;
 
@@ -95,8 +96,16 @@ type BookFlipStageProps = {
 
 export default function BookFlipStage({ pages }: BookFlipStageProps) {
   const { pageIndex, direction, nextPage, prevPage, totalPages } = useBookNav();
+  const { setScrollEl } = useMainScroll();
   const reduceMotion = useReducedMotion();
   const variants = reduceMotion ? fadeVariants : flipVariants;
+
+  const scrollRef = useCallback(
+    (node: HTMLDivElement | null) => {
+      setScrollEl(node);
+    },
+    [setScrollEl]
+  );
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -123,6 +132,7 @@ export default function BookFlipStage({ pages }: BookFlipStageProps) {
       <AnimatePresence initial={false} mode="wait" custom={direction}>
         <motion.div
           key={pageIndex}
+          ref={scrollRef}
           custom={direction}
           variants={variants}
           initial="initial"
