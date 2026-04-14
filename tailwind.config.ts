@@ -10,13 +10,14 @@ const config: Config = {
     extend: {
       colors: {
         gold: {
-          DEFAULT: "#e50914",
-          dark: "#b20710",
+          DEFAULT: "#dc2626",
+          dark: "#991b1b",
         },
       },
       fontFamily: {
-        comic: ["Inter", "system-ui", "sans-serif"],
-        ui: ["Inter", "system-ui", "sans-serif"],
+        comic: ["var(--font-display)", "Bebas Neue", "sans-serif"],
+        ui: ["var(--font-ui)", "Oswald", "sans-serif"],
+        serif: ["var(--font-serif)", "Crimson Text", "Georgia", "serif"],
       },
       boxShadow: {
         comic: "0 4px 24px rgba(0,0,0,0.45)",

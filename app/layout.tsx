@@ -1,15 +1,35 @@
 import type { Metadata, Viewport } from "next";
-import "@fontsource/inter/400.css";
-import "@fontsource/inter/500.css";
-import "@fontsource/inter/600.css";
-import "@fontsource/inter/700.css";
+import { Bebas_Neue, Crimson_Text, Oswald } from "next/font/google";
+
 import "./globals.css";
+
+const fontDisplay = Bebas_Neue({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-display",
+  display: "swap",
+});
+
+const fontUi = Oswald({
+  weight: ["400", "600"],
+  subsets: ["latin"],
+  variable: "--font-ui",
+  display: "swap",
+});
+
+const fontSerif = Crimson_Text({
+  weight: "400",
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+  variable: "--font-serif",
+  display: "swap",
+});
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#0a0a0a",
+  themeColor: "#060608",
 };
 
 export const metadata: Metadata = {
@@ -41,7 +61,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased relative z-[1]">{children}</body>
+      <body
+        className={`${fontDisplay.variable} ${fontUi.variable} ${fontSerif.variable} dd-theme antialiased relative z-[1]`}
+      >
+        {children}
+      </body>
     </html>
   );
 }

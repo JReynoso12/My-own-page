@@ -40,19 +40,19 @@ export default function StatsBar() {
   }, []);
 
   return (
-    <div className="flex flex-wrap gap-4 sm:gap-8 px-6 sm:px-12 py-6 bg-[var(--surface)] border-b border-[var(--ink)]">
+    <div className="flex flex-wrap gap-4 border-b border-[rgba(204,0,0,0.12)] bg-[var(--night2)] px-6 py-6 sm:gap-8 sm:px-12">
       {stats.map((stat, i) => (
         <div
           key={stat.label}
-          className="comic-panel-flat flex flex-col flex-1 min-w-[140px] px-5 py-4"
+          className="feature-card-shell min-w-[140px] flex-1 rounded-sm px-5 py-4"
         >
           <span
             id={`counter-${i}`}
-            className="font-comic text-[34px] text-[var(--dd-red)] tracking-tight"
+            className="font-comic text-[34px] tracking-tight text-[var(--crimson)]"
           >
             {stat.suffix === "%" ? "0%" : "0"}
           </span>
-          <span className="text-[10px] tracking-[2px] uppercase text-[var(--muted)] font-ui font-bold">
+          <span className="mt-1 block font-ui text-[10px] font-bold uppercase tracking-[2px] text-[var(--text-muted)]">
             {stat.label}
           </span>
         </div>

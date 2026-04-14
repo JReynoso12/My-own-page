@@ -23,7 +23,7 @@ export default function ThreeContactScene() {
     const camera = new THREE.PerspectiveCamera(60, w / h, 0.1, 100);
     camera.position.z = 5;
 
-    const accent = 0xe50914;
+    const accent = 0xcc0000;
 
     // Lighter particle field
     const pcount = 900;

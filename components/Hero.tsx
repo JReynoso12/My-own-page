@@ -12,7 +12,7 @@ export default function Hero() {
 
   return (
     <section
-      className="relative min-h-[620px] overflow-hidden flex items-center border-b border-[var(--ink)]"
+      className="relative flex min-h-[620px] items-center overflow-hidden border-b border-[rgba(204,0,0,0.12)]"
       id="hero"
     >
       <div className="absolute inset-0 z-0">
@@ -24,66 +24,77 @@ export default function Hero() {
           className="object-cover object-[72%_center] sm:object-right"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/65 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-black/35" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#060608] via-[#060608]/88 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#060608]/90 via-transparent to-[#060608]/50" />
       </div>
 
-      <div className="absolute inset-0 z-[1] opacity-[0.2] pointer-events-none">
+      <div className="pointer-events-none absolute inset-0 z-[1] opacity-[0.15]">
         <ThreeHeroScene />
       </div>
 
-      <div className="relative z-[2] px-6 sm:px-12 max-w-[560px]">
-        <div
-          className="comic-panel p-6 sm:p-8 animate-fade-up"
-          style={{ animationDelay: "0.3s" }}
-        >
-          <div
-            className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--dd-red)] font-ui font-semibold mb-5 px-3 py-1.5 rounded-full border border-[rgba(229,9,20,0.35)] bg-[rgba(229,9,20,0.08)]"
-            style={{ animationDelay: "0.35s" }}
+      <div className="dd-emblem hidden lg:block">DD</div>
+
+      <div className="relative z-[2] w-full max-w-[640px] px-6 sm:px-12">
+        <div className="comic-panel p-6 sm:p-10 animate-fade-up" style={{ animationDelay: "0.25s" }}>
+          <p
+            className="mb-4 font-ui text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--crimson)] animate-fade-up"
+            style={{ animationDelay: "0.3s" }}
           >
             Available for projects
-          </div>
+          </p>
+          <p
+            className="font-serif-italic mb-4 animate-fade-up text-[1rem] uppercase tracking-[0.3em] text-[var(--crimson)]"
+            style={{ animationDelay: "0.32s" }}
+          >
+            The Man Without Fear
+          </p>
           <h1
-            className="font-comic text-[clamp(40px,7vw,80px)] leading-[0.95] mb-3 animate-fade-up text-white"
-            style={{ animationDelay: "0.4s" }}
+            className="font-comic mb-3 animate-fade-up text-[clamp(3rem,10vw,5.5rem)] leading-[0.92] text-[var(--text-primary)]"
+            style={{ animationDelay: "0.38s" }}
           >
             Jimuel{" "}
-            <span className="text-[var(--dd-red)]">Reynoso</span>
+            <span className="dd-accent-glitch text-[var(--crimson)]">Reynoso</span>
           </h1>
           <p
-            className="text-[clamp(18px,3vw,26px)] leading-tight text-[var(--muted)] font-ui font-medium mb-6 animate-fade-up uppercase tracking-[0.08em]"
-            style={{ animationDelay: "0.5s" }}
+            className="font-ui mb-6 animate-fade-up text-[0.9rem] uppercase tracking-[0.25em] text-[var(--text-muted)]"
+            style={{ animationDelay: "0.45s" }}
           >
             Full-Stack Developer
           </p>
           <p
-            className="text-[15px] leading-[1.75] text-[var(--muted)] font-ui mb-8 animate-fade-up"
-            style={{ animationDelay: "0.6s" }}
+            className="mb-8 animate-fade-up text-[1.05rem] leading-[1.75] text-[var(--text-muted)]"
+            style={{
+              animationDelay: "0.52s",
+              fontFamily: "var(--font-serif), Georgia, serif",
+            }}
           >
-            I build scalable, user-friendly web applications using modern
-            full-stack technologies. Transforming ideas into secure,
-            high-performance digital products from concept to deployment.
+            I build scalable, user-friendly web applications using modern full-stack
+            technologies. Transforming ideas into secure, high-performance digital
+            products from concept to deployment.
           </p>
           <div
-            className="flex flex-wrap gap-3 animate-fade-up"
-            style={{ animationDelay: "0.7s" }}
+            className="flex flex-wrap gap-4 animate-fade-up"
+            style={{ animationDelay: "0.6s" }}
           >
             <button
               type="button"
               onClick={() => goToPage("work")}
-              className="rounded-full px-8 py-3 bg-[var(--gold)] text-white text-[11px] tracking-[0.15em] uppercase font-ui font-semibold cursor-pointer border-none shadow-lg shadow-red-950/40 transition-all duration-200 hover:bg-[#f40612] hover:scale-[1.02]"
+              className="dd-btn dd-btn-filled border-none"
             >
               View Work
             </button>
             <button
               type="button"
               onClick={() => goToPage("contact")}
-              className="rounded-full px-8 py-3 border border-white/40 text-white text-[11px] tracking-[0.15em] uppercase font-ui font-semibold cursor-pointer bg-transparent transition-all duration-200 hover:bg-white/10 hover:border-white/60"
+              className="dd-btn border-none"
             >
               Get in Touch
             </button>
           </div>
         </div>
+      </div>
+      <div className="relative z-[3] mt-12 w-full px-6 sm:px-12">
+        <hr className="dd-divider" />
       </div>
     </section>
   );

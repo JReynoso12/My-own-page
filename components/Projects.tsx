@@ -188,14 +188,10 @@ export default function Projects() {
 
   return (
     <>
-      <section className="py-[72px] px-6 sm:px-12 bg-[var(--bg)]" id="work">
-        <div className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--dd-red)] font-ui font-semibold mb-3 px-3 py-1.5 rounded-full border border-[rgba(229,9,20,0.35)] bg-[rgba(229,9,20,0.08)]">
-          Selected Work
-        </div>
-        <h2 className="font-comic text-[clamp(32px,4vw,52px)] leading-[1.05] mb-11 text-white">
-          Projects That
-          <br />
-          <span className="text-[var(--muted)]">Actually Shipped</span>
+      <section className="border-t border-[rgba(204,0,0,0.15)] bg-[var(--night2)] px-6 py-[72px] sm:px-12" id="work">
+        <p className="section-label">Selected Work</p>
+        <h2 className="section-title">
+          Projects That <em>Actually Shipped</em>
         </h2>
 
         {/* Filter buttons */}
@@ -204,10 +200,10 @@ export default function Projects() {
             <button
               key={f.id}
               onClick={() => setFilter(f.id)}
-              className={`rounded-full px-5 py-2 text-[10px] tracking-[0.12em] uppercase font-ui font-semibold border border-[var(--ink)] cursor-pointer transition-all duration-200 ${
+              className={`cursor-none rounded-full border px-5 py-2 font-ui text-[10px] font-semibold uppercase tracking-[0.12em] transition-all duration-200 ${
                 filter === f.id
-                  ? "bg-[var(--gold)] text-white border-transparent"
-                  : "bg-transparent text-[var(--muted)] hover:text-white hover:border-white/20"
+                  ? "border-transparent bg-[var(--crimson)] text-[var(--night)]"
+                  : "border-[var(--ink)] bg-transparent text-[var(--text-muted)] hover:border-[rgba(204,0,0,0.35)] hover:text-[var(--crimson)]"
               }`}
             >
               {f.label}
@@ -226,14 +222,14 @@ export default function Projects() {
               onClick={() => setModalProject(project)}
               onMouseMove={handleCardMouseMove}
               onMouseLeave={handleCardMouseLeave}
-              className={`bg-[var(--surface)] p-7 cursor-pointer transition-all duration-[250ms] relative overflow-hidden rounded-lg border border-[var(--ink)] shadow-comic hover:border-white/15 will-change-transform group ${
+              className={`feature-card-shell group relative cursor-none overflow-hidden rounded-sm p-7 shadow-comic transition-all duration-[250ms] will-change-transform ${
                 project.featured
                   ? "sm:col-span-full sm:grid sm:grid-cols-2 sm:gap-8 sm:items-center"
                   : ""
               }`}
               style={{ transformStyle: "preserve-3d" }}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-[rgba(229,9,20,0.12)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-[rgba(204,0,0,0.1)] to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
               {project.featured && (
                 <div className="relative">
@@ -242,30 +238,30 @@ export default function Projects() {
               )}
 
               <div className="relative z-[1]">
-                <div className="text-[10px] tracking-[0.15em] uppercase text-[var(--dd-red)] font-ui font-semibold mb-[14px]">
+                <div className="mb-[14px] font-ui text-[10px] font-semibold uppercase tracking-[0.15em] text-[var(--crimson)]">
                   {project.category} &middot; {project.year}
                 </div>
-                <div className="font-comic text-[22px] mb-[10px] tracking-tight text-white">
+                <div className="mb-[10px] font-comic text-[22px] tracking-tight text-[var(--text-primary)]">
                   {project.title}
                 </div>
-                <div className="text-[13px] text-[var(--muted)] font-ui leading-[1.7] mb-5">
+                <div className="mb-5 font-ui text-[13px] leading-[1.7] text-[var(--text-muted)]">
                   {project.shortDesc}
                 </div>
                 <div className="flex gap-[6px] flex-wrap mb-5">
                   {project.techStack.map((tech) => (
                     <span
                       key={tech}
-                      className="text-[9px] tracking-[0.08em] px-2 py-1 bg-[var(--s2)] text-[var(--muted)] font-ui font-medium uppercase rounded border border-[var(--ink)]"
+                      className="rounded border border-[rgba(204,0,0,0.25)] bg-[var(--night3)] px-2 py-1 font-ui text-[9px] font-medium uppercase tracking-[0.08em] text-[var(--text-muted)]"
                     >
                       {tech}
                     </span>
                   ))}
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-[11px] text-[var(--muted)] font-ui font-bold">
+                  <span className="font-ui text-[11px] font-bold text-[var(--text-muted)]">
                     {project.year}
                   </span>
-                  <span className="text-[16px] text-[var(--dd-red)] transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1">
+                  <span className="text-[16px] text-[var(--crimson)] transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1">
                     &#8599;
                   </span>
                 </div>
@@ -292,22 +288,22 @@ export default function Projects() {
             >
               &#10005;
             </button>
-            <div className="text-[10px] tracking-[0.15em] uppercase text-[var(--dd-red)] font-ui font-semibold mb-[14px]">
+            <div className="mb-[14px] font-ui text-[10px] font-semibold uppercase tracking-[0.15em] text-[var(--crimson)]">
               {modalProject.modal.cat}
             </div>
-            <div className="font-comic text-[28px] tracking-tight mb-[14px] text-white">
+            <div className="mb-[14px] font-comic text-[28px] tracking-tight text-[var(--text-primary)]">
               {modalProject.title}
             </div>
-            <div className="text-[14px] text-[var(--muted)] font-ui leading-[1.8] mb-6">
+            <div className="mb-6 font-ui text-[14px] leading-[1.8] text-[var(--text-muted)]">
               {modalProject.modal.desc}
             </div>
             <div className="grid grid-cols-2 gap-[14px] border-t border-[var(--ink)] pt-5 mb-6">
               {modalProject.modal.meta.map(([key, value]) => (
                 <div key={key}>
-                  <div className="text-[10px] tracking-[2px] uppercase text-[var(--muted)] font-ui font-bold mb-[3px]">
+                  <div className="mb-[3px] font-ui text-[10px] font-bold uppercase tracking-[2px] text-[var(--text-muted)]">
                     {key}
                   </div>
-                  <div className="text-[13px] text-[var(--text)] font-ui">
+                  <div className="font-ui text-[13px] text-[var(--text-primary)]">
                     {value}
                   </div>
                 </div>
@@ -317,7 +313,7 @@ export default function Projects() {
               href={modalProject.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block rounded-full px-8 py-3 bg-[var(--gold)] text-white text-[11px] tracking-[0.12em] uppercase font-ui font-semibold cursor-pointer border-none shadow-lg transition-all duration-200 hover:bg-[#f40612] no-underline"
+              className="dd-btn dd-btn-filled inline-block border-none px-8 py-3 no-underline"
             >
               View Live Project &#8599;
             </a>

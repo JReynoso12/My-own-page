@@ -14,24 +14,26 @@ export default function Navbar() {
   const { pageId, goToPage } = useBookNav();
 
   return (
-    <nav className="sticky top-0 z-[200] flex shrink-0 items-center justify-between px-5 py-4 sm:px-9 bg-black/75 backdrop-blur-xl border-b border-white/[0.06]">
+    <nav className="sticky top-0 z-[200] flex shrink-0 items-center justify-between border-b border-[rgba(204,0,0,0.2)] bg-[rgba(6,6,8,0.85)] px-5 py-4 backdrop-blur-[8px] sm:px-12">
       <button
         type="button"
         onClick={() => goToPage("hero")}
-        className="font-ui text-[18px] font-bold tracking-[0.12em] text-white cursor-pointer bg-transparent border-none uppercase"
+        className="logo-dd-pulse cursor-none border-none bg-transparent p-0 font-comic text-[2.2rem] leading-none tracking-[0.05em] text-[var(--crimson)]"
+        style={{ textShadow: "0 0 20px var(--crimson-glow)" }}
+        aria-label="Home"
       >
-        JR.
+        DD
       </button>
-      <div className="hidden sm:flex gap-8">
+      <div className="hidden gap-8 sm:flex">
         {links.map((link) => (
           <button
             key={link.id}
             type="button"
             onClick={() => goToPage(link.id)}
-            className={`text-[12px] tracking-[0.06em] cursor-pointer font-ui font-medium transition-colors duration-200 border-none bg-transparent p-0 ${
+            className={`cursor-none border-none bg-transparent p-0 font-ui text-[0.85rem] uppercase tracking-[0.15em] transition-colors duration-300 ${
               pageId === link.id
-                ? "text-white"
-                : "text-[var(--muted)] hover:text-white"
+                ? "text-[var(--crimson)]"
+                : "text-[var(--text-muted)] hover:text-[var(--crimson)]"
             }`}
           >
             {link.label}
@@ -41,7 +43,7 @@ export default function Navbar() {
       <button
         type="button"
         onClick={() => goToPage("contact")}
-        className="rounded-full text-[11px] tracking-[0.12em] uppercase bg-[var(--gold)] text-white px-5 py-2.5 cursor-pointer font-ui font-semibold border-none transition-all duration-200 hover:bg-[#f40612] hover:scale-[1.02]"
+        className="dd-btn dd-btn-filled cursor-none border-none px-5 py-2.5 text-[0.75rem]"
       >
         Hire Me
       </button>

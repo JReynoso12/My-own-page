@@ -2,36 +2,36 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Daredevil theme demo — tokens */
 :root {
-  /* Netflix / Daredevil — cinematic dark + crimson */
-  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
-  --font-comic-display: var(--font-sans);
-  --font-comic-body: var(--font-sans);
+  --crimson: #cc0000;
+  --crimson-dark: #8b0000;
+  --crimson-glow: rgba(204, 0, 0, 0.35);
+  --night: #060608;
+  --night2: #0d0d0f;
+  --night3: #151518;
+  --text-primary: #f0ece4;
+  --text-muted: #888880;
 
-  --dd-red: #e50914;
-  --dd-red-deep: #b20710;
-  --dd-crimson: #9f1239;
-  --marvel-red: #e50914;
-  --marvel-red-deep: #991b1b;
-  --spider-blue: #1f1f1f;
-  --spider-blue-bright: #404040;
-  --spider-blue-glow: #d4d4d4;
+  --font-sans: var(--font-ui), "Oswald", system-ui, sans-serif;
+  --font-comic-display: var(--font-display), "Bebas Neue", sans-serif;
+  --font-comic-body: var(--font-serif), "Crimson Text", Georgia, serif;
 
-  --gold: #e50914;
-  --gold2: #b20710;
-  --on-gold: #ffffff;
-  --on-marvel-red: #fafafa;
+  --dd-red: var(--crimson);
+  --dd-red-bright: #ff2222;
+  --dd-red-deep: var(--crimson-dark);
+  --gold: var(--crimson);
+  --gold2: var(--crimson-dark);
+  --on-gold: var(--night);
 
-  --bg: #0a0a0a;
-  --surface: #141414;
-  --s2: #1a1a1a;
-  --text: #f5f5f5;
-  --muted: #a3a3a3;
-  --border: rgba(255, 255, 255, 0.06);
-  --ink: rgba(255, 255, 255, 0.12);
-  --comic-red: #ef4444;
-  --comic-blue: #a3a3a3;
-  --panel-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.65);
+  --bg: var(--night);
+  --surface: var(--night2);
+  --s2: var(--night3);
+  --text: var(--text-primary);
+  --muted: var(--text-muted);
+  --border: rgba(204, 0, 0, 0.12);
+  --ink: rgba(255, 255, 255, 0.08);
+  --panel-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.75);
 }
 
 @layer base {
@@ -48,32 +48,40 @@
 
   body {
     position: relative;
-    background: var(--bg);
-    background-image: radial-gradient(ellipse 100% 80% at 80% 20%, rgba(229, 9, 20, 0.08), transparent 50%),
-      radial-gradient(ellipse 80% 60% at 0% 100%, rgba(80, 10, 20, 0.2), transparent 45%),
-      linear-gradient(180deg, #050505 0%, var(--bg) 45%, #0a0a0a 100%);
-    color: var(--text);
+    background: var(--night);
+    color: var(--text-primary);
     font-family: var(--font-sans);
     overflow-x: hidden;
   }
 
-  body::before {
+  body.dd-theme {
+    cursor: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    body.dd-theme {
+      cursor: auto;
+    }
+  }
+
+  body::after {
     content: "";
     position: fixed;
     inset: 0;
     pointer-events: none;
-    z-index: 0;
-    opacity: 0.04;
-    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.4) 0.4px, transparent 0.45px);
-    background-size: 4px 4px;
+    z-index: 50;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+    mix-blend-mode: screen;
   }
 
   h1,
   h2,
   h3 {
-    font-family: var(--font-sans);
-    font-weight: 700;
-    letter-spacing: -0.03em;
+    font-family: var(--font-comic-display);
+    font-weight: 400;
+    letter-spacing: 0.02em;
   }
 }
 
@@ -81,7 +89,7 @@
   @keyframes fadeUp {
     from {
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(24px);
     }
     to {
       opacity: 1;
@@ -99,39 +107,295 @@
   }
 
   .font-comic {
+    font-family: var(--font-comic-display);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+  }
+
+  .font-serif-italic {
+    font-family: var(--font-serif), Georgia, serif;
+    font-style: italic;
+  }
+
+  .section-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--crimson);
+    margin-bottom: 0.75rem;
     font-family: var(--font-sans);
-    font-weight: 800;
-    letter-spacing: -0.03em;
+  }
+
+  .section-title {
+    font-family: var(--font-comic-display);
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    line-height: 1;
+    margin-bottom: 3rem;
+    color: var(--text-primary);
+  }
+
+  .section-title em {
+    font-style: normal;
+    color: var(--crimson);
+  }
+
+  .dd-divider {
+    height: 3px;
+    margin: 0;
+    border: none;
+    background: repeating-linear-gradient(
+      90deg,
+      var(--crimson) 0px,
+      var(--crimson) 8px,
+      transparent 8px,
+      transparent 16px
+    );
+    opacity: 0.4;
+  }
+
+  .dd-btn {
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.75rem 2rem;
+    border: 1px solid var(--crimson);
+    background: transparent;
+    color: var(--crimson);
+    cursor: none;
+    transition: color 0.25s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .dd-btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--crimson);
+    transform: translateX(-101%);
+    transition: transform 0.25s ease;
+    z-index: -1;
+  }
+
+  .dd-btn:hover {
+    color: var(--night);
+  }
+
+  .dd-btn:hover::before {
+    transform: translateX(0);
+  }
+
+  .dd-btn-filled {
+    background: var(--crimson);
+    color: var(--night);
+  }
+
+  .dd-btn-filled::before {
+    background: var(--crimson-dark);
+  }
+
+  .dd-btn-filled:hover {
+    color: var(--text-primary);
+  }
+
+  .dd-btn-filled:hover::before {
+    transform: translateX(0);
+  }
+
+  .logo-dd-pulse {
+    animation: pulse-logo 3s ease-in-out infinite;
+  }
+
+  @keyframes pulse-logo {
+    0%,
+    100% {
+      text-shadow: 0 0 20px var(--crimson-glow);
+    }
+    50% {
+      text-shadow: 0 0 40px rgba(204, 0, 0, 0.6), 0 0 80px rgba(204, 0, 0, 0.3);
+    }
+  }
+
+  .dd-scan-line-v {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--crimson), transparent);
+    opacity: 0.18;
+    animation: dd-scan-vertical 6s linear infinite;
+  }
+
+  @keyframes dd-scan-vertical {
+    0% {
+      top: -2px;
+    }
+    100% {
+      top: 100vh;
+    }
+  }
+
+  .dd-emblem {
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.06;
+    font-family: var(--font-comic-display);
+    font-size: min(28vw, 240px);
+    color: var(--crimson);
+    line-height: 1;
+    pointer-events: none;
+    animation: emblem-drift 8s ease-in-out infinite alternate;
+  }
+
+  @keyframes emblem-drift {
+    from {
+      transform: translateY(-50%) rotate(-3deg);
+    }
+    to {
+      transform: translateY(-48%) rotate(3deg);
+    }
+  }
+
+  .dd-accent-glitch {
+    display: inline-block;
+    animation: dd-glitch-cycle 4s 2s infinite;
+  }
+
+  @keyframes dd-glitch-cycle {
+    0%,
+    92%,
+    100% {
+      clip-path: none;
+      transform: none;
+      color: var(--crimson);
+    }
+    93% {
+      clip-path: polygon(0 20%, 100% 20%, 100% 40%, 0 40%);
+      transform: translate(-3px, 0);
+    }
+    94% {
+      clip-path: polygon(0 60%, 100% 60%, 100% 80%, 0 80%);
+      transform: translate(3px, 0);
+      color: #ff2222;
+    }
+    95% {
+      clip-path: none;
+      transform: none;
+      color: var(--crimson);
+    }
+    97% {
+      clip-path: polygon(0 10%, 100% 10%, 100% 25%, 0 25%);
+      transform: translate(2px, 0);
+    }
+    98% {
+      clip-path: none;
+    }
   }
 
   .comic-panel {
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 0.375rem;
+    border: 1px solid rgba(204, 0, 0, 0.15);
+    border-radius: 0.25rem;
     box-shadow: var(--panel-shadow);
-    background: rgba(20, 20, 20, 0.55);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    background: rgba(21, 21, 24, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
   }
 
   .comic-panel-flat {
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 0.375rem;
-    background: rgba(20, 20, 20, 0.85);
+    border: 1px solid rgba(204, 0, 0, 0.12);
+    border-radius: 0.25rem;
+    background: var(--night3);
   }
 
-  .comic-divider {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(229, 9, 20, 0.45), transparent);
-    margin-left: 1rem;
-    margin-right: 1rem;
-    border: none;
-    box-shadow: none;
+  .dd-skill-track {
+    flex: 1;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.06);
+    position: relative;
+    overflow: visible;
   }
 
-  @media (min-width: 640px) {
-    .comic-divider {
-      margin-left: 2rem;
-      margin-right: 2rem;
+  .dd-skill-fill {
+    height: 100%;
+    background: var(--crimson);
+    width: 0;
+    transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+  }
+
+  .dd-skill-fill.dd-heartbeat::after {
+    content: "";
+    position: absolute;
+    right: -1px;
+    top: -3px;
+    width: 2px;
+    height: 9px;
+    background: var(--crimson);
+    box-shadow: 0 0 10px var(--crimson), 0 0 20px var(--crimson-glow);
+    animation: dd-heartbeat-bar 1.4s ease-in-out infinite;
+  }
+
+  @keyframes dd-heartbeat-bar {
+    0%,
+    100% {
+      box-shadow: 0 0 8px var(--crimson);
+      opacity: 1;
+    }
+    50% {
+      box-shadow: 0 0 20px var(--crimson), 0 0 40px var(--crimson-glow);
+      opacity: 0.7;
+    }
+  }
+
+  .feature-card-shell {
+    background: var(--night3);
+    border: 1px solid rgba(204, 0, 0, 0.12);
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+
+  .feature-card-shell::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--crimson);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s;
+  }
+
+  .feature-card-shell:hover::before {
+    transform: scaleX(1);
+  }
+
+  .feature-card-shell:hover {
+    border-color: rgba(204, 0, 0, 0.4);
+    transform: translateY(-4px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .dd-accent-glitch {
+      animation: none;
+    }
+
+    .dd-emblem {
+      animation: none;
+    }
+
+    .logo-dd-pulse {
+      animation: none;
+    }
+
+    .dd-scan-line-v {
+      animation: none;
+    }
+
+    .dd-skill-fill.dd-heartbeat::after {
+      animation: none;
     }
   }
 }

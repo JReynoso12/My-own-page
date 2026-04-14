@@ -1,6 +1,7 @@
 "use client";
 
 import BookFlipStage from "@/components/BookFlipStage";
+import DaredevilAtmosphere from "@/components/DaredevilAtmosphere";
 import ContactPerson from "@/components/ContactPerson";
 import Experience from "@/components/Experience";
 import Footer from "@/components/Footer";
@@ -14,6 +15,7 @@ import { BookNavigationProvider } from "@/contexts/BookNavigationContext";
 export default function Home() {
   return (
     <BookNavigationProvider>
+      <DaredevilAtmosphere />
       <div className="relative z-[1] flex h-[100dvh] flex-col overflow-hidden">
         <Navbar />
         <BookFlipStage
