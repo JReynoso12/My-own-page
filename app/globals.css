@@ -328,6 +328,22 @@ html.dd-light body.dd-theme {
     );
   }
 
+  /* Daredevil hero PNG — slow Ken Burns zoom + drift (parent has overflow:hidden) */
+  .hero-bg-kenburns {
+    transform-origin: 50% 42%;
+    will-change: transform;
+    animation: hero-ken-burns 38s ease-in-out infinite alternate;
+  }
+
+  @keyframes hero-ken-burns {
+    0% {
+      transform: scale(1.05) translate(0%, 0%);
+    }
+    100% {
+      transform: scale(1.12) translate(-1.8%, 0.6%);
+    }
+  }
+
   .hero-tagline-cinematic {
     font-family: var(--font-serif), Georgia, serif;
     font-style: italic;
@@ -532,6 +548,11 @@ html.dd-light body.dd-theme {
 
     .dd-page-loader-bar {
       animation: none;
+    }
+
+    .hero-bg-kenburns {
+      animation: none;
+      transform: scale(1.08);
     }
 
     .dd-skill-fill.dd-heartbeat::after {

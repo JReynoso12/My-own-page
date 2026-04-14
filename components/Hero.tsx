@@ -20,15 +20,17 @@ export default function Hero() {
       className="hero-noir relative flex min-h-[620px] flex-col overflow-hidden border-b border-[rgba(204,0,0,0.12)]"
       id="hero"
     >
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="/images/daredevil-cowl-hero.png"
-          alt=""
-          fill
-          priority
-          className="object-cover object-center"
-          sizes="100vw"
-        />
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <div className="hero-bg-kenburns pointer-events-none absolute inset-0">
+          <Image
+            src="/images/daredevil-cowl-hero.png"
+            alt=""
+            fill
+            priority
+            className="object-cover object-center"
+            sizes="100vw"
+          />
+        </div>
         <div
           className="absolute inset-0 bg-[radial-gradient(ellipse_90%_80%_at_50%_38%,rgba(5,5,5,0.35)_0%,rgba(10,0,8,0.55)_45%,rgba(5,0,0,0.88)_100%)]"
           aria-hidden
