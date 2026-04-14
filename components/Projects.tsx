@@ -1,9 +1,8 @@
 "use client";
 
 import { useState, useCallback } from "react";
-import dynamic from "next/dynamic";
 
-const ThreeCardScene = dynamic(() => import("./ThreeCardScene"), { ssr: false });
+import ProjectPreview from "./ProjectPreview";
 
 interface Project {
   id: string;
@@ -189,14 +188,14 @@ export default function Projects() {
 
   return (
     <>
-      <section className="py-[72px] px-6 sm:px-12 bg-[var(--surface)]" id="work">
-        <div className="text-[10px] tracking-[4px] uppercase text-[var(--gold)] font-ui mb-[14px]">
+      <section className="py-[72px] px-6 sm:px-12 bg-[var(--bg)]" id="work">
+        <div className="inline-block text-[10px] tracking-[3px] uppercase text-[var(--on-gold)] font-ui font-bold mb-3 px-3 py-1 bg-[var(--gold)] border-2 border-[var(--on-gold)] shadow-[2px_2px_0_0_var(--marvel-red)]">
           Selected Work
         </div>
-        <h2 className="text-[clamp(30px,4vw,48px)] font-normal tracking-[-1px] leading-[1.15] mb-11">
+        <h2 className="font-comic text-[clamp(32px,4vw,52px)] leading-[1.05] mb-11 uppercase">
           Projects That
           <br />
-          <em className="text-[var(--muted)] italic">Actually Shipped</em>
+          <span className="text-[var(--spider-blue-glow)]">Actually Shipped</span>
         </h2>
 
         {/* Filter buttons */}
@@ -205,10 +204,10 @@ export default function Projects() {
             <button
               key={f.id}
               onClick={() => setFilter(f.id)}
-              className={`px-[18px] py-[7px] text-[10px] tracking-[2px] uppercase font-ui bg-transparent border cursor-pointer transition-all duration-200 ${
+              className={`px-[18px] py-[7px] text-[10px] tracking-[2px] uppercase font-ui font-bold border-[3px] border-[var(--ink)] cursor-pointer transition-all duration-200 ${
                 filter === f.id
-                  ? "border-[var(--gold)] text-[var(--gold)]"
-                  : "border-[var(--border)] text-[var(--muted)] hover:border-[var(--gold)] hover:text-[var(--gold)]"
+                  ? "bg-[var(--gold)] text-[var(--on-gold)] shadow-comic-sm"
+                  : "bg-[var(--surface)] text-[var(--muted)] hover:bg-[var(--s2)] hover:text-[var(--text)]"
               }`}
             >
               {f.label}
@@ -227,28 +226,26 @@ export default function Projects() {
               onClick={() => setModalProject(project)}
               onMouseMove={handleCardMouseMove}
               onMouseLeave={handleCardMouseLeave}
-              className={`bg-[var(--s2)] p-7 cursor-pointer transition-all duration-[250ms] relative overflow-hidden border border-transparent hover:bg-[#181830] hover:border-[#252540] hover:shadow-[0_20px_60px_rgba(0,0,0,0.5),0_0_0_1px_rgba(232,201,106,0.08)] will-change-transform group ${
+              className={`bg-[var(--surface)] p-7 cursor-pointer transition-all duration-[250ms] relative overflow-hidden border-[3px] border-[var(--ink)] shadow-comic hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[3px_3px_0_0_var(--ink)] will-change-transform group ${
                 project.featured
                   ? "sm:col-span-full sm:grid sm:grid-cols-2 sm:gap-8 sm:items-center"
                   : ""
               }`}
               style={{ transformStyle: "preserve-3d" }}
             >
-              {/* Gold gradient overlay on hover */}
-              <div className="absolute inset-0 bg-gradient-to-br from-[rgba(232,201,106,0.04)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-br from-[rgba(226,54,54,0.14)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
 
-              {/* Featured card gets a 3D scene */}
               {project.featured && (
                 <div className="relative">
-                  <ThreeCardScene />
+                  <ProjectPreview title={project.title} liveUrl={project.liveUrl} />
                 </div>
               )}
 
               <div className="relative z-[1]">
-                <div className="text-[10px] tracking-[3px] uppercase text-[var(--gold)] font-ui mb-[14px]">
+                <div className="text-[10px] tracking-[3px] uppercase text-[var(--marvel-red)] font-ui font-bold mb-[14px]">
                   {project.category} &middot; {project.year}
                 </div>
-                <div className="text-[22px] font-normal mb-[10px] tracking-[-0.3px]">
+                <div className="font-comic text-[22px] mb-[10px] tracking-[0.02em] uppercase">
                   {project.title}
                 </div>
                 <div className="text-[13px] text-[var(--muted)] font-ui leading-[1.7] mb-5">
@@ -258,14 +255,14 @@ export default function Projects() {
                   {project.techStack.map((tech) => (
                     <span
                       key={tech}
-                      className="text-[9px] tracking-[1px] px-2 py-[3px] bg-[#1a1a2e] text-[#4a4a6a] font-ui uppercase"
+                      className="text-[9px] tracking-[1px] px-2 py-[3px] bg-[var(--spider-blue)] text-[var(--text)] font-ui font-bold uppercase border border-[var(--ink)]"
                     >
                       {tech}
                     </span>
                   ))}
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-[11px] text-[#333] font-ui">
+                  <span className="text-[11px] text-[var(--muted)] font-ui font-bold">
                     {project.year}
                   </span>
                   <span className="text-[16px] text-[var(--gold)] transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1">
@@ -281,31 +278,32 @@ export default function Projects() {
       {/* Project detail modal */}
       {modalProject && (
         <div
-          className="fixed inset-0 bg-[rgba(0,0,0,0.88)] z-[300] flex items-center justify-center"
+          className="fixed inset-0 bg-[rgba(20,18,16,0.85)] z-[300] flex items-center justify-center p-4"
           onClick={(e) => {
             if (e.target === e.currentTarget) setModalProject(null);
           }}
         >
-          <div className="bg-[var(--surface)] max-w-[520px] w-[92%] p-11 relative max-h-[85vh] overflow-y-auto border border-[var(--border)]">
+          <div className="comic-panel max-w-[520px] w-full p-11 relative max-h-[85vh] overflow-y-auto">
             <button
               onClick={() => setModalProject(null)}
-              className="absolute top-[18px] right-[18px] bg-transparent border-none text-[var(--muted)] text-[20px] cursor-pointer hover:text-[var(--text)]"
+              className="absolute top-[18px] right-[18px] bg-[var(--surface)] border-2 border-[var(--ink)] w-9 h-9 text-[var(--ink)] text-[18px] cursor-pointer font-comic leading-none shadow-[2px_2px_0_0_var(--ink)] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none"
+              aria-label="Close"
             >
               &#10005;
             </button>
-            <div className="text-[10px] tracking-[3px] uppercase text-[var(--gold)] font-ui mb-[14px]">
+            <div className="text-[10px] tracking-[3px] uppercase text-[var(--marvel-red)] font-ui font-bold mb-[14px]">
               {modalProject.modal.cat}
             </div>
-            <div className="text-[28px] font-normal tracking-[-0.5px] mb-[14px]">
+            <div className="font-comic text-[28px] tracking-[0.02em] mb-[14px] uppercase">
               {modalProject.title}
             </div>
-            <div className="text-[14px] text-[#8888aa] font-ui leading-[1.8] mb-6">
+            <div className="text-[14px] text-[var(--muted)] font-ui leading-[1.8] mb-6">
               {modalProject.modal.desc}
             </div>
-            <div className="grid grid-cols-2 gap-[14px] border-t border-[var(--border)] pt-5 mb-6">
+            <div className="grid grid-cols-2 gap-[14px] border-t-[3px] border-[var(--ink)] pt-5 mb-6">
               {modalProject.modal.meta.map(([key, value]) => (
                 <div key={key}>
-                  <div className="text-[10px] tracking-[2px] uppercase text-[#333350] font-ui mb-[3px]">
+                  <div className="text-[10px] tracking-[2px] uppercase text-[var(--muted)] font-ui font-bold mb-[3px]">
                     {key}
                   </div>
                   <div className="text-[13px] text-[var(--text)] font-ui">
@@ -318,7 +316,7 @@ export default function Projects() {
               href={modalProject.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block px-[30px] py-3 bg-[var(--gold)] text-[var(--bg)] text-[11px] tracking-[2px] uppercase font-ui cursor-pointer border-none font-bold transition-colors duration-200 hover:bg-[var(--gold2)] no-underline"
+              className="inline-block px-[30px] py-3 bg-[var(--gold)] text-[var(--on-gold)] text-[11px] tracking-[2px] uppercase font-ui cursor-pointer border-[3px] border-[var(--on-gold)] font-bold shadow-comic transition-all duration-200 hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none no-underline"
             >
               View Live Project &#8599;
             </a>

@@ -1,4 +1,7 @@
 import type { Metadata, Viewport } from "next";
+import "@fontsource/bangers/400.css";
+import "@fontsource/comic-neue/400.css";
+import "@fontsource/comic-neue/700.css";
 import "./globals.css";
 
 export const viewport: Viewport = {
@@ -36,7 +39,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antialiased">{children}</body>
+      <body className="antialiased relative z-[1]">{children}</body>
     </html>
   );
 }

@@ -33,10 +33,10 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className="sticky top-0 z-[200] flex items-center justify-between px-5 sm:px-9 py-4 bg-[rgba(8,8,16,0.9)] border-b border-[var(--border)] backdrop-blur-2xl">
+    <nav className="sticky top-0 z-[200] flex items-center justify-between px-5 sm:px-9 py-4 bg-[var(--marvel-red)] border-b-[3px] border-[var(--ink)] shadow-[0_4px_0_0_rgba(0,0,0,0.35)]">
       <button
         onClick={() => scrollTo("hero")}
-        className="text-[17px] font-bold tracking-[3px] text-[var(--gold)] cursor-pointer bg-transparent border-none"
+        className="font-comic text-[22px] tracking-[2px] text-[var(--on-marvel-red)] cursor-pointer bg-transparent border-none uppercase drop-shadow-sm"
       >
         JR.
       </button>
@@ -45,8 +45,10 @@ export default function Navbar() {
           <button
             key={link.id}
             onClick={() => scrollTo(link.id)}
-            className={`text-[10px] tracking-[2px] uppercase cursor-pointer font-ui transition-colors duration-200 border-none bg-transparent p-0 ${
-              active === link.id ? "text-[var(--gold)]" : "text-[var(--muted)] hover:text-[var(--gold)]"
+            className={`text-[11px] tracking-[2px] uppercase cursor-pointer font-ui font-bold transition-colors duration-200 border-none bg-transparent p-0 ${
+              active === link.id
+                ? "text-[var(--gold)] underline decoration-2 underline-offset-4"
+                : "text-white/80 hover:text-[var(--gold)]"
             }`}
           >
             {link.label}
@@ -55,7 +57,7 @@ export default function Navbar() {
       </div>
       <button
         onClick={() => scrollTo("contact")}
-        className="text-[10px] tracking-[2px] uppercase border border-[var(--gold)] text-[var(--gold)] px-[18px] py-[7px] cursor-pointer font-ui bg-transparent transition-all duration-200 hover:bg-[var(--gold)] hover:text-[var(--bg)]"
+        className="text-[10px] tracking-[2px] uppercase border-[3px] border-[var(--gold)] text-[var(--gold)] px-[18px] py-[7px] cursor-pointer font-ui font-bold bg-transparent shadow-comic-sm transition-all duration-200 hover:bg-[var(--gold)] hover:text-[var(--on-gold)] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none"
       >
         Hire Me
       </button>

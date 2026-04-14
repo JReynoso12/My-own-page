@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['localhost'],
+    domains: ['localhost', 'www.google.com'],
   },
   experimental: {
     // Only bundle icons you import instead of the whole library (faster compile)

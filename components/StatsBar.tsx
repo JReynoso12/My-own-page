@@ -3,47 +3,56 @@
 import { useEffect, useRef } from "react";
 
 const stats = [
-  { target: 6, suffix: "+", label: "Projects Shipped" },
-  { target: 3, suffix: "+", label: "Years Experience" },
+  { target: 5, suffix: "+", label: "Projects Shipped" },
+  { target: 5, suffix: "+", label: "Years Experience" },
   { target: 100, suffix: "%", label: "Dedication" },
 ];
 
-function animateCounter(el: HTMLElement, target: number, suffix: string) {
-  let value = 0;
-  const step = Math.ceil(target / 50);
-  const interval = setInterval(() => {
-    value = Math.min(value + step, target);
-    el.textContent = value + suffix;
-    if (value >= target) clearInterval(interval);
-  }, 35);
-}
-
 export default function StatsBar() {
-  const countedRef = useRef(false);
+  const intervalIdsRef = useRef<number[]>([]);
 
   useEffect(() => {
-    if (countedRef.current) return;
-    countedRef.current = true;
-    const timer = setTimeout(() => {
+    intervalIdsRef.current = [];
+
+    const startDelay = window.setTimeout(() => {
       stats.forEach((stat, i) => {
         const el = document.getElementById(`counter-${i}`);
-        if (el) animateCounter(el, stat.target, stat.suffix);
+        if (!el) return;
+
+        let value = 0;
+        const step = Math.max(1, Math.ceil(stat.target / 50));
+        const id = window.setInterval(() => {
+          value = Math.min(value + step, stat.target);
+          el.textContent = `${value}${stat.suffix}`;
+          if (value >= stat.target) {
+            window.clearInterval(id);
+          }
+        }, 35);
+        intervalIdsRef.current.push(id);
       });
     }, 500);
-    return () => clearTimeout(timer);
+
+    return () => {
+      window.clearTimeout(startDelay);
+      intervalIdsRef.current.forEach((id) => window.clearInterval(id));
+      intervalIdsRef.current = [];
+    };
   }, []);
 
   return (
-    <div className="flex gap-10 px-6 sm:px-12 py-6 bg-[rgba(14,14,26,0.95)] border-t border-b border-[var(--border)]">
+    <div className="flex flex-wrap gap-4 sm:gap-8 px-6 sm:px-12 py-6 bg-[var(--surface)] border-b-[3px] border-[var(--ink)]">
       {stats.map((stat, i) => (
-        <div key={stat.label} className="flex flex-col">
+        <div
+          key={stat.label}
+          className="comic-panel-flat flex flex-col flex-1 min-w-[140px] px-5 py-4"
+        >
           <span
             id={`counter-${i}`}
-            className="text-[30px] text-[var(--gold)] tracking-[-1px]"
+            className="font-comic text-[34px] text-[var(--marvel-red)] tracking-[1px]"
           >
-            0
+            {stat.suffix === "%" ? "0%" : "0"}
           </span>
-          <span className="text-[10px] tracking-[2px] uppercase text-[var(--muted)] font-ui">
+          <span className="text-[10px] tracking-[2px] uppercase text-[var(--muted)] font-ui font-bold">
             {stat.label}
           </span>
         </div>

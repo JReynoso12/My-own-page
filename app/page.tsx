@@ -11,17 +11,17 @@ import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <div>
+    <div className="relative z-[1] min-h-screen">
       <Navbar />
       <Hero />
       <StatsBar />
-      <div className="h-px bg-[var(--border)] mx-6 sm:mx-12" />
+      <div className="comic-divider" aria-hidden />
       <Projects />
-      <div className="h-px bg-[var(--border)] mx-6 sm:mx-12" />
+      <div className="comic-divider" aria-hidden />
       <Skills />
-      <div className="h-px bg-[var(--border)] mx-6 sm:mx-12" />
+      <div className="comic-divider" aria-hidden />
       <Experience />
-      <div className="h-px bg-[var(--border)] mx-6 sm:mx-12" />
+      <div className="comic-divider" aria-hidden />
       <ContactPerson />
       <Footer />
     </div>

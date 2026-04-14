@@ -23,7 +23,7 @@ export default function ThreeContactScene() {
     const camera = new THREE.PerspectiveCamera(60, w / h, 0.1, 100);
     camera.position.z = 5;
 
-    const gold = 0xe8c96a;
+    const accent = 0xe23636;
 
     // Lighter particle field
     const pcount = 900;
@@ -37,14 +37,14 @@ export default function ThreeContactScene() {
     pg.setAttribute("position", new THREE.BufferAttribute(pos, 3));
     const pts = new THREE.Points(
       pg,
-      new THREE.PointsMaterial({ color: gold, size: 0.03, transparent: true, opacity: 0.6 })
+      new THREE.PointsMaterial({ color: accent, size: 0.03, transparent: true, opacity: 0.6 })
     );
     scene.add(pts);
 
     // Counter-rotating ring 1
     const ring = new THREE.Mesh(
       new THREE.TorusGeometry(1.8, 0.01, 6, 64),
-      new THREE.MeshBasicMaterial({ color: gold, transparent: true, opacity: 0.2 })
+      new THREE.MeshBasicMaterial({ color: accent, transparent: true, opacity: 0.2 })
     );
     ring.rotation.x = 0.5;
     scene.add(ring);
@@ -52,7 +52,7 @@ export default function ThreeContactScene() {
     // Counter-rotating ring 2
     const ring2 = new THREE.Mesh(
       new THREE.TorusGeometry(1.1, 0.008, 6, 48),
-      new THREE.MeshBasicMaterial({ color: gold, transparent: true, opacity: 0.15 })
+      new THREE.MeshBasicMaterial({ color: accent, transparent: true, opacity: 0.15 })
     );
     ring2.rotation.x = -0.8;
     ring2.rotation.y = 0.4;

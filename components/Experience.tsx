@@ -6,7 +6,7 @@ const experiences = [
     role: "Full-Stack Web Developer",
     company: "Freelance · Philippines",
     detail:
-      "Building and deploying modern web applications with Vue.js, Next.js, Node.js, and MySQL. Shipped 6+ production projects with focus on performance and UX.",
+      "Building and deploying modern web applications with Vue.js, Next.js, Node.js, and MySQL. Shipped 5+ production projects with focus on performance and UX.",
   },
   {
     year: "2023 — 2024",
@@ -34,31 +34,31 @@ const experiences = [
 export default function Experience() {
   return (
     <section className="py-[72px] px-6 sm:px-12 bg-[var(--surface)]" id="experience">
-      <div className="text-[10px] tracking-[4px] uppercase text-[var(--gold)] font-ui mb-[14px]">
+      <div className="inline-block text-[10px] tracking-[3px] uppercase text-[var(--on-gold)] font-ui font-bold mb-3 px-3 py-1 bg-[var(--gold)] border-2 border-[var(--on-gold)] shadow-[2px_2px_0_0_var(--marvel-red)]">
         Experience
       </div>
-      <h2 className="text-[clamp(30px,4vw,48px)] font-normal tracking-[-1px] leading-[1.15] mb-11">
+      <h2 className="font-comic text-[clamp(32px,4vw,52px)] leading-[1.05] mb-11 uppercase">
         The Journey
         <br />
-        <em className="text-[var(--muted)] italic">So Far</em>
+        <span className="text-[var(--spider-blue-glow)]">So Far</span>
       </h2>
-      <div className="relative pl-[22px] border-l border-[var(--border)]">
+      <div className="relative pl-[22px] border-l-[4px] border-[var(--ink)]">
         {experiences.map((exp, i) => (
           <div
             key={i}
             className={i === experiences.length - 1 ? "relative" : "relative mb-11"}
           >
-            <div className="absolute left-[-27px] top-[5px] w-[9px] h-[9px] border-2 border-[var(--gold)] bg-[var(--bg)] rounded-full shadow-[0_0_12px_rgba(232,201,106,0.3)]" />
-            <div className="text-[10px] tracking-[2px] text-[var(--gold)] font-ui mb-[6px]">
+            <div className="absolute left-[-27px] top-[5px] w-[14px] h-[14px] border-[3px] border-[var(--on-gold)] bg-[var(--gold)] rotate-45 shadow-[2px_2px_0_0_var(--marvel-red)]" />
+            <div className="text-[10px] tracking-[2px] text-[var(--marvel-red)] font-ui font-bold mb-[6px]">
               {exp.year}
             </div>
-            <div className="text-[19px] font-normal mb-1 tracking-[-0.3px]">
+            <div className="font-comic text-[20px] mb-1 tracking-[0.02em] uppercase">
               {exp.role}
             </div>
             <div className="text-[13px] text-[var(--muted)] font-ui mb-[10px]">
               {exp.company}
             </div>
-            <div className="text-[13px] text-[#555570] font-ui leading-[1.7]">
+            <div className="text-[13px] text-[var(--muted)] font-ui leading-[1.7]">
               {exp.detail}
             </div>
           </div>
