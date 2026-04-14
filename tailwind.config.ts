@@ -10,17 +10,17 @@ const config: Config = {
     extend: {
       colors: {
         gold: {
-          DEFAULT: "#facc15",
-          dark: "#eab308",
+          DEFAULT: "#e50914",
+          dark: "#b20710",
         },
       },
       fontFamily: {
-        comic: ["var(--font-comic-display)", "Impact", "Arial Black", "sans-serif"],
-        ui: ["var(--font-comic-body)", "Comic Neue", "cursive"],
+        comic: ["Inter", "system-ui", "sans-serif"],
+        ui: ["Inter", "system-ui", "sans-serif"],
       },
       boxShadow: {
-        comic: "6px 6px 0 0 #7f1d1d",
-        "comic-sm": "3px 3px 0 0 #7f1d1d",
+        comic: "0 4px 24px rgba(0,0,0,0.45)",
+        "comic-sm": "0 2px 12px rgba(0,0,0,0.35)",
       },
     },
   },

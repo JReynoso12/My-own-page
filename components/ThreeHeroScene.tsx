@@ -3,10 +3,10 @@
 import { useEffect, useRef } from "react";
 import * as THREE from "three";
 
-/** Silk colors — bright enough to read as real webs on dark bg */
-const WEB_SILK = 0xc5d0e0;
-const RING_SILK = 0xe8eef5;
-const SILK_THREAD = 0xd8e0ec;
+/** Muted crimson-gray silk — reads on Daredevil-dark hero */
+const WEB_SILK = 0x8b6b70;
+const RING_SILK = 0xa89a9c;
+const SILK_THREAD = 0xc4b8ba;
 const SPIDER_BODY = 0x0a0a0a;
 
 /**

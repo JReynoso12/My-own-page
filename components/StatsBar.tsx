@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 
 const stats = [
-  { target: 5, suffix: "+", label: "Projects Shipped" },
+  { target: 3, suffix: "+", label: "Projects Shipped" },
   { target: 5, suffix: "+", label: "Years Experience" },
   { target: 100, suffix: "%", label: "Dedication" },
 ];
@@ -40,7 +40,7 @@ export default function StatsBar() {
   }, []);
 
   return (
-    <div className="flex flex-wrap gap-4 sm:gap-8 px-6 sm:px-12 py-6 bg-[var(--surface)] border-b-[3px] border-[var(--ink)]">
+    <div className="flex flex-wrap gap-4 sm:gap-8 px-6 sm:px-12 py-6 bg-[var(--surface)] border-b border-[var(--ink)]">
       {stats.map((stat, i) => (
         <div
           key={stat.label}
@@ -48,7 +48,7 @@ export default function StatsBar() {
         >
           <span
             id={`counter-${i}`}
-            className="font-comic text-[34px] text-[var(--marvel-red)] tracking-[1px]"
+            className="font-comic text-[34px] text-[var(--dd-red)] tracking-tight"
           >
             {stat.suffix === "%" ? "0%" : "0"}
           </span>

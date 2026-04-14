@@ -1,13 +1,15 @@
 import type { Metadata, Viewport } from "next";
-import "@fontsource/bangers/400.css";
-import "@fontsource/comic-neue/400.css";
-import "@fontsource/comic-neue/700.css";
+import "@fontsource/inter/400.css";
+import "@fontsource/inter/500.css";
+import "@fontsource/inter/600.css";
+import "@fontsource/inter/700.css";
 import "./globals.css";
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
+  themeColor: "#0a0a0a",
 };
 
 export const metadata: Metadata = {

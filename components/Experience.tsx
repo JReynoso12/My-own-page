@@ -34,25 +34,25 @@ const experiences = [
 export default function Experience() {
   return (
     <section className="py-[72px] px-6 sm:px-12 bg-[var(--surface)]" id="experience">
-      <div className="inline-block text-[10px] tracking-[3px] uppercase text-[var(--on-gold)] font-ui font-bold mb-3 px-3 py-1 bg-[var(--gold)] border-2 border-[var(--on-gold)] shadow-[2px_2px_0_0_var(--marvel-red)]">
+      <div className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--dd-red)] font-ui font-semibold mb-3 px-3 py-1.5 rounded-full border border-[rgba(229,9,20,0.35)] bg-[rgba(229,9,20,0.08)]">
         Experience
       </div>
-      <h2 className="font-comic text-[clamp(32px,4vw,52px)] leading-[1.05] mb-11 uppercase">
+      <h2 className="font-comic text-[clamp(32px,4vw,52px)] leading-[1.05] mb-11 text-white">
         The Journey
         <br />
-        <span className="text-[var(--spider-blue-glow)]">So Far</span>
+        <span className="text-[var(--muted)]">So Far</span>
       </h2>
-      <div className="relative pl-[22px] border-l-[4px] border-[var(--ink)]">
+      <div className="relative pl-[22px] border-l-2 border-[rgba(229,9,20,0.35)]">
         {experiences.map((exp, i) => (
           <div
             key={i}
             className={i === experiences.length - 1 ? "relative" : "relative mb-11"}
           >
-            <div className="absolute left-[-27px] top-[5px] w-[14px] h-[14px] border-[3px] border-[var(--on-gold)] bg-[var(--gold)] rotate-45 shadow-[2px_2px_0_0_var(--marvel-red)]" />
-            <div className="text-[10px] tracking-[2px] text-[var(--marvel-red)] font-ui font-bold mb-[6px]">
+            <div className="absolute left-[-26px] top-[6px] w-3 h-3 rounded-full bg-[var(--dd-red)] ring-2 ring-black" />
+            <div className="text-[10px] tracking-[0.12em] text-[var(--dd-red)] font-ui font-semibold mb-[6px]">
               {exp.year}
             </div>
-            <div className="font-comic text-[20px] mb-1 tracking-[0.02em] uppercase">
+            <div className="font-comic text-[20px] mb-1 tracking-tight text-white">
               {exp.role}
             </div>
             <div className="text-[13px] text-[var(--muted)] font-ui mb-[10px]">

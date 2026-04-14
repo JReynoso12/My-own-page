@@ -189,13 +189,13 @@ export default function Projects() {
   return (
     <>
       <section className="py-[72px] px-6 sm:px-12 bg-[var(--bg)]" id="work">
-        <div className="inline-block text-[10px] tracking-[3px] uppercase text-[var(--on-gold)] font-ui font-bold mb-3 px-3 py-1 bg-[var(--gold)] border-2 border-[var(--on-gold)] shadow-[2px_2px_0_0_var(--marvel-red)]">
+        <div className="inline-block text-[10px] tracking-[0.2em] uppercase text-[var(--dd-red)] font-ui font-semibold mb-3 px-3 py-1.5 rounded-full border border-[rgba(229,9,20,0.35)] bg-[rgba(229,9,20,0.08)]">
           Selected Work
         </div>
-        <h2 className="font-comic text-[clamp(32px,4vw,52px)] leading-[1.05] mb-11 uppercase">
+        <h2 className="font-comic text-[clamp(32px,4vw,52px)] leading-[1.05] mb-11 text-white">
           Projects That
           <br />
-          <span className="text-[var(--spider-blue-glow)]">Actually Shipped</span>
+          <span className="text-[var(--muted)]">Actually Shipped</span>
         </h2>
 
         {/* Filter buttons */}
@@ -204,10 +204,10 @@ export default function Projects() {
             <button
               key={f.id}
               onClick={() => setFilter(f.id)}
-              className={`px-[18px] py-[7px] text-[10px] tracking-[2px] uppercase font-ui font-bold border-[3px] border-[var(--ink)] cursor-pointer transition-all duration-200 ${
+              className={`rounded-full px-5 py-2 text-[10px] tracking-[0.12em] uppercase font-ui font-semibold border border-[var(--ink)] cursor-pointer transition-all duration-200 ${
                 filter === f.id
-                  ? "bg-[var(--gold)] text-[var(--on-gold)] shadow-comic-sm"
-                  : "bg-[var(--surface)] text-[var(--muted)] hover:bg-[var(--s2)] hover:text-[var(--text)]"
+                  ? "bg-[var(--gold)] text-white border-transparent"
+                  : "bg-transparent text-[var(--muted)] hover:text-white hover:border-white/20"
               }`}
             >
               {f.label}
@@ -226,14 +226,14 @@ export default function Projects() {
               onClick={() => setModalProject(project)}
               onMouseMove={handleCardMouseMove}
               onMouseLeave={handleCardMouseLeave}
-              className={`bg-[var(--surface)] p-7 cursor-pointer transition-all duration-[250ms] relative overflow-hidden border-[3px] border-[var(--ink)] shadow-comic hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-[3px_3px_0_0_var(--ink)] will-change-transform group ${
+              className={`bg-[var(--surface)] p-7 cursor-pointer transition-all duration-[250ms] relative overflow-hidden rounded-lg border border-[var(--ink)] shadow-comic hover:border-white/15 will-change-transform group ${
                 project.featured
                   ? "sm:col-span-full sm:grid sm:grid-cols-2 sm:gap-8 sm:items-center"
                   : ""
               }`}
               style={{ transformStyle: "preserve-3d" }}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-[rgba(226,54,54,0.14)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+              <div className="absolute inset-0 bg-gradient-to-br from-[rgba(229,9,20,0.12)] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
 
               {project.featured && (
                 <div className="relative">
@@ -242,10 +242,10 @@ export default function Projects() {
               )}
 
               <div className="relative z-[1]">
-                <div className="text-[10px] tracking-[3px] uppercase text-[var(--marvel-red)] font-ui font-bold mb-[14px]">
+                <div className="text-[10px] tracking-[0.15em] uppercase text-[var(--dd-red)] font-ui font-semibold mb-[14px]">
                   {project.category} &middot; {project.year}
                 </div>
-                <div className="font-comic text-[22px] mb-[10px] tracking-[0.02em] uppercase">
+                <div className="font-comic text-[22px] mb-[10px] tracking-tight text-white">
                   {project.title}
                 </div>
                 <div className="text-[13px] text-[var(--muted)] font-ui leading-[1.7] mb-5">
@@ -255,7 +255,7 @@ export default function Projects() {
                   {project.techStack.map((tech) => (
                     <span
                       key={tech}
-                      className="text-[9px] tracking-[1px] px-2 py-[3px] bg-[var(--spider-blue)] text-[var(--text)] font-ui font-bold uppercase border border-[var(--ink)]"
+                      className="text-[9px] tracking-[0.08em] px-2 py-1 bg-[var(--s2)] text-[var(--muted)] font-ui font-medium uppercase rounded border border-[var(--ink)]"
                     >
                       {tech}
                     </span>
@@ -265,7 +265,7 @@ export default function Projects() {
                   <span className="text-[11px] text-[var(--muted)] font-ui font-bold">
                     {project.year}
                   </span>
-                  <span className="text-[16px] text-[var(--gold)] transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1">
+                  <span className="text-[16px] text-[var(--dd-red)] transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1">
                     &#8599;
                   </span>
                 </div>
@@ -278,29 +278,30 @@ export default function Projects() {
       {/* Project detail modal */}
       {modalProject && (
         <div
-          className="fixed inset-0 bg-[rgba(20,18,16,0.85)] z-[300] flex items-center justify-center p-4"
+          className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[300] flex items-center justify-center p-4"
           onClick={(e) => {
             if (e.target === e.currentTarget) setModalProject(null);
           }}
         >
           <div className="comic-panel max-w-[520px] w-full p-11 relative max-h-[85vh] overflow-y-auto">
             <button
+              type="button"
               onClick={() => setModalProject(null)}
-              className="absolute top-[18px] right-[18px] bg-[var(--surface)] border-2 border-[var(--ink)] w-9 h-9 text-[var(--ink)] text-[18px] cursor-pointer font-comic leading-none shadow-[2px_2px_0_0_var(--ink)] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none"
+              className="absolute top-[18px] right-[18px] bg-[var(--surface)] border border-[var(--ink)] rounded-full w-9 h-9 text-[var(--text)] text-[18px] cursor-pointer leading-none hover:bg-[var(--s2)]"
               aria-label="Close"
             >
               &#10005;
             </button>
-            <div className="text-[10px] tracking-[3px] uppercase text-[var(--marvel-red)] font-ui font-bold mb-[14px]">
+            <div className="text-[10px] tracking-[0.15em] uppercase text-[var(--dd-red)] font-ui font-semibold mb-[14px]">
               {modalProject.modal.cat}
             </div>
-            <div className="font-comic text-[28px] tracking-[0.02em] mb-[14px] uppercase">
+            <div className="font-comic text-[28px] tracking-tight mb-[14px] text-white">
               {modalProject.title}
             </div>
             <div className="text-[14px] text-[var(--muted)] font-ui leading-[1.8] mb-6">
               {modalProject.modal.desc}
             </div>
-            <div className="grid grid-cols-2 gap-[14px] border-t-[3px] border-[var(--ink)] pt-5 mb-6">
+            <div className="grid grid-cols-2 gap-[14px] border-t border-[var(--ink)] pt-5 mb-6">
               {modalProject.modal.meta.map(([key, value]) => (
                 <div key={key}>
                   <div className="text-[10px] tracking-[2px] uppercase text-[var(--muted)] font-ui font-bold mb-[3px]">
@@ -316,7 +317,7 @@ export default function Projects() {
               href={modalProject.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block px-[30px] py-3 bg-[var(--gold)] text-[var(--on-gold)] text-[11px] tracking-[2px] uppercase font-ui cursor-pointer border-[3px] border-[var(--on-gold)] font-bold shadow-comic transition-all duration-200 hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none no-underline"
+              className="inline-block rounded-full px-8 py-3 bg-[var(--gold)] text-white text-[11px] tracking-[0.12em] uppercase font-ui font-semibold cursor-pointer border-none shadow-lg transition-all duration-200 hover:bg-[#f40612] no-underline"
             >
               View Live Project &#8599;
             </a>

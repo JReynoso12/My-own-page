@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useBookNav } from "@/contexts/BookNavigationContext";
 
 const links = [
   { id: "hero", label: "Home" },
@@ -11,44 +11,27 @@ const links = [
 ];
 
 export default function Navbar() {
-  const [active, setActive] = useState("hero");
-
-  const scrollTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  useEffect(() => {
-    const onScroll = () => {
-      const scrollPos = window.scrollY + 250;
-      for (let i = links.length - 1; i >= 0; i--) {
-        const el = document.getElementById(links[i].id);
-        if (el && el.offsetTop <= scrollPos) {
-          setActive(links[i].id);
-          break;
-        }
-      }
-    };
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  const { pageId, goToPage } = useBookNav();
 
   return (
-    <nav className="sticky top-0 z-[200] flex items-center justify-between px-5 sm:px-9 py-4 bg-[var(--marvel-red)] border-b-[3px] border-[var(--ink)] shadow-[0_4px_0_0_rgba(0,0,0,0.35)]">
+    <nav className="sticky top-0 z-[200] flex shrink-0 items-center justify-between px-5 py-4 sm:px-9 bg-black/75 backdrop-blur-xl border-b border-white/[0.06]">
       <button
-        onClick={() => scrollTo("hero")}
-        className="font-comic text-[22px] tracking-[2px] text-[var(--on-marvel-red)] cursor-pointer bg-transparent border-none uppercase drop-shadow-sm"
+        type="button"
+        onClick={() => goToPage("hero")}
+        className="font-ui text-[18px] font-bold tracking-[0.12em] text-white cursor-pointer bg-transparent border-none uppercase"
       >
         JR.
       </button>
-      <div className="hidden sm:flex gap-7">
+      <div className="hidden sm:flex gap-8">
         {links.map((link) => (
           <button
             key={link.id}
-            onClick={() => scrollTo(link.id)}
-            className={`text-[11px] tracking-[2px] uppercase cursor-pointer font-ui font-bold transition-colors duration-200 border-none bg-transparent p-0 ${
-              active === link.id
-                ? "text-[var(--gold)] underline decoration-2 underline-offset-4"
-                : "text-white/80 hover:text-[var(--gold)]"
+            type="button"
+            onClick={() => goToPage(link.id)}
+            className={`text-[12px] tracking-[0.06em] cursor-pointer font-ui font-medium transition-colors duration-200 border-none bg-transparent p-0 ${
+              pageId === link.id
+                ? "text-white"
+                : "text-[var(--muted)] hover:text-white"
             }`}
           >
             {link.label}
@@ -56,8 +39,9 @@ export default function Navbar() {
         ))}
       </div>
       <button
-        onClick={() => scrollTo("contact")}
-        className="text-[10px] tracking-[2px] uppercase border-[3px] border-[var(--gold)] text-[var(--gold)] px-[18px] py-[7px] cursor-pointer font-ui font-bold bg-transparent shadow-comic-sm transition-all duration-200 hover:bg-[var(--gold)] hover:text-[var(--on-gold)] hover:translate-x-0.5 hover:translate-y-0.5 hover:shadow-none"
+        type="button"
+        onClick={() => goToPage("contact")}
+        className="rounded-full text-[11px] tracking-[0.12em] uppercase bg-[var(--gold)] text-white px-5 py-2.5 cursor-pointer font-ui font-semibold border-none transition-all duration-200 hover:bg-[#f40612] hover:scale-[1.02]"
       >
         Hire Me
       </button>
