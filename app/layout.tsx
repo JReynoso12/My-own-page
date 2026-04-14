@@ -1,7 +1,14 @@
 import type { Metadata, Viewport } from "next";
-import { Bebas_Neue, Crimson_Text, Oswald } from "next/font/google";
+import { Anton, Bebas_Neue, Crimson_Text, Oswald } from "next/font/google";
 
 import "./globals.css";
+
+const fontHeroName = Anton({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-hero-name",
+  display: "swap",
+});
 
 const fontDisplay = Bebas_Neue({
   weight: "400",
@@ -62,7 +69,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${fontDisplay.variable} ${fontUi.variable} ${fontSerif.variable} dd-theme antialiased relative z-[1]`}
+        className={`${fontHeroName.variable} ${fontDisplay.variable} ${fontUi.variable} ${fontSerif.variable} dd-theme antialiased relative z-[1]`}
       >
         {children}
       </body>

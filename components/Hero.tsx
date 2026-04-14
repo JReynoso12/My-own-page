@@ -12,88 +12,96 @@ export default function Hero() {
 
   return (
     <section
-      className="relative flex min-h-[620px] items-center overflow-hidden border-b border-[rgba(204,0,0,0.12)]"
+      className="hero-noir relative flex min-h-[620px] flex-col overflow-hidden border-b border-[rgba(204,0,0,0.12)]"
       id="hero"
     >
       <div className="absolute inset-0 z-0">
         <Image
-          src="/images/daredevil-hero-bg.png"
+          src="/images/daredevil-cowl-hero.png"
           alt=""
           fill
           priority
-          className="object-cover object-[72%_center] sm:object-right"
+          className="object-cover object-center"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#060608] via-[#060608]/88 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#060608]/90 via-transparent to-[#060608]/50" />
+        {/* Vignette: keep center mask visible; darken top for title + edges for blend into page */}
+        <div
+          className="absolute inset-0 bg-[radial-gradient(ellipse_90%_80%_at_50%_38%,rgba(5,5,5,0.35)_0%,rgba(10,0,8,0.55)_45%,rgba(5,0,0,0.88)_100%)]"
+          aria-hidden
+        />
+        <div
+          className="absolute inset-0 bg-gradient-to-b from-[#050505]/80 via-transparent to-[#0a0000]/95"
+          aria-hidden
+        />
+        <div
+          className="absolute inset-0 bg-gradient-to-r from-black/65 via-transparent to-black/65"
+          aria-hidden
+        />
       </div>
 
-      <div className="pointer-events-none absolute inset-0 z-[1] opacity-[0.15]">
+      <div className="pointer-events-none absolute inset-0 z-[2] opacity-[0.06]">
         <ThreeHeroScene />
       </div>
 
-      <div className="dd-emblem hidden lg:block">DD</div>
+      <div className="dd-emblem pointer-events-none z-[4] select-none" aria-hidden>
+        DD
+      </div>
 
-      <div className="relative z-[2] w-full max-w-[640px] px-6 sm:px-12">
-        <div className="comic-panel p-6 sm:p-10 animate-fade-up" style={{ animationDelay: "0.25s" }}>
+      <div className="relative z-10 flex flex-1 flex-col justify-center px-6 py-14 sm:px-12">
+        <div className="mx-auto flex w-full max-w-5xl flex-col items-center text-center">
           <p
-            className="mb-4 font-ui text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--crimson)] animate-fade-up"
-            style={{ animationDelay: "0.3s" }}
-          >
-            Available for projects
-          </p>
-          <p
-            className="font-serif-italic mb-4 animate-fade-up text-[1rem] uppercase tracking-[0.3em] text-[var(--crimson)]"
-            style={{ animationDelay: "0.32s" }}
+            className="hero-tagline-cinematic animate-fade-up"
+            style={{ animationDelay: "0.2s" }}
           >
             The Man Without Fear
           </p>
           <h1
-            className="font-comic mb-3 animate-fade-up text-[clamp(3rem,10vw,5.5rem)] leading-[0.92] text-[var(--text-primary)]"
-            style={{ animationDelay: "0.38s" }}
+            className="hero-name-title flex flex-wrap justify-center gap-x-4 gap-y-1 animate-fade-up"
+            style={{ animationDelay: "0.35s" }}
           >
-            Jimuel{" "}
-            <span className="dd-accent-glitch text-[var(--crimson)]">Reynoso</span>
+            <span className="hero-name-first">Jimuel</span>
+            <span className="hero-name-last">Reynoso</span>
           </h1>
-          <p
-            className="font-ui mb-6 animate-fade-up text-[0.9rem] uppercase tracking-[0.25em] text-[var(--text-muted)]"
-            style={{ animationDelay: "0.45s" }}
-          >
-            Full-Stack Developer
-          </p>
-          <p
-            className="mb-8 animate-fade-up text-[1.05rem] leading-[1.75] text-[var(--text-muted)]"
-            style={{
-              animationDelay: "0.52s",
-              fontFamily: "var(--font-serif), Georgia, serif",
-            }}
-          >
-            I build scalable, user-friendly web applications using modern full-stack
-            technologies. Transforming ideas into secure, high-performance digital
-            products from concept to deployment.
-          </p>
+
           <div
-            className="flex flex-wrap gap-4 animate-fade-up"
-            style={{ animationDelay: "0.6s" }}
+            className="comic-panel mt-2 w-full max-w-xl p-6 text-left sm:p-8 animate-fade-up"
+            style={{ animationDelay: "0.5s" }}
           >
-            <button
-              type="button"
-              onClick={() => goToPage("work")}
-              className="dd-btn dd-btn-filled border-none"
+            <p className="mb-4 font-ui text-[10px] font-semibold uppercase tracking-[0.2em] text-[var(--crimson)]">
+              Available for projects
+            </p>
+            <p className="font-ui mb-6 text-[0.9rem] uppercase tracking-[0.25em] text-[var(--text-muted)]">
+              Full-Stack Developer
+            </p>
+            <p
+              className="mb-8 text-[1.05rem] leading-[1.75] text-[var(--text-muted)]"
+              style={{ fontFamily: "var(--font-serif), Georgia, serif" }}
             >
-              View Work
-            </button>
-            <button
-              type="button"
-              onClick={() => goToPage("contact")}
-              className="dd-btn border-none"
-            >
-              Get in Touch
-            </button>
+              I build scalable, user-friendly web applications using modern full-stack
+              technologies. Transforming ideas into secure, high-performance digital
+              products from concept to deployment.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4 sm:justify-start">
+              <button
+                type="button"
+                onClick={() => goToPage("work")}
+                className="dd-btn dd-btn-filled border-none"
+              >
+                View Work
+              </button>
+              <button
+                type="button"
+                onClick={() => goToPage("contact")}
+                className="dd-btn border-none"
+              >
+                Get in Touch
+              </button>
+            </div>
           </div>
         </div>
       </div>
-      <div className="relative z-[3] mt-12 w-full px-6 sm:px-12">
+
+      <div className="relative z-10 mt-auto w-full px-6 pb-8 pt-4 sm:px-12">
         <hr className="dd-divider" />
       </div>
     </section>

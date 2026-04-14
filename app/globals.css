@@ -233,18 +233,64 @@
     }
   }
 
+  /* Cinematic hero — poster name + tagline (Daredevil-style) */
+  .hero-noir::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.055;
+    background: repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 3px,
+      rgba(255, 255, 255, 0.04) 3px,
+      rgba(255, 255, 255, 0.04) 4px
+    );
+  }
+
+  .hero-tagline-cinematic {
+    font-family: var(--font-serif), Georgia, serif;
+    font-style: italic;
+    font-size: clamp(0.68rem, 1.75vw, 0.95rem);
+    color: var(--crimson);
+    letter-spacing: 0.38em;
+    text-transform: uppercase;
+    margin-bottom: 1.35rem;
+  }
+
+  .hero-name-title {
+    font-family: var(--font-hero-name), var(--font-comic-display), Impact, sans-serif;
+    font-weight: 400;
+    font-size: clamp(3.25rem, 12vw, 8rem);
+    line-height: 0.9;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin: 0 0 1.5rem;
+  }
+
+  .hero-name-first {
+    color: #e8e5e0;
+  }
+
+  .hero-name-last {
+    color: #cc0000;
+  }
+
   .dd-emblem {
     position: absolute;
-    right: 5%;
+    right: 2%;
     top: 50%;
     transform: translateY(-50%);
-    opacity: 0.06;
-    font-family: var(--font-comic-display);
-    font-size: min(28vw, 240px);
-    color: var(--crimson);
+    opacity: 0.085;
+    font-family: var(--font-hero-name), var(--font-comic-display), sans-serif;
+    font-size: min(32vw, 280px);
+    color: #8b0000;
     line-height: 1;
     pointer-events: none;
     animation: emblem-drift 8s ease-in-out infinite alternate;
+    user-select: none;
   }
 
   @keyframes emblem-drift {

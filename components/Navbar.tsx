@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 import { useBookNav } from "@/contexts/BookNavigationContext";
 
 const links = [
@@ -18,11 +20,19 @@ export default function Navbar() {
       <button
         type="button"
         onClick={() => goToPage("hero")}
-        className="logo-dd-pulse cursor-none border-none bg-transparent p-0 font-comic text-[2.2rem] leading-none tracking-[0.05em] text-[var(--crimson)]"
-        style={{ textShadow: "0 0 20px var(--crimson-glow)" }}
+        className="cursor-none border-none bg-transparent p-0"
         aria-label="Home"
       >
-        DD
+        <span className="relative block h-10 w-10 shrink-0 sm:h-11 sm:w-11">
+          <Image
+            src="/images/dd-navbar-logo.png"
+            alt=""
+            fill
+            className="object-contain drop-shadow-[0_0_12px_rgba(204,0,0,0.35)]"
+            sizes="44px"
+            priority
+          />
+        </span>
       </button>
       <div className="hidden gap-8 sm:flex">
         {links.map((link) => (
